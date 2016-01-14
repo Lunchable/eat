@@ -21,14 +21,20 @@ class EmailExists(object):
             raise ValidationError(self._message or u'Email exists.')
 
 
-class SignIn(Form):
+class SignUp(Form):
     email = StringField('Email', [InputRequired(message=u'Email is required'),
                                   Email(message=u'Invalid email address.'),
-                                  EmailExists()])
+                                  EmailExists(should_exist=False)])
     password = PasswordField('Password',
                              [InputRequired(message=u'Password is required')],
                              widget=PasswordInput(hide_value=False))
     redir_url = HiddenField(default=lambda: request.full_path)
+
+
+class SignIn(SignUp):
+    email = StringField('Email', [InputRequired(message=u'Email is required'),
+                                  Email(message=u'Invalid email address.'),
+                                  EmailExists()])
 
     def validate_password(self, field):
         """
@@ -40,31 +46,3 @@ class SignIn(Form):
 
     def get_user(self):
         return User.objects(email=self.email.data).first()
-
-# class SignUp(Form):
-#     first_name = StringField('First Name',
-#                            [InputRequired(message=u'First name is required')])
-#     last_name = StringField('Last Name',
-#                           [InputRequired(message=u'Last name is required')])
-#     location = StringField(label='City of Primary Residence',
-#                          description='City, State, Country',
-#                          validators=[])
-#     email = StringField('Email Address',
-#                       [InputRequired(message=u'Email is required'),
-#                        Email(message=u'Invalid email address.'),
-#                        EmailExists(should_exist=False)])
-#
-#     password = PasswordField(
-#             'Create Password',
-#             [InputRequired(message=u'Password is required'),
-#              Length(min=8, message=u'Password must be at least 8 characters long')],
-#             widget=PasswordInput(hide_value=False))
-#     agree = BooleanField(
-#             '',
-#             [InputRequired(
-#                     message=u'You must agree to the Terms of Use to create an account')])
-#     subscribe = BooleanField('')
-#     redir_url = HiddenField(default=lambda: request.full_path)
-#
-#     def get_user(self):
-#         return SiteUser.query.filter(SiteUser.email == self.email.data).first()

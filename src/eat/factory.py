@@ -17,8 +17,13 @@ def create_app(config=None, environment=None):
 
     @login_manager.user_loader
     def load_user(id):
-        from models.user import User
-        return User.objects(id=id).first()
+        if id in (None, 'None'):
+            return None
+        try:
+            from models.user import User
+            return User.objects(id=id).first()
+        except:
+            return None
 
     login_manager.init_app(app)
 

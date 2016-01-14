@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% import "macros/forms.html" as form_macros %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+<div id="basic-form">
+    <form role="form" action="{{ url_for('signup') }}" method="POST">
+        {{ form_macros.as_tabular_form(signup_form) }}
+        <p>
+            <button type="submit" class="signin-submit primary_btn pull-right">Sign up</button>
+        </p>
+    </form>
+</div>
+</body>
+</html>

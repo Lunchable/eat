@@ -1,5 +1,5 @@
 from flask import render_template
-import signin
+import auth
 
 
 def register_routes(app):
@@ -7,4 +7,4 @@ def register_routes(app):
     def root():
         return render_template('index.html')
 
-    signin.register_routes(app)
+    auth.register_routes(app)
