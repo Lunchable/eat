@@ -6,6 +6,22 @@ from . import db
 
 
 class User(db.Document):
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
     created_at = db.DateTimeField(default=datetime.datetime.utcnow(), required=True)
     email = db.EmailField(unique=True, required=True)
     email_verified_at = db.DateTimeField(default=None, required=False)
@@ -27,7 +43,11 @@ class User(db.Document):
 
     def verify_password(self, password):
         hasher = PasswordHasher()
-        return hasher.verify(self.password_hash, password)
+        try:
+            hasher.verify(self.password_hash, password)
+            return True
+        except Exception:
+            return False
 
     def __unicode__(self):
         return self.email

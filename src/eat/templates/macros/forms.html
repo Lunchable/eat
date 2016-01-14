@@ -1,0 +1,100 @@
+{% macro as_list(form, class='modal_list', submit_text='Send') -%}
+    <ul class="{{ class }}">
+        {% for field in form %}
+        <li>
+            {% if field.errors %}
+                <div class="error_msg">
+                    <ul class="">{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+        <li>
+            <button class="blue_primary_btn" type="submit">{{ submit_text }}</button>
+        </li>
+    </ul>
+{%- endmacro %}
+
+{% macro as_list_items(form, skip=[], class="") -%}
+    {% for field in form %}
+        {% if field not in skip %}
+            <li {% if field.errors %}class="error"{% endif %}>
+                {{ field(placeholder=field.label.text, class=class) }}
+                {% if field.errors %}
+                    <div class="error_msg">
+                        <ul>{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    </div>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+{%- endmacro %}
+
+{% macro input(field, class='form-group', readonly=False, wrap_links=True) -%}
+<div class="{{ class }} {{ field.name }} {% if field.errors %}has-error{% endif %}">
+  {% if field.errors %}
+  <div class="error-msg error-msg-label {{ field.name }}">{{ field.errors[0] }}</div>
+  {% endif %}
+  {% if field.label.text and field.type != "BooleanField" %}
+  {% if wrap_links %}
+  <a name="{{ field.name }}">
+    {% endif %}
+    {{ field.label() }}
+    {% if wrap_links %}
+  </a>
+  {% endif %}
+  {% endif %}
+  <div class="form-control-holder">
+    {% if readonly %}
+      {{ field(placeholder=(field.description or field.label.text), class='form-control', readonly=readonly) }}
+    {% else %}
+      {{ field(placeholder=(field.description or field.label.text), class='form-control') }}
+    {% endif %}
+  </div>
+  {% if field.type == "BooleanField" %}
+  {% if wrap_links %}
+  <a name="{{ field.name }}">
+    {% endif %}
+    {{ field.label() }}
+    {% if wrap_links %}
+  </a>
+  {% endif %}
+  {% endif %}
+</div>
+{%- endmacro %}
+
+{% macro as_tabular_form(form, skip=[], class='form-group', readonly=False, wrap_links=True) -%}
+  {% if readonly and not 'CSRFTokenField' in skip %}
+    {% set skip = skip + ['CSRFTokenField'] %}
+  {% endif %}
+  {% for field in form %}
+    {% if field not in skip %}
+      {% if field.type in ('CSRFTokenField', 'HiddenField') %}
+        {{ field }}
+      {% elif field.type == 'FormField' %}
+        <div class="{{ class }} {{ field.name }}">
+          {% if wrap_links %}
+            <a name="{{ field.name }}">
+          {% endif %}
+            {{ field.label() }}
+          {% if wrap_links %}
+            </a>
+          {% endif %}
+          {{ as_tabular_form(field, skip=skip + ['csrf_token'], class='form-group-nested', readonly=readonly, wrap_links=wrap_) }}
+        </div>
+      {% else %}
+        {{ input(field, class=class, readonly=readonly, wrap_links=wrap_links) }}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{%- endmacro %}
+
+{% macro text_field(field) -%}
+  <div class="{{ class }} {{ field.name }}">
+    <a name="{{ field.name }}">
+      {{ field.label() }}
+    </a>
+    <input type="text" value="{{ field.value }}" placeholder="">
+  </div>
+{%- endmacro %}
+
