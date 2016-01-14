@@ -1,6 +1,7 @@
 from flask import Flask
 
 from models import db
+from views import register_routes as register_views
 
 
 def create_app(config=None, environment=None):
@@ -11,6 +12,6 @@ def create_app(config=None, environment=None):
     app.config["SECRET_KEY"] = "KeepThisS3cr3t"
     db.init_app(app)
 
-    # TODO: add routes
+    register_views(app)
 
     return app
