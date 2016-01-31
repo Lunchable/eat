@@ -39,3 +39,7 @@ def register_routes(app):
         if current_user:
             logout_user()
         return redirect('/')
+
+    @app.route('/foobar')
+    def foobar():
+        return render_template()

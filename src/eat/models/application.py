@@ -1,59 +1,47 @@
 import datetime
-
-from argon2 import PasswordHasher
-
 from . import db
+from securemongoengine import EncryptedDecimalField, EncryptedStringField
 
 
-class User(db.Document):
 
-    @property
-    def is_authenticated(self):
-        return True
-
-    @property
-    def is_active(self):
-        return True
-
-    @property
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
+class Application(db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.utcnow(), required=True)
-    email = db.EmailField(unique=True, required=True)
-    email_verified_at = db.DateTimeField(default=None, required=False)
-    password_hash = db.StringField(max_length=255, required=True)
+    email = db.EmailField(unique=False, required=True)
 
-    first_name = db.StringField(max_length=255, required=False)
-    middle_initial = db.StringField(max_length=255, required=False)
-    last_name = db.StringField(max_length=255, required=False)
-
-    @property
-    def password(self):
-        return self.password_hash
-
-    @password.setter
-    def password(self, password):
-        hasher = PasswordHasher()
-        ph = hasher.hash(password)
-        self.password_hash = ph
-
-    def verify_password(self, password):
-        hasher = PasswordHasher()
-        try:
-            hasher.verify(self.password_hash, password)
-            return True
-        except Exception:
-            return False
+    applicant = db.EmbeddedDocumentField(Applicant)
+    children = db.ListField(db.EmbeddedDocumentField(Child))
+    household = db.ListField(db.EmbeddedDocumentField(Person))
+    signature = db.EmbeddedDocumentField(Signature)
 
     def __unicode__(self):
-        return self.email
+        return '{} ({})'.format(unicode(self.id), self.email)
 
     meta = {
         'allow_inheritance': True,
         'indexes': ['-created_at', 'email'],
         'ordering': ['-created_at']
     }
+
+
+class Person(db.Document):
+    first_name = EncryptedStringField(max_length=255, required=False)
+    middle_initial = EncryptedStringField(max_length=255, required=False)
+    last_name = EncryptedStringField(max_length=255, required=False)
+
+
+class Applicant(Person):
+    ssn = EncryptedStringField(min_length=4, max_length=4, required=False)
+    postal = EncryptedStringField(max_length=32, required=False)
+    city = EncryptedStringField(max_length=255, required=False)
+    state = EncryptedStringField(max_length=255, required=False)
+
+
+class Child(Person):
+    pass
+
+
+class Signature(db.Document):
+    name = EncryptedStringField(max_length=255, required=True)
+    date = db.DateTimeField(default=datetime.datetime.utcnow(), required=True)
+    ip_address = EncryptedStringField(max_length=255, required=True)
+    attestation = db.StringField(required=True)
