@@ -1,23 +1,74 @@
 <!DOCTYPE html>
 {% import "macros/forms.html" as form_macros %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Signin</title>
-</head>
-<body>
-<div id="basic-form">
-    <form role="form" action="{{ url_for('signin') }}" method="POST">
-        {{ form_macros.as_tabular_form(signin_form) }}
-{#        <p><a class="signup_lnk" href="/reset">Forgot your password?</a></p> #}
-        <p>
-            <button type="submit" class="signin-submit primary_btn pull-right">Sign in</button>
-        </p>
-    </form>
-    {# <p class="register">Not a registered user yet? <a class="signup_lnk"
-                                                         href="{{ url_for('signup', redir_url=request.args.get('redir_url')) }}">Sign
-    up now!</a></p>
-    #}
-</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Signin</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body> 
+        <nav class="navbar navbar-default navbar-static-top">
+                <section class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">E.A.T.</a>
+                    </div>
+                        <ul class="nav navbar-default">
+                            <li class="nav navbar-right">
+                                <a href="languages">Languages</a>
+                            </li>
+                        <li class="nav navbar-default navbar-right">
+                            <a href="faq">FAQ</a>
+                        </li>
+                        <li class="nav navbar-default navbar-right">
+                            <a href="signin">Sign In</a>
+                        </li>
+                    </ul>
+                    </div>
+                </section>
+            </nav>
+            <div class="row">
+                <div class="col-xs-12 col-md-6" id="main">
+                    <form class="form-signin" role="form" method="POST">
+                    <h2 class="form-signin-heading">
+                        Please Sign In
+                    </h2>
+                    {{ form_macros.as_tabular_form(signin_form) }}
+                    <a href="/reset">Forgot your password?</a>
+                        <input id="show-password" type="checkbox">
+                        <label for="show-password">
+                            Show password
+                        </label>
+                        <button class="btn btn-large btn-primary" type="submit">
+                            Sign In
+                        </button>
+                </form>
+
+            </div>
+            </div>
+
+            <footer class="navbar-fixed-bottom">
+                <div class="nav nav-justified">
+                <li role="presentation">
+                    <a class="btn-large text-center" href="#">About</a>
+                </li>
+                <li role="presentation">
+                    <a class="btn-large text-center" href="#">Terms</a>
+                </li>
+                <li role="presentation">
+                    <a class="btn-large text-center" href="#">Contact</a>
+                </li>
+            </footer>
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+        </script>   
+        <script type="text/javascript">
+            $('.cancel').click(function() {
+                $("input").removeAttr('required');
+                window.location='/';
+            });
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+        
+    </body>
 </html>

@@ -1,0 +1,156 @@
+<!doctype HTML>
+	<head>
+		{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	    <title>EAT</title>
+	</head>
+	<body>
+<!--		{# {% for item in nav %} #}
+			{# <li "">{{ item }}</li> #}
+			{# {% endfor %} #} -->
+			
+			<nav class="navbar navbar-default">
+				<section class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/">E.A.T.</a>
+					</div>
+						<ul class="nav navbar-default">
+							<li class="nav navbar-right">
+								<a href="languages">Languages</a>
+							</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="faq">FAQ</a>
+						</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="signin">Sign In</a>
+						</li>
+					</ul>
+					</div>
+				</section>
+			</nav>
+			<div class="row">
+				<div class="col-md-6 col-xs-6" id="main">
+					<div id="inner-container">
+					  <h1 class= "text-center">Let's start with you</h1>
+					  <p>
+					  	DID THE SOURCES OF INCOME INCLUDE ANY OF THE BELOW?
+					  </p>
+					</div>
+					<div class="row">
+						<!-- <form action="user.js" method="GET"> -->
+							{# {{ form_macros.as_tabular_form(signin_form) }} #}
+					      	<!-- Need to add overlay -->
+						        <p>
+									<a class="overlay-highlight" data-toggle="modal" data-target="#adultIncome">(Learn More)</a>
+									<span class="req">*</span>
+					        	</p>
+
+
+								<div class="modal fade" id="adultIncome" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-body">
+												<p>
+													Adult income – Typically this should be income received during the month or year prior to the date that the application is submitted – whichever is a better reflection of the household's current annual income. If past income is does not accurately reflect the household's current annual rate of income, income shall be based on the projected annual household income. Income reported in whole dollars (no cents) and in gross amounts, meaning before taxes or deductions.
+												</p>
+												<p>
+													This includes:
+													<ul>
+														<li>
+															Wages
+														</li>
+														<li>
+															Bonus
+														</li>
+														<li>
+															Public Assistance
+														</li>
+														<li>
+															Child Support 
+														</li>
+														<li>
+															Social Security
+														</li>
+														<li>
+															Unemployment
+														</li>
+														<li>
+															Workers' Compenstaion
+														</li>
+														<li>
+															Interest Earned
+														</li>
+														<li>
+															Military Pay
+														</li>
+													</ul>
+												</p>	
+											</div>
+						      				<div class="modal-footer">
+						      					<button type="button" class="close" aria-label="Close" data-dismiss="modal">
+						      						<span aria-hidden="true">&times;</span>
+						      					</button>
+											</div>
+										</div>
+									</div>
+								</div>
+					      	</div>
+					      	<div class="center-block">
+				        		<label class="radio-inline"><input type="radio" name="income" />Yes</label>
+								<label class="radio-inline"><input type="radio" name="income"  />No</label>
+								<label class="radio-inline"><input type="radio" name="income" />Not Sure</label>
+							</div>
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="/">Cancel</a>
+								</p>
+							</div>	
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="enterChildInfo">Continue</a>
+								</p>
+							</div>
+
+						       <!--  <button class="btn-default btn text-left" type="button" value="CANCEL" formaction="/">
+						        	CANCEL
+						        </button>						      
+						        <button class="btn-default btn text-left" type ="submit" value="CONTINUE">
+						        	CONTINUE
+						        </button> -->
+				        <!-- </form> -->
+					</div>
+				</div>
+			</div>
+			
+
+		</section>
+			<footer class="navbar-fixed-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+			
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+
+</html>

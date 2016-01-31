@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% import "macros/forms.html" as form_macros %}
+    <meta charset="UTF-8">
+    <meta initial scale="1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>EAT {# title #}</title>
+</head>
+	<body>
+		<nav class="navbar navbar-default">
+				<section class="container-fluid">
+					<div class="navbar-header">
+						<a href="/">E.A.T.</a>
+					</div>
+						<ul class="nav navbar-default">
+							<li class="nav navbar-right">
+								<a href="languages">Languages</a>
+							</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="faq">FAQ</a>
+						</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="signin">Sign In</a>
+						</li>
+					</ul>
+					</div>
+				</section>
+			</nav>
+			<section class="container-fluid">
+				<div class="row">
+					<div class="col-xs-6" id="main">
+						<form action="user.js" method="GET">
+							<div class="well">
+								<p class="text-center">Step 2</p>
+							</div>
+							<p class="text-center">Enter your child's info</p>
+							<p class="col-xs-6 text-center">
+						<a class="btn btn-large btn-primary" href="/">Cancel</a>
+					</p>	
+					<p class="col-xs-6 text-center">
+						<a class="btn btn-large btn-primary" href="child_new">Continue</a>
+					</p>
+						</form>
+					</div>
+				</div>
+			</section>
+			<footer class="navbar-fixed-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+</html>

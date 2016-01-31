@@ -1,0 +1,39 @@
+<!doctype HTML>
+	<head>
+		{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <title>EAT</title>
+	</head>
+	<body>
+		<section class="container-fluid">
+			<nav ="navbar">
+					{% for item in nav %}
+					<li class="nav-menu-items">{{ item }}</li>
+					{% endfor %}
+					<ul class="nav nav-pills">
+					<li class="presentation" href="Languages">Languages</a>
+					<li class="presentation" href="faq">FAQ</a></li>
+					<li class="presentation" href="signin">Sign In</a>
+				</ul>
+			</nav>
+		<div class="col-lg-offset-2 align-center">
+		  <h1 class="align-center">
+		  	Let's start with you</h1>
+		</div>
+		<h2>
+			DID YOU HAVE ANY INCOME IN THE LAST YEAR? <span class="req">*</span>
+		</h2>
+		</div>
+		<form>
+			{{ form_macros.as_tabular_form() }}
+		        <input type ="submit" role="submit" value="CANCEL" action="{{ url_for('') }}" />
+
+		        <input type ="submit" role="submit" value="CONTINUE" action="{{ url_for('income') }}" />
+		  <div class="overlay-modal">
+		  	<h2></h2>
+		  </div>
+		</form>
+	</body>
+</html>

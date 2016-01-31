@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% import "macros/forms.html" as form_macros %}
     <meta charset="UTF-8">
+    <meta initial scale="1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <title>EAT</title>
 </head>
-<body>
-{% for x in range(0, 5) %}
-<p>{{ x }}</p>
-{% endfor %}
-</body>
+	<body>
+		<nav class="navbar navbar-default">
+            <section class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">E.A.T.</a>
+                </div>
+                    <ul class="nav navbar-default">
+                        <li class="nav navbar-right">
+                            <a href="languages">Languages</a>
+                        </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="faq">FAQ</a>
+                    </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="signin">Sign In</a>
+                    </li>
+                </ul>
+                </div>
+            </section>
+        </nav>
+		<div class="row">
+			<div class="col-xs-6 col-md-6" id="main">
+				<h1 class="text-center">Welcome to EAT Lunch</h1>
+				<p class="text-center">Street art fashion axe</p>
+				<p class="col-xs-6 text-center">
+					<a class="btn btn-large btn-default" href="signin">Sign In</a>
+				</p>
+				<p class="col-xs-6 text-center">
+					<a class="btn btn-large btn-default" href="self">Apply Now/Sign Up</a>
+				</p>
+					<!-- <div class="dropdown main">
+						<button class="dropdown-toggle" type="button" data-toggle="dropdown">FAST TRACK YOUR APPLICATION!<span class="caret"></span>
+				  		</button>
+					  	<button type="button"  class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					  		<div class="row">
+					  			<div class="col-xs-12">
+									<p class="text-center">Click here if you are <em>exclusively</em> a parent to a foster child  <strong>OR</strong> if you are a SNAP/TANF/FDPIR recipient</p>
+									<p class="col-xs-6 text-center">
+										<a class="btn btn-large btn-primary" href="foster">I have foster children</a>
+									</p>	
+									<p class="col-xs-6 text-center">
+										<a class="btn btn-large btn-primary" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
+									</p>
+								</div>
+							</div>
+						</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<footer class="navbar-fixed-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+		</footer>
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>	
+	</body>
 </html>

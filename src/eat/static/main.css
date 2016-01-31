@@ -1,0 +1,31 @@
+
+html{
+	font-family: Arial, Courier, Sans-Serif;
+	font-size: 100%;
+}
+
+.footer, .header{
+	height: 1.25em;
+}
+
+.header{
+	position: absolute;
+	top: 3%;
+}
+.footer{
+	position: absolute;
+	bottom: 3%;
+}
+
+#main {
+	float: none;
+	margin: auto;
+	padding: 2.75em;
+	background-color: #ffffff;
+	border-radius: 1em;
+}
+.req{
+	color: #FF0000;
+}
+
+.

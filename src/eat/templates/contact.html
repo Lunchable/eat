@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% import "macros/forms.html" as form_macros %}
+    <meta charset="UTF-8">
+    <meta initial scale="1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>EAT</title>
+</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<section class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">E.A.T.</a>
+				</div>
+					<ul class="nav navbar-default">
+						<li class="nav navbar-right">
+							<a href="languages">Languages</a>
+						</li>
+					<li class="nav navbar-default navbar-right">
+						<a href="faq">FAQ</a>
+					</li>
+					<li class="nav navbar-default navbar-right">
+						<a href="signin">Sign In</a>
+					</li>
+				</ul>
+				</div>
+			</section>
+		</nav>
+
+			<div class="inner-container">
+				<div class="hero">
+				</div>
+					<h1 class="header">Welcome to EAT Lunch</h1>
+					<p class="header">Street art fashion axe</p>
+				<a id="signin" class="btn"  href="signin">Sign In</a>
+				<a id="signup" class="btn"  href="signup">Sign Up</a>
+			</div>
+		</div>
+			<div id="fast-track">
+				<h2>Click here if you are <em>exclusively</em> a parent to a foster child  <strong>OR</strong> if you are a SNAP/TANF/FDPIR recipient</h2>
+				<a class="btn" href="foster">I have foster children</a>
+				<a class="btn" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
+			</div>
+		<footer class="navbar-static-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+	</body>
+</html>

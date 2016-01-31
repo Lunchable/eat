@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% import "macros/forms.html" as form_macros %}
+    <meta charset="UTF-8">
+    <meta initial scale="1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>EAT {# title #}</title>
+</head>
+	<body>
+		<section class="container-fluid">
+			<nav>
+				<ul class="nav nav-justified"></ul>
+					<li role="presentation">
+						<a href="Languages">Languages</a>
+					</li>
+				<li role="presentation">
+					<a href="faq">FAQ</a>
+				</li>
+				<li role="presentation">
+					<a href="signin">Sign In</a>
+				</li>
+			</nav>
+
+			<footer>
+				<!-- {% for item in footer %} -->
+				<!-- {% endfor %} -->
+					<a class="nav-menu-items" href="#">About</a>
+					<a class="nav-menu-items" href="#">Terms</a>
+					<a class="nav-menu-items" href="#">Contact</a>
+			</footer>
+		</section>
+	</body>
+</html>

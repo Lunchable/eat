@@ -1,0 +1,205 @@
+<!doctype HTML>
+	<head>
+		{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	    <title>EAT</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+            <section class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">E.A.T.</a>
+                </div>
+                    <ul class="nav navbar-default">
+                        <li class="nav navbar-right">
+                            <a href="languages">Languages</a>
+                        </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="faq">FAQ</a>
+                    </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="signin">Sign In</a>
+                    </li>
+                </ul>
+                </div>
+            </section>
+        </nav>
+		<div class="row">
+			<div class="col-xs-6 col-md-6" id="main">
+				<h1 class= "text-center">Let's start with you</h1>
+				<!-- <form method="POST"> -->
+					{# {{ form_macros.as_tabular_form(signin_form) }} #}
+				  <div class="form-group">
+				       <label for="firstNameSelf">
+				       	First Name <span class="req">*</span>
+				       </label>
+				        <input type="text" class="form-control" id="firstNameSelf"placeholder="First Name" />
+
+				        <label for="lastNameSelf">
+	        				Last Name <span class="req">*</span>
+	        			</label>
+				        <input type="text" class="form-control" id="lastNameSelf"placeholder="Last Name" />
+
+				      	<label for='selfAddress'>
+		      				Address <span class="req">*</span>
+				      	</label>
+				        <input type="text" class="form-control" placeholder="Street Address" />
+				      	<input type="text" class="form-control" placeholder="Apartment / Suite #"/>
+
+					    <label for="city" id="citySelf">
+				      		City <span class="req">*</span>
+				   		</label>
+					    <input type="text" class="form-control" placeholder="City"  />
+
+				    	<label for="zipCode">
+				    		Zip Code <span class="req">*</span>
+			    		</label>
+				      	<input type="text" class="form-control" placeholder="ZipCode"  />
+				      	
+				      	<label>
+				      		State <span class="req">*</span>
+				      	</label>
+				        <select name="state">
+				          <option value="--Select--">--Select--</option>
+				          <option value="AL">Alabama</option>
+				          <option value="AK">Alaska</option>
+				          <option value="AZ">Arizona</option>
+				          <option value="AR">Arkansas</option>
+				          <option value="CA">California</option>
+				          <option value="CO">Colorado</option>
+				          <option value="CT">Connecticut</option>
+				          <option value="DE">Delaware</option>
+				          <option value="DC">District of Columbia</option>
+				          <option value="FL">Florida</option>
+				          <option value="GA">Georgia</option>
+				          <option value="HI">Hawaii</option>
+				          <option value="ID">Idaho</option>
+				          <option value="IL">Illinois</option>
+				          <option value="IN">Indiana</option>
+				          <option value="IA">Iowa</option>
+				          <option value="KS">Kansas</option>
+				          <option value="KY">Kentucky</option>
+				          <option value="LA">Louisiana</option>
+				          <option value="ME">Maine</option>
+				          <option value="MD">Maryland</option>
+				          <option value="MA">Massachusetts</option>
+				          <option value="MI">Michigan</option>
+				          <option value="MN">Minnesota</option>
+				          <option value="MS">Mississippi</option>
+				          <option value="MO">Missouri</option>
+				          <option value="MT">Montana</option>
+				          <option value="NE">Nebraska</option>
+				          <option value="NV">Nevada</option>
+				          <option value="NH">New Hampshire</option>
+				          <option value="NJ">New Jersey</option>
+				          <option value="NM">New Mexico</option>
+				          <option value="NY">New York</option>
+				          <option value="NC">North Carolina</option>
+				          <option value="ND">North Dakota</option>
+				          <option value="OH">Ohio</option>
+				          <option value="OK">Oklahoma</option>
+				          <option value="OR">Oregon</option>
+				          <option value="PA">Pennsylvania</option>
+				          <option value="RI">Rhode Island</option>
+				          <option value="SC">South Carolina</option>
+				          <option value="SD">South Dakota</option>
+				          <option value="TN">Tennessee</option>
+				          <option value="TX">Texas</option>
+				          <option value="UT">Utah</option>
+				          <option value="VT">Vermont</option>
+				          <option value="VA">Virginia</option>
+				          <option value="WA">Washington</option>
+				          <option value="WV">West Virginia</option>
+				          <option value="WI">Wisconsin</option>
+				          <option value="WY">Wyoming</option>
+				        </select>
+
+						<p>
+				        	I am over 21 years of age 
+				        	<input type='radio' name="selfAge"/>
+				    	</p>
+				      
+				        <p>I am a legally emancipated minor 
+				        	<input type='radio' name="selfAge"/>
+			        	</p>
+				        
+
+			      	<!-- Need to add overlay -->
+				        <p>
+							In order to get started, please read <a class="overlay-highlight" data-toggle="modal" data-target="#usdaAgreement">the agreement here</a> carefully then check the box to agree to the terms. <span class="req">*</span>
+			        	</p>
+
+
+						<div class="modal fade" id="usdaAgreement" role="dialog">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-body">
+										<p>
+											In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, the USDA, its Agencies, offices, and employees, and institutions participating in or administering USDA programs are prohibited from discriminating based on race, color, national origin, religion, sex, gender identity (including gender expression), sexual orientation, disability, age, marital status, family/parental status, income derived from a public assistance program, political beliefs, or reprisal or retaliation for prior civil rights activity, in any program or activity conducted or funded by USDA (not all bases apply to all programs). Remedies and complaint filing deadlines vary by program or incident. 
+										</p>
+										<p>	
+											Persons with disabilities who require alternative means of communication for program information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally, program information may be made available in languages other than English. 
+										</p>
+										<p>
+											To file a program discrimination complaint, complete the USDA Program Discrimination Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint and at any USDA office or write a letter addressed to USDA and provide in the letter all of the information requested in the form. To request a copy of the complaint form, call (866) 632-9992. Submit your completed form or letter to USDA by: (1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410; (2) fax: (202) 690-7442; or (3) email: <a href= "mailto:program.intake@usda.gov."> program.intake@usda.gov.</a>
+										</p>
+										<p>
+											USDA is an equal opportunity provider, employer, and lender.
+										</p>	
+									</div>
+				      				<div class="modal-footer">
+				      					<button type="button" class="close" aria-label="Close" data-dismiss="modal">
+				      						<span aria-hidden="true">&times;</span>
+				      					</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			      	</div>
+			    	<p>
+			        	<input type='checkbox' /> I have read and agree to the terms.
+		        	</p>
+			        <!-- <button type="button" value="CANCEL" formaction="/">
+			        	CANCEL
+			        </button>
+			        <a type ="button" role="submit" value="CONTINUE" formaction="self_income">
+			    	</a> -->
+			    	<p class="col-xs-2 col-xs-offset 1">
+						<a class="btn btn-large btn-primary" href="/">Cancel</a>
+					</p>	
+					<p class="col-xs-2 col-xs-offset-3">
+						<a class="btn btn-large btn-primary" href="self_income">Continue</a>
+					</p>
+		        <!-- </form> -->
+			</div>
+		</div>
+		</section>
+			<footer class="navbar-static-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+
+</html>

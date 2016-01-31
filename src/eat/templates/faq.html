@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% import "macros/forms.html" as form_macros %}
+    <meta charset="UTF-8">
+    <meta initial scale="1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>EAT</title>
+</head>
+	<body>
+		<body>
+		<nav class="navbar navbar-default">
+				<section class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/">E.A.T.</a>
+					</div>
+						<ul class="nav navbar-default">
+							<li class="nav navbar-right">
+								<a href="languages">Languages</a>
+							</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="faq">FAQ</a>
+						</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="signin">Sign In</a>
+						</li>
+					</ul>
+					</div>
+				</section>
+			</nav>
+			<section class="container-fluid">
+				<div class="row jumbotron" id="inner-container">
+					<div class="row">
+						<form action="user.js" method="GET">
+						</form>
+					</div>
+				</div>
+			</section>
+			<footer class="footer col-md-8 col-md-offset-2">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			</footer>
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+</html>

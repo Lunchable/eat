@@ -1,0 +1,178 @@
+<!doctype HTML>
+	<head>
+		{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	    <title>EAT</title>
+	</head>
+	<body>
+<!--		{# {% for item in nav %} #}
+			{# <li "">{{ item }}</li> #}
+			{# {% endfor %} #} -->
+			
+			<nav class="navbar navbar-default">
+				<section class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/">E.A.T.</a>
+					</div>
+						<ul class="nav navbar-default">
+							<li class="nav navbar-right">
+								<a href="languages">Languages</a>
+							</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="faq">FAQ</a>
+						</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="signin">Sign In</a>
+						</li>
+					</ul>
+					</div>
+				</section>
+			</nav>
+			<div class="row">
+				<div class="col-md-6 col-xs-6" id="main">
+					<div id="inner-container">
+					  <h1 class= "text-center">Child's Information</h1>
+					</div>
+					<div class="row">
+						<!-- <form action="user.js" method="GET"> -->
+							{# {{ form_macros.as_tabular_form(signin_form) }} #}
+					      	<!-- Need to add overlay -->
+				       <div class="form-group">
+
+					       <label for="firstNameStudent">
+					       	First Name <span class="req">*</span>
+					       </label>
+					        <input type="text" class="form-control" id="firstNameStudent"placeholder="First Name" />
+
+					        <label for="lastNameSelf">
+		        				Last Name <span class="req">*</span>
+		        			</label>
+					        <input type="text" class="form-control" id="lastNameStudent"placeholder="Last Name" />
+					      	
+					      	<div>
+				        		<label class="radio-inline"><input type="radio" name="student" />Yes</label>
+								<label class="radio-inline"><input type="radio" name="student"  />No</label>
+							</div>
+
+							 <label for="city" id="citySelf">
+							 	City <span class="req">*</span>
+					   		</label>
+							    <input type="text" class="form-control" placeholder="City"  />
+
+						    	<label for="zipCode">
+						    		Zip Code <span class="req">*</span>
+					    		</label>
+						      	<input type="text" class="form-control" placeholder="ZipCode"  />
+						      	
+						      	<label>
+						      		State <span class="req">*</span>
+						      	</label>
+						        <select name="state">
+						          <option value="--Select--">--Select--</option>
+						          <option value="AL">Alabama</option>
+						          <option value="AK">Alaska</option>
+						          <option value="AZ">Arizona</option>
+						          <option value="AR">Arkansas</option>
+						          <option value="CA">California</option>
+						          <option value="CO">Colorado</option>
+						          <option value="CT">Connecticut</option>
+						          <option value="DE">Delaware</option>
+						          <option value="DC">District of Columbia</option>
+						          <option value="FL">Florida</option>
+						          <option value="GA">Georgia</option>
+						          <option value="HI">Hawaii</option>
+						          <option value="ID">Idaho</option>
+						          <option value="IL">Illinois</option>
+						          <option value="IN">Indiana</option>
+						          <option value="IA">Iowa</option>
+						          <option value="KS">Kansas</option>
+						          <option value="KY">Kentucky</option>
+						          <option value="LA">Louisiana</option>
+						          <option value="ME">Maine</option>
+						          <option value="MD">Maryland</option>
+						          <option value="MA">Massachusetts</option>
+						          <option value="MI">Michigan</option>
+						          <option value="MN">Minnesota</option>
+						          <option value="MS">Mississippi</option>
+						          <option value="MO">Missouri</option>
+						          <option value="MT">Montana</option>
+						          <option value="NE">Nebraska</option>
+						          <option value="NV">Nevada</option>
+						          <option value="NH">New Hampshire</option>
+						          <option value="NJ">New Jersey</option>
+						          <option value="NM">New Mexico</option>
+						          <option value="NY">New York</option>
+						          <option value="NC">North Carolina</option>
+						          <option value="ND">North Dakota</option>
+						          <option value="OH">Ohio</option>
+						          <option value="OK">Oklahoma</option>
+						          <option value="OR">Oregon</option>
+						          <option value="PA">Pennsylvania</option>
+						          <option value="RI">Rhode Island</option>
+						          <option value="SC">South Carolina</option>
+						          <option value="SD">South Dakota</option>
+						          <option value="TN">Tennessee</option>
+						          <option value="TX">Texas</option>
+						          <option value="UT">Utah</option>
+						          <option value="VT">Vermont</option>
+						          <option value="VA">Virginia</option>
+						          <option value="WA">Washington</option>
+						          <option value="WV">West Virginia</option>
+						          <option value="WI">Wisconsin</option>
+						          <option value="WY">Wyoming</option>
+						        </select>
+
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="/">Cancel</a>
+								</p>
+							</div>	
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="enterChildInfo">Continue</a>
+								</p>
+							</div>
+
+						       <!--  <button class="btn-default btn text-left" type="button" value="CANCEL" formaction="/">
+						        	CANCEL
+						        </button>						      
+						        <button class="btn-default btn text-left" type ="submit" value="CONTINUE">
+						        	CONTINUE
+						        </button> -->
+				        <!-- </form> -->
+					</div>
+				</div>
+			</div>
+			
+
+		</section>
+			<footer class="navbar-fixed-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+			
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+
+</html>
