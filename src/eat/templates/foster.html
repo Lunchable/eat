@@ -8,27 +8,37 @@
     <title>EAT {# title #}</title>
 </head>
 	<body>
-		<section class="container-fluid">
-			<nav>
-				<ul class="nav nav-justified"></ul>
-					<li role="presentation">
-						<a href="Languages">Languages</a>
-					</li>
-				<li role="presentation">
-					<a href="faq">FAQ</a>
-				</li>
-				<li role="presentation">
-					<a href="signin">Sign In</a>
-				</li>
-			</nav>
-
-			<footer>
-				<!-- {% for item in footer %} -->
-				<!-- {% endfor %} -->
-					<a class="nav-menu-items" href="#">About</a>
-					<a class="nav-menu-items" href="#">Terms</a>
-					<a class="nav-menu-items" href="#">Contact</a>
-			</footer>
-		</section>
+		<nav class="navbar navbar-default">
+            <section class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">E.A.T.</a>
+                </div>
+                    <ul class="nav navbar-default">
+                        <li class="nav navbar-right">
+                            <a href="languages">Languages</a>
+                        </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="faq">FAQ</a>
+                    </li>
+                    <li class="nav navbar-default navbar-right">
+                        <a href="signin">Sign In</a>
+                    </li>
+                </ul>
+                </div>
+            </section>
+        </nav>
+		
+		<footer class="navbar-fixed-bottom">
+			<div class="nav nav-justified">
+			<li role="presentation">
+				<a class="btn-large text-center" href="#">About</a>
+			</li>
+			<li role="presentation">
+				<a class="btn-large text-center" href="#">Terms</a>
+			</li>
+			<li role="presentation">
+				<a class="btn-large text-center" href="#">Contact</a>
+			</li>
+		</footer>
 	</body>
 </html>

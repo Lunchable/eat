@@ -38,23 +38,12 @@
 				<p class="col-xs-6 text-center">
 					<a class="btn btn-large btn-default" href="self">Apply Now/Sign Up</a>
 				</p>
-					<!-- <div class="dropdown main">
-						<button class="dropdown-toggle" type="button" data-toggle="dropdown">FAST TRACK YOUR APPLICATION!<span class="caret"></span>
-				  		</button>
-					  	<button type="button"  class="dropdown-menu" role="menu" aria-labelledby="menu1">
-					  		<div class="row">
-					  			<div class="col-xs-12">
-									<p class="text-center">Click here if you are <em>exclusively</em> a parent to a foster child  <strong>OR</strong> if you are a SNAP/TANF/FDPIR recipient</p>
-									<p class="col-xs-6 text-center">
-										<a class="btn btn-large btn-primary" href="foster">I have foster children</a>
-									</p>	
-									<p class="col-xs-6 text-center">
-										<a class="btn btn-large btn-primary" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
-									</p>
-								</div>
-							</div>
-						</button>
-					</div> -->
+				<button type="button"  class="btn dropdown-toggle" data-toggle="dropdown">FAST TRACK YOUR APPLICATION!<span class="caret"></span></button>
+				<div class="dropdown-menu">
+			  		<p>Click here if you are <em>exclusively</em> a parent to a foster child  <strong>OR</strong> if you are a SNAP/TANF/FDPIR recipient
+		  			</p>
+					<a class="btn btn-large btn-primary" href="foster">I have foster children</a>
+					<a class="btn btn-large btn-primary" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
 				</div>
 			</div>
 		</div>
@@ -73,12 +62,6 @@
 		</footer>
 		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
-		</script>	
-		<script type="text/javascript">
-			$('.cancel').click(function() {
-				$("input").removeAttr('required');
-				window.location='/';
-			});
 		</script>
 		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>	
 	</body>
