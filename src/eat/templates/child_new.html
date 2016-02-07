@@ -34,10 +34,17 @@
 			<div class="row">
 				<div class="col-md-6 col-xs-6" id="main">
 					<div id="inner-container">
-					  <h1 class= "text-center">Child's Information</h1>
+						<h1>Child's Information</h1>
+						<h3>PLEASE ENTER THE FOLLOWING INFORMATION FOR THE CHILD/CHILDREN APPLYING FOR FREE OR DISCOUNT MEALS<span class="req">*</span></h3>
+						<h6><span class="req">*</span>denotes required information</h6>
+						<div>
+				      		<h3>Is the child a student?</h3>
+			        		<label class="radio-inline"><input type="radio" name="student" value="yes" />Yes</label>
+							<label class="radio-inline"><input type="radio" name="student" value="no" />No</label>
+						</div>
 					</div>
 					<div class="row">
-						<!-- <form action="user.js" method="GET"> -->
+						<form action="user.js" method="GET" class="form-inline hidden" id="student">
 							{# {{ form_macros.as_tabular_form(signin_form) }} #}
 					      	<!-- Need to add overlay -->
 				       <div class="form-group">
@@ -45,27 +52,22 @@
 					       <label for="firstNameStudent">
 					       	First Name <span class="req">*</span>
 					       </label>
-					        <input type="text" class="form-control" id="firstNameStudent"placeholder="First Name" />
+					        <input type="text" class="form-control" id="firstNameStudent" placeholder="First Name" />
 
 					        <label for="lastNameSelf">
 		        				Last Name <span class="req">*</span>
 		        			</label>
-					        <input type="text" class="form-control" id="lastNameStudent"placeholder="Last Name" />
-					      	
-					      	<div>
-				        		<label class="radio-inline"><input type="radio" name="student" />Yes</label>
-								<label class="radio-inline"><input type="radio" name="student"  />No</label>
-							</div>
+					        <input type="text" class="form-control" id="lastNameStudent" placeholder="Last Name" />
 
-							 <label for="city" id="citySelf">
-							 	City <span class="req">*</span>
+							<label for="schoolZip">
+							 	School Zip Code <span class="req">*</span>
 					   		</label>
-							    <input type="text" class="form-control" placeholder="City"  />
+							    <input type="text" class="form-control" placeholder="schoolZip"  />
 
-						    	<label for="zipCode">
-						    		Zip Code <span class="req">*</span>
+						    	<label for="schoolCity">
+						    		City<span class="req">*</span>
 					    		</label>
-						      	<input type="text" class="form-control" placeholder="ZipCode"  />
+						      	<input type="text" class="form-control" placeholder="City"  />
 						      	
 						      	<label>
 						      		State <span class="req">*</span>
@@ -125,6 +127,14 @@
 						          <option value="WY">Wyoming</option>
 						        </select>
 
+					        <label for="schoolName">
+						    		School Name<span class="req">*</span>
+				    		</label>
+					      	<select>
+					      		{# % import Something about autocomplete schools % #}
+					      	</select>
+					    </form>
+
 							<div>
 								<p class="col-md-6">
 									<a class="btn btn-large btn-primary" href="/">Cancel</a>
@@ -132,7 +142,7 @@
 							</div>	
 							<div>
 								<p class="col-md-6">
-									<a class="btn btn-large btn-primary" href="enterChildInfo">Continue</a>
+									<a class="btn btn-large btn-primary" href="child_Income">Continue</a>
 								</p>
 							</div>
 
@@ -167,9 +177,17 @@
 		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
 		</script>	
 		<script type="text/javascript">
+			$(document).ready(function(){
+				$("input:radio[value='yes']").change(function(){
+    				$("#student").removeClass('hidden');
+  				});
+  				$("input:radio[value='no']").change(function(){
+  					$("#student").addClass('hidden');
+  				});
 			$('.cancel').click(function() {
 				$("input").removeAttr('required');
 				window.location='/';
+				});
 			});
 		</script>
 		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>

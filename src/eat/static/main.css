@@ -21,11 +21,12 @@ html{
 	float: none;
 	margin: auto;
 	padding: 2.75em;
+	height: 40em;
 	background-color: #ffffff;
 	border-radius: 1em;
+	border: 1px solid black;
+	overflow: scroll;
 }
 .req{
 	color: #FF0000;
 }
-
-.

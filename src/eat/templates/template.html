@@ -12,7 +12,7 @@
 		<nav class="navbar navbar-default">
 				<section class="container-fluid">
 					<div class="navbar-header">
-						<a href="/">E.A.T.</a>
+						<a class="navbar-brand" href="/">E.A.T.</a>
 					</div>
 						<ul class="nav navbar-default">
 							<li class="nav navbar-right">
@@ -28,15 +28,15 @@
 					</div>
 				</section>
 			</nav>
-			<section class="container-fluid" id="main">
-				<div class="row jumbotron">
+			<section class="container-fluid">
+				<div class="row" id="inner-container">
 					<div class="row">
 						<form action="user.js" method="GET">
 						</form>
 					</div>
 				</div>
 			</section>
-			<footer class="navbar-static-bottom">
+			<footer class="footer col-md-8 col-md-offset-2">
 				<div class="nav nav-justified">
 				<li role="presentation">
 					<a class="btn-large text-center" href="#">About</a>
@@ -47,7 +47,6 @@
 				<li role="presentation">
 					<a class="btn-large text-center" href="#">Contact</a>
 				</li>
-			
 			</footer>
 		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">

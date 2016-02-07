@@ -1,0 +1,105 @@
+<!doctype HTML>
+	<head>
+		{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	    <title>EAT</title>
+	</head>
+	<body>
+<!--		{# {% for item in nav %} #}
+			{# <li "">{{ item }}</li> #}
+			{# {% endfor %} #} -->
+			
+			<nav class="navbar navbar-default">
+				<section class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/">E.A.T.</a>
+					</div>
+						<ul class="nav navbar-default">
+							<li class="nav navbar-right">
+								<a href="languages">Languages</a>
+							</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="faq">FAQ</a>
+						</li>
+						<li class="nav navbar-default navbar-right">
+							<a href="signin">Sign In</a>
+						</li>
+					</ul>
+					</div>
+				</section>
+			</nav>
+			<div class="row">
+				<div class="col-md-6 col-xs-6" id="main">
+					<div id="inner-container">
+					  <h1 class= "text-center">Do you have a Social Security #?</h1>
+					  	<div>
+			        		<label class="radio-inline"><input type="radio" name="ssn" value="yes" />Yes</label>
+							<label class="radio-inline"><input type="radio" name="ssn" value="no" checked="checked" />No</label>
+						</div>
+					</div>
+					<div class="row hidden" id="ssn">
+						<div class="col-xs-12 well">
+							<input type="text" class="inline" id="disabledTextInput" placeholder="XXXX" />
+							<input type="text" class="inline" id="disabledTextInput" placeholder="XX" />
+							<input type="text" class="inline" placeholder="Last four digits" />
+						</div>
+					</div>
+					<div class="row">
+						<!-- <form action="user.js" method="GET"> -->
+							{# {{ form_macros.as_tabular_form(signin_form) }} #}
+					      	<!-- Need to add overlay -->
+				       <div class="form-group">      						     
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="/">Cancel</a>
+								</p>
+							</div>	
+							<div>
+								<p class="col-md-6">
+									<a class="btn btn-large btn-primary" href="enterChildInfo">Continue</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+
+		</section>
+			<footer class="navbar-fixed-bottom">
+				<div class="nav nav-justified">
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">About</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Terms</a>
+				</li>
+				<li role="presentation">
+					<a class="btn-large text-center" href="#">Contact</a>
+				</li>
+			
+			</footer>
+			
+		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
+		</script>	
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("input:radio[value='yes']").change(function(){
+				$("#ssn").removeClass('hidden');
+			});
+			$("input:radio[value='no']").change(function(){
+				$("#ssn").addClass('hidden');
+			});
+			$('.cancel').click(function() {
+				$("input").removeAttr('required');
+				window.location='/';
+			});
+		});
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	</body>
+
+</html>
