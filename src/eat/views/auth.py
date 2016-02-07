@@ -45,6 +45,30 @@ def register_routes(app):
             return redirect('/')
         return render_template('child_new.html')
 
+    @app.route('/ssn', methods=['GET', 'POST'])
+    def ssn(): 
+        if current_user.is_authenticated:
+            return redirect('/')
+        return render_template('ssn.html')
+
+    @app.route('/child_Income', methods=['GET', 'POST'])
+    def child_Income(): 
+        if current_user.is_authenticated:
+            return redirect('/')
+        return render_template('child_Income.html')
+
+    @app.route('/enterAnotherChild', methods=['GET', 'POST'])
+    def enterAnotherChild(): 
+        if current_user.is_authenticated:
+            return redirect('/')
+        return render_template('enterAnotherChild.html')
+
+    @app.route('/self_income_types', methods=['GET', 'POST'])
+    def self_income_types(): 
+        if current_user.is_authenticated:
+            return redirect('/')
+        return render_template('self_income_types.html')    
+
     @app.route('/enterChildInfo', methods=['GET', 'POST'])
     def enterChildInfo(): 
         if current_user.is_authenticated:
