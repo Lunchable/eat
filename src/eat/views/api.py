@@ -7,3 +7,4 @@ def register_routes(app):
     @app.route('/svc/eat/v1/name', methods=['GET', 'POST'])
     def api_name():
         return redirect('/')
+
