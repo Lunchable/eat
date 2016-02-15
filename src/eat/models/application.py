@@ -15,7 +15,7 @@ class Income(db.EmbeddedDocument):
     @property
     def dict(self):
         return {
-            '_id': str(self.id),
+            '_id': str(self._id),
             'source': self.source,
             'amount': self.amount,
             'frequency': self.frequency,
@@ -35,7 +35,7 @@ class Person(db.EmbeddedDocument):
     @property
     def dict(self):
         return {
-            '_id': str(self.id),
+            '_id': str(self._id),
             'first_name': self.first_name,
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
@@ -47,7 +47,7 @@ class Child(Person):
     @property
     def dict(self):
         return {
-            '_id': str(self.id),
+            '_id': str(self._id),
             'first_name': self.first_name,
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
@@ -65,7 +65,7 @@ class Signature(db.EmbeddedDocument):
     @property
     def dict(self):
         return {
-            '_id': str(self.id),
+            '_id': str(self._id),
             'name': self.name,
             'date': self.date,
             'ip_address': self.ip_address,
@@ -85,7 +85,7 @@ class Applicant(Person):
     @property
     def dict(self):
         return {
-            '_id': str(self.id),
+            '_id': str(self._id),
             'first_name': self.first_name,
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,

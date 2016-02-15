@@ -1,9 +1,9 @@
 import bson.json_util as json
-from flask import redirect
-from flask import session
+from flask import session, request, Response
 from flask_login import current_user
 
-from eat.models.application import Application
+from eat.models.application import Application, Applicant
+from ..forms.applicant import ApplicantForm
 
 
 def register_routes(app):
@@ -41,18 +41,38 @@ def register_routes(app):
 
         return decorator
 
-    @app.route('/svc/eat/v1/name', methods=['GET', 'POST'])
-    def api_name():
-        return redirect('/')
-
-    @app.route('/svc/eat/v1/application/applicant', methods=['GET', 'POST'],
+    @app.route('/svc/eat/v1/application/applicant', methods=['GET', 'POST', 'PUT'],
                endpoint='svc_eat_v1_application_applicant')
     @inject_application
     def svc_eat_v1_application_applicant(application):
-        if application.applicant:
-            return json.dumps(application.applicant.dict)
-        else:
-            return json.dumps({})
+        applicant_form = ApplicantForm(csrf_enabled=False)
+        if request.method == 'GET':
+            if application.applicant:
+                return json.dumps(application.applicant.dict)
+            else:
+                return Response(
+                    response=json.dumps({'errors': 'Applicant does not exist.', 'form': applicant_form.data}),
+                    status=404, headers=None,
+                    content_type='application/json; charset=utf-8')
+        elif request.method == 'POST' and application.applicant:
+            return Response(response=json.dumps({'error': 'Applicant already exists.  Use PUT instead'}),
+                            status=409, headers=None,
+                            content_type='application/json; charset=utf-8')
+
+        application.applicant = application.applicant or Applicant()
+        if not applicant_form.validate_on_submit():
+            return Response(
+                response=json.dumps({'errors': applicant_form.errors, 'form': applicant_form.data}),
+                status=400, headers=None,
+                content_type='application/json; charset=utf-8')
+        for field in ['middle_initial', 'city', 'last_name', 'first_name', 'apt', 'state', 'ssn', 'address_1',
+                      'address_2', 'postal']:
+            if applicant_form.data[field]:
+                application.applicant[field] = applicant_form.data[field]
+        application.save()
+        return Response(response=json.dumps(application.dict),
+                        status=201, headers=None,
+                        content_type='application/json; charset=utf-8')
 
     @app.route('/svc/eat/v1/application', methods=['GET', 'POST'], endpoint='svc_eat_v1_application')
     @inject_application
