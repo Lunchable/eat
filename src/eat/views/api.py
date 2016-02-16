@@ -123,23 +123,30 @@ def register_routes(app):
                endpoint='svc_eat_v1_application_applicant_incomes_income_id')
     @inject_application
     def svc_eat_v1_application_applicant_incomes_income_id(application, income_id):
-        if not application.applicant or not application.applicant.incomes or income_id not in [str(i['_id']) for i in
-                                                                                               application.applicant.incomes]:
+        application.applicant = application.applicant or Applicant()
+        try:
+            income = application.applicant.incomes.get(_id=ObjectId(income_id))
+
+            if request.method == 'GET':
+                return json.dumps(income.dict)
+            else:
+                application.applicant.incomes.remove(income)
+                application.save()
+
+            return Response(response=json.dumps(application.dict),
+                            status=201, headers=None,
+                            content_type='application/json; charset=utf-8')
+        except DoesNotExist:
             return Response(
                 response=json.dumps({'errors': 'Income does not exist.'}),
                 status=404, headers=None,
                 content_type='application/json; charset=utf-8')
 
-        income = filter(lambda x: str(x['_id']) == income_id, application.applicant.incomes)[0]
-        if request.method == 'GET':
-            return json.dumps(income.dict)
-        else:
-            application.applicant.incomes.remove(income)
-            application.save()
-
-        return Response(response=json.dumps(application.dict),
-                        status=201, headers=None,
-                        content_type='application/json; charset=utf-8')
+        except Exception:
+            return Response(
+                response=json.dumps({'errors': 'The income could not be queried'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
 
     @app.route('/svc/eat/v1/application/children', methods=['GET', 'POST'],
                endpoint='svc_eat_v1_application_children')
