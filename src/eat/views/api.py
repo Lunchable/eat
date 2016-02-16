@@ -244,3 +244,32 @@ def register_routes(app):
                 response=json.dumps({'errors': 'The child could not be queried'}),
                 status=404, headers=None,
                 content_type='application/json; charset=utf-8')
+
+    @app.route('/svc/eat/v1/application/children/<child_id>/incomes/<income_id>', methods=['GET', 'DELETE'],
+               endpoint='svc_eat_v1_application_children_child_id_incomes_income_id')
+    @inject_application
+    def svc_eat_v1_application_children_child_id_incomes_income_id(application, child_id, income_id):
+        try:
+            child = application.children.get(_id=ObjectId(child_id))
+            income = child.incomes.get(_id=ObjectId(income_id))
+
+            if request.method == 'GET':
+                return json.dumps(income.dict)
+            else:
+                child.incomes.remove(income)
+                application.save()
+
+            return Response(response=json.dumps(application.dict),
+                            status=201, headers=None,
+                            content_type='application/json; charset=utf-8')
+        except DoesNotExist:
+            return Response(
+                response=json.dumps({'errors': 'Income does not exist.'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
+
+        except Exception:
+            return Response(
+                response=json.dumps({'errors': 'The income could not be queried'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')

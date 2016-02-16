@@ -92,6 +92,47 @@ POST /svc/eat/v1/application/children
 (form eat.forms.person.ChildForm)
 Creates a new child object and attaches it to the application
 
+---
+```
+GET /svc/eat/v1/application/children/<child_id>
+```
+Returns a 404 if a child does not exist whose id is child_id
+Returns the child object
 
+---
+```
+DELETE /svc/eat/v1/application/children/<child_id>
+```
+Returns a 404 if a child does not exist whose id is child_id
+Deletes the child object and returns the application.
+
+---
+```
+GET /svc/eat/v1/application/children/<child_id>/incomes
+```
+Returns a 404 if a child does not exist whose id is child_id
+Returns a list of the child's incomes
+
+---
+```
+POST /svc/eat/v1/application/children/<child_id>/incomes
+```
+(form eat.forms.applicant.Income)
+Returns a 404 if a child does not exist whose id is child_id
+Creates a new income object attached to the child, and returns the entire application object
+
+---
+```
+GET /svc/eat/v1/application/children/<child_id>/incomes/<income_id>
+```
+Returns a 404 if a child does not exist whose id is child_id, or if the child's income whose id is income_id does not exist
+Returns the child's income object
+
+---
+```
+DELETE /svc/eat/v1/application/children/<child_id>/incomes/<income_id>
+```
+Returns a 404 if a child does not exist whose id is child_id, or if the child's income whose id is income_id does not exist
+Deletes the child's income object and returns the application.
 
 
