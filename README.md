@@ -23,7 +23,7 @@ If the user signs up or logs in at any time during or after the process, the new
 All forms are validated server-side, and return 400 status with error descriptions if validation fails.
 
 ```
-GET /svc/eat/v1/application
+pGET /svc/eat/v1/application
 ```
 Returns the application object stored in the session.
 
@@ -76,4 +76,22 @@ DELETE /svc/eat/v1/application/applicant/incomes/<income_id>
 ```
 Returns a 404 if the applicant's info doesn't exist yet, or if an income object with that income_id doesn't exist on the application.
 Deletes the income object and returns the entire application object.
+
+---
+```
+GET /svc/eat/v1/application/children
+```
+Returns a 404 if there are no children on the application
+Returns a list of child objects
+
+
+---
+```
+POST /svc/eat/v1/application/children
+```
+(form eat.forms.person.ChildForm)
+Creates a new child object and attaches it to the application
+
+
+
 

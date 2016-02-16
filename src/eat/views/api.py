@@ -2,9 +2,10 @@ import bson.json_util as json
 from flask import session, request, Response
 from flask_login import current_user
 
-from eat.models.application import Application, Applicant, Income
+from eat.models.application import Application, Applicant, Income, Child
 from ..forms.applicant import ApplicantForm
 from ..forms.income import IncomeForm
+from ..forms.person import ChildForm
 
 
 def register_routes(app):
@@ -134,6 +135,36 @@ def register_routes(app):
             application.applicant.incomes.remove(income)
             application.save()
 
+        return Response(response=json.dumps(application.dict),
+                        status=201, headers=None,
+                        content_type='application/json; charset=utf-8')
+
+    @app.route('/svc/eat/v1/application/children', methods=['GET', 'POST'],
+               endpoint='svc_eat_v1_application_children')
+    @inject_application
+    def svc_eat_v1_application_children(application):
+        child_form = ChildForm(csrf_enabled=False)
+        if request.method == 'GET':
+            if application.children:
+                return json.dumps([c.dict for c in application.children])
+            else:
+                return Response(
+                    response=json.dumps({'errors': 'Children do not exist.', 'form': child_form.data}),
+                    status=404, headers=None,
+                    content_type='application/json; charset=utf-8')
+
+        if not child_form.validate_on_submit():
+            return Response(
+                response=json.dumps({'errors': child_form.errors, 'form': child_form.data}),
+                status=400, headers=None,
+                content_type='application/json; charset=utf-8')
+
+        child = Child()
+        for field in ['first_name', 'middle_initial', 'last_name', 'school_zip', 'school_city', 'school_state']:
+            if child_form.data[field]:
+                child[field] = child_form.data[field]
+        application.children.append(child)
+        application.save()
         return Response(response=json.dumps(application.dict),
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')

@@ -44,6 +44,11 @@ class Person(db.EmbeddedDocument):
 
 
 class Child(Person):
+    school_zip = EncryptedStringField(max_length=15, required=False, key=str(_key), iv=str(_iv))
+    school_city = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    school_state = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    school_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+
     @property
     def dict(self):
         return {
