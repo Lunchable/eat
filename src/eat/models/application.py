@@ -17,7 +17,7 @@ class Income(db.EmbeddedDocument):
         return {
             '_id': str(self._id),
             'source': self.source,
-            'amount': self.amount,
+            'amount': str(self.amount),
             'frequency': self.frequency,
         }
 
