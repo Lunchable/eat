@@ -56,6 +56,10 @@ class Child(Person):
             'first_name': self.first_name,
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
+            'school_zip': self.school_zip,
+            'school_city': self.school_city,
+            'school_state': self.school_state,
+            'school_name': self.school_name,
             'incomes': [i.dict for i in self.incomes],
         }
 

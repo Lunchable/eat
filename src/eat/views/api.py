@@ -1,6 +1,8 @@
 import bson.json_util as json
+from bson import ObjectId
 from flask import session, request, Response
 from flask_login import current_user
+from mongoengine.errors import DoesNotExist
 
 from eat.models.application import Application, Applicant, Income, Child
 from ..forms.applicant import ApplicantForm
@@ -168,3 +170,31 @@ def register_routes(app):
         return Response(response=json.dumps(application.dict),
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')
+
+    @app.route('/svc/eat/v1/application/children/<child_id>', methods=['GET', 'DELETE'],
+               endpoint='svc_eat_v1_application_children_child_id')
+    @inject_application
+    def svc_eat_v1_application_children_child_id(application, child_id):
+        try:
+            child = application.children.get(_id=ObjectId(child_id))
+
+            if request.method == 'GET':
+                return json.dumps(child.dict)
+            else:
+                application.children.remove(child)
+                application.save()
+
+            return Response(response=json.dumps(application.dict),
+                            status=201, headers=None,
+                            content_type='application/json; charset=utf-8')
+        except DoesNotExist:
+            return Response(
+                response=json.dumps({'errors': 'Child does not exist.'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
+
+        except Exception:
+            return Response(
+                response=json.dumps({'errors': 'The child could not be queried'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
