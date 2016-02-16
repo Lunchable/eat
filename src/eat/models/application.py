@@ -121,7 +121,7 @@ class Application(db.Document):
     def dict(self):
         return {
             '_id': str(self.id),
-            'created_at': self.created_at,
+            'created_at': str(self.created_at),
             'applicant': self.applicant.dict if self.applicant else None,
             'children': [c.dict for c in self.children] if self.children else [],
             'household': [h.dict for h in self.household] if self.household else [],
