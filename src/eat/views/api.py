@@ -205,3 +205,42 @@ def register_routes(app):
                 response=json.dumps({'errors': 'The child could not be queried'}),
                 status=404, headers=None,
                 content_type='application/json; charset=utf-8')
+
+    @app.route('/svc/eat/v1/application/children/<child_id>/incomes', methods=['GET', 'POST'],
+               endpoint='svc_eat_v1_application_children_child_id_incomes')
+    @inject_application
+    def svc_eat_v1_application_children_child_id_incomes(application, child_id):
+        income_form = IncomeForm(csrf_enabled=False)
+        try:
+            child = application.children.get(_id=ObjectId(child_id))
+
+            if request.method == 'GET':
+                return json.dumps([i.dict for i in child.incomes])
+            else:
+                if not income_form.validate_on_submit():
+                    return Response(
+                        response=json.dumps({'errors': income_form.errors, 'form': income_form.data}),
+                        status=400, headers=None,
+                        content_type='application/json; charset=utf-8')
+
+                income = Income()
+                for field in ['source', 'amount', 'frequency']:
+                    if income_form.data[field]:
+                        income[field] = income_form.data[field]
+                child.incomes.append(income)
+                application.save()
+
+            return Response(response=json.dumps(application.dict),
+                            status=201, headers=None,
+                            content_type='application/json; charset=utf-8')
+        except DoesNotExist:
+            return Response(
+                response=json.dumps({'errors': 'Child does not exist.'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
+
+        except Exception:
+            return Response(
+                response=json.dumps({'errors': 'The child could not be queried'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
