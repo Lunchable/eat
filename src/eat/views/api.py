@@ -51,6 +51,8 @@ def register_routes(app):
                 application = Application()
                 application.save()
                 session['application_id'] = application.id
+                pickled_application = pickle.dumps(application)
+                session['application'] = pickled_application
 
             response = f(application, **kwargs)
             pickled_application = pickle.dumps(application)
