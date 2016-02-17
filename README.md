@@ -165,9 +165,47 @@ POST /svc/eat/v1/application/children/<child_id>/ethnicities
 Returns a 404 if a child does not exist whose id is child_id
 Overwrites the list of ethnicities associated with the child
 
+---
+```
+GET /svc/eat/v1/application/persons/<person_id>/incomes
+```
+Returns a 404 if a person does not exist whose id is person_id
+Returns a list of the person's incomes
 
+---
+```
+POST /svc/eat/v1/application/persons/<person_id>/incomes
+```
+(form eat.forms.applicant.Income)
+Returns a 404 if a person does not exist whose id is person_id
+Creates a new income object attached to the person, and returns the entire application object
 
+---
+```
+GET /svc/eat/v1/application/persons/<person_id>/incomes/<income_id>
+```
+Returns a 404 if a person does not exist whose id is person_id, or if the person's income whose id is income_id does not exist
+Returns the person's income object
 
+---
+```
+DELETE /svc/eat/v1/application/persons/<person_id>/incomes/<income_id>
+```
+Returns a 404 if a person does not exist whose id is person_id, or if the person's income whose id is income_id does not exist
+Deletes the person's income object and returns the application.
 
+---
+```
+GET /svc/eat/v1/application/persons/<person_id>/ethnicities
+```
+Returns a 404 if a person does not exist whose id is person_id
+Returns a list of the ethnicities associated with the person
 
+---
+```
+POST /svc/eat/v1/application/persons/<person_id>/ethnicities
+```
+(form eat.forms.ethnicity.EthnicityForm)
+Returns a 404 if a person does not exist whose id is person_id
+Overwrites the list of ethnicities associated with the person
 

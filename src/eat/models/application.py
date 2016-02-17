@@ -49,7 +49,7 @@ class Person(db.EmbeddedDocument):
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
             'incomes': [i.dict for i in self.incomes],
-            'ethnicity': [e.dict for e in self.ethnicities]
+            'ethnicities': [e.dict for e in self.ethnicities]
         }
 
 
