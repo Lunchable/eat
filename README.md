@@ -150,6 +150,24 @@ POST /svc/eat/v1/application/children/<child_id>/programs
 Returns a 404 if a child does not exist whose id is child_id
 Overwrites the child's programs (SNAP, TANF, etc)
 
+---
+```
+GET /svc/eat/v1/application/children/<child_id>/ethnicities
+```
+Returns a 404 if a child does not exist whose id is child_id
+Returns a list of the ethnicities associated with the child
+
+---
+```
+POST /svc/eat/v1/application/children/<child_id>/ethnicities
+```
+(form eat.forms.ethnicity.EthnicityForm)
+Returns a 404 if a child does not exist whose id is child_id
+Overwrites the list of ethnicities associated with the child
+
+
+
+
 
 
 

@@ -22,12 +22,21 @@ class Income(db.EmbeddedDocument):
         }
 
 
+class Ethnicity(db.EmbeddedDocument):
+    ethnicity_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+
+    @property
+    def dict(self):
+        return self.ethnicity_name
+
+
 class Person(db.EmbeddedDocument):
     _id = db.ObjectIdField(required=True, default=lambda: ObjectId())
     first_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     middle_initial = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     last_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     incomes = db.EmbeddedDocumentListField(Income)
+    ethnicities = db.EmbeddedDocumentListField(Ethnicity)
     meta = {
         'allow_inheritance': True,
     }
@@ -40,6 +49,7 @@ class Person(db.EmbeddedDocument):
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
             'incomes': [i.dict for i in self.incomes],
+            'ethnicity': [e.dict for e in self.ethnicities]
         }
 
 
@@ -70,7 +80,8 @@ class Child(Person):
             'school_state': self.school_state,
             'school_name': self.school_name,
             'incomes': [i.dict for i in self.incomes],
-            'programs': [p.dict for p in self.programs]
+            'programs': [p.dict for p in self.programs],
+            'ethnicities': [e.dict for e in self.ethnicities]
         }
 
 
