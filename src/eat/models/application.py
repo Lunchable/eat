@@ -135,7 +135,7 @@ class Application(db.Document):
 
     applicant = db.EmbeddedDocumentField(Applicant)
     children = db.EmbeddedDocumentListField(Child)
-    household = db.EmbeddedDocumentListField(Person)
+    persons = db.EmbeddedDocumentListField(Person)
     signature = db.EmbeddedDocumentField(Signature)
 
     def __str__(self):
@@ -154,6 +154,6 @@ class Application(db.Document):
             'created_at': str(self.created_at),
             'applicant': self.applicant.dict if self.applicant else None,
             'children': [c.dict for c in self.children] if self.children else [],
-            'household': [h.dict for h in self.household] if self.household else [],
+            'persons': [p.dict for p in self.persons] if self.persons else [],
             'signature': self.signature.dict if self.signature else None
         }
