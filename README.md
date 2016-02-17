@@ -23,7 +23,7 @@ If the user signs up or logs in at any time during or after the process, the new
 All forms are validated server-side, and return 400 status with error descriptions if validation fails.
 
 ```
-pGET /svc/eat/v1/application
+GET /svc/eat/v1/application
 ```
 Returns the application object stored in the session.
 
@@ -134,5 +134,22 @@ DELETE /svc/eat/v1/application/children/<child_id>/incomes/<income_id>
 ```
 Returns a 404 if a child does not exist whose id is child_id, or if the child's income whose id is income_id does not exist
 Deletes the child's income object and returns the application.
+
+---
+```
+GET /svc/eat/v1/application/children/<child_id>/programs
+```
+Returns a 404 if a child does not exist whose id is child_id
+Returns a list of the programs the child participates in
+
+---
+```
+POST /svc/eat/v1/application/children/<child_id>/programs
+```
+(form eat.forms.program.ProgramForm)
+Returns a 404 if a child does not exist whose id is child_id
+Overwrites the child's programs (SNAP, TANF, etc)
+
+
 
 

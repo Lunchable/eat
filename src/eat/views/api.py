@@ -4,10 +4,11 @@ from flask import session, request, Response
 from flask_login import current_user
 from mongoengine.errors import DoesNotExist
 
-from eat.models.application import Application, Applicant, Income, Child
+from eat.models.application import Application, Applicant, Income, Child, Program
 from ..forms.applicant import ApplicantForm
 from ..forms.income import IncomeForm
 from ..forms.person import ChildForm
+from ..forms.programs import ProgramsForm
 
 
 def register_routes(app):
@@ -271,5 +272,41 @@ def register_routes(app):
         except Exception:
             return Response(
                 response=json.dumps({'errors': 'The income could not be queried'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
+
+    @app.route('/svc/eat/v1/application/children/<child_id>/programs', methods=['GET', 'POST'],
+               endpoint='svc_eat_v1_application_children_child_id_programs')
+    @inject_application
+    def svc_eat_v1_application_children_child_id_programs(application, child_id):
+        programs_form = ProgramsForm(csrf_enabled=False)
+        try:
+            child = application.children.get(_id=ObjectId(child_id))
+
+            if request.method == 'GET':
+                return json.dumps([p.dict for p in child.programs])
+            else:
+                if not programs_form.validate_on_submit():
+                    return Response(
+                        response=json.dumps({'errors': programs_form.errors, 'form': programs_form.programs.data}),
+                        status=400, headers=None,
+                        content_type='application/json; charset=utf-8')
+
+                programs = [Program(program_name=p) for (p, k) in programs_form.data.items() if k]
+                child.programs = programs
+                application.save()
+
+            return Response(response=json.dumps(application.dict),
+                            status=201, headers=None,
+                            content_type='application/json; charset=utf-8')
+        except DoesNotExist:
+            return Response(
+                response=json.dumps({'errors': 'Child does not exist.'}),
+                status=404, headers=None,
+                content_type='application/json; charset=utf-8')
+
+        except Exception:
+            return Response(
+                response=json.dumps({'errors': 'The child could not be queried'}),
                 status=404, headers=None,
                 content_type='application/json; charset=utf-8')

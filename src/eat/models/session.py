@@ -38,7 +38,7 @@ class MongoSessionInterface(SessionInterface):
         if self.get_expiration_time(app, session):
             expiration = self.get_expiration_time(app, session)
         else:
-            expiration = datetime.utcnow() + timedelta(hours=1)
+            expiration = datetime.utcnow() + timedelta(hours=24)
         self.store.update({'sid': session.sid},
                           {'sid': session.sid,
                            'data': session,
