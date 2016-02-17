@@ -3,6 +3,7 @@ from bson import ObjectId
 from flask import session, request, Response
 from flask_login import current_user
 from mongoengine.errors import DoesNotExist
+import pickle
 
 from eat.models.application import Application, Applicant, Income, Child, Program, Ethnicity, Person
 from ..forms.applicant import ApplicantForm
@@ -15,9 +16,17 @@ from ..forms.ethnicity import EthnicityForm
 def register_routes(app):
     def inject_application(f):
         def decorator(**kwargs):
-            application_id = session.get('application_id')
-            if application_id:
-                return f(Application.objects(id=application_id).first(), **kwargs)
+            pickled_application = session.get('application')
+            if pickled_application:
+                application = pickle.loads(pickled_application)
+            else:
+                application_id = session.get('application_id')
+                application = Application.objects(id=application_id).first()
+            if application:
+                response = f(application, **kwargs)
+                pickled_application = pickle.dumps(application)
+                session['application'] = pickled_application
+                return response
 
             application = None
 
@@ -43,7 +52,10 @@ def register_routes(app):
                 application.save()
                 session['application_id'] = application.id
 
-            return f(application, **kwargs)
+            response = f(application, **kwargs)
+            pickled_application = pickle.dumps(application)
+            session['application'] = pickled_application
+            return response
 
         return decorator
 
