@@ -3,10 +3,11 @@ import datetime
 from argon2 import PasswordHasher
 
 from . import db
+from application import Application
+import mongoengine
 
 
 class User(db.Document):
-
     @property
     def is_authenticated(self):
         return True
@@ -30,6 +31,8 @@ class User(db.Document):
     first_name = db.StringField(max_length=255, required=False)
     middle_initial = db.StringField(max_length=255, required=False)
     last_name = db.StringField(max_length=255, required=False)
+
+    applications = db.ListField(db.ReferenceField(Application), reverse_delete_rule=mongoengine.PULL)
 
     @property
     def password(self):
