@@ -1,0 +1,22 @@
+{
+  "name": "eat",
+  "homepage": "https://github.com/Lunchable/eat",
+  "authors": [
+    "James Boehmer <james.boehmer@gmail.com>"
+  ],
+  "description": "Electronic Application Transformation - a model electronic application for the National School Lunch Program. http://lunchux.devpost.com",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0"
+  }
+}
