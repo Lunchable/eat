@@ -10,7 +10,7 @@ class PersonForm(Form):
 
 
 class ChildForm(PersonForm):
-    school_zip = StringField('School Zip Code',
+    school_postal = StringField('School Zip Code',
                              [InputRequired(), Length(min=5, max=15, message="Zip code must be 5-10 digits long")])
     school_city = StringField('School City', [InputRequired()])
     school_state = StringField('School State', [InputRequired()])

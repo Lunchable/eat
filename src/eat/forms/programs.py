@@ -5,11 +5,11 @@ program_names = ['SNAP', 'TANF', 'FDPIR', 'FOSTER', 'MIGRANT', 'HOMELESS', 'RUNA
 
 
 class ProgramsForm(Form):
-    SNAP = BooleanField()
-    TANF = BooleanField()
-    FDPIR = BooleanField()
-    FOSTER = BooleanField()
-    MIGRANT = BooleanField()
-    HOMELESS = BooleanField()
-    RUNAWAY = BooleanField()
-    HEADSTART = BooleanField()
+    SNAP = BooleanField(label='SNAP')
+    TANF = BooleanField(label='TANF')
+    FDPIR = BooleanField(label='FDPIR')
+    FOSTER = BooleanField(label='Foster Child')
+    MIGRANT = BooleanField(label='Migrant')
+    HOMELESS = BooleanField(label='Homeless')
+    RUNAWAY = BooleanField(label='Runaway')
+    HEADSTART = BooleanField(label='Headstart')

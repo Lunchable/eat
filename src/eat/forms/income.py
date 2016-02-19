@@ -1,10 +1,11 @@
 from flask_wtf import Form
-from wtforms import StringField, DecimalField
-from wtforms.validators import InputRequired, AnyOf
+from wtforms import DecimalField, SelectField
+from wtforms.validators import InputRequired
 
 
 class IncomeForm(Form):
-    # TODO: validate source against known values
-    source = StringField('Source', [InputRequired()])
+    source = SelectField('Source', choices=[('wages', 'Wages'), ('tips', 'Tips')])
     amount = DecimalField('Amount', [InputRequired()])
-    frequency = StringField('Frequency', [InputRequired(), AnyOf(values=['daily', 'weekly', 'biweekly', 'semimonthly', 'monthly'])])
+    frequency = SelectField('Frequency',
+                            choices=[('daily', 'Daily'), ('weekly', 'Weekly'), ('biweekly', 'Every Two Weeks'),
+                                     ('semimonthly', 'Twice a Month'), ('monthly', 'Monthly'), ('annual', 'Annually')])

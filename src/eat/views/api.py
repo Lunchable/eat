@@ -13,55 +13,59 @@ from ..forms.programs import ProgramsForm
 from ..forms.ethnicity import EthnicityForm
 
 
-def register_routes(app):
-    def inject_application(f):
-        def decorator(**kwargs):
-            pickled_application = session.get('application')
-            if pickled_application:
-                application = pickle.loads(pickled_application)
-            else:
-                application_id = session.get('application_id')
+def inject_application(f):
+    def decorator(**kwargs):
+        application = None
+        pickled_application = session.get('application')
+        if pickled_application:
+            application = pickle.loads(pickled_application)
+        else:
+            application_id = session.get('application_id')
+            if application_id:
                 application = Application.objects(id=application_id).first()
-            if application:
-                response = f(application, **kwargs)
-                pickled_application = pickle.dumps(application)
-                session['application'] = pickled_application
-                return response
-
-            application = None
-
-            if current_user.is_authenticated:
-                # User may have applications they previously created
-                # load the latest one into the session
-                if current_user.applications:
-                    for a in current_user.applications:
-                        if not application:
-                            application = a
-                        else:
-                            if a.created_at > application.created_at:
-                                application = a
-                    session['application_id'] = application.id
-                else:
-                    # Need to create a new application
-                    application = Application()
-                    application.save()
-                    session['application_id'] = application.id
-            else:
-                # Need to create a new application
-                application = Application()
-                application.save()
-                session['application_id'] = application.id
-                pickled_application = pickle.dumps(application)
-                session['application'] = pickled_application
-
+        if application:
             response = f(application, **kwargs)
             pickled_application = pickle.dumps(application)
             session['application'] = pickled_application
             return response
 
-        return decorator
+        application = None
 
-    @app.route('/svc/eat/v1/application/applicant', methods=['GET', 'POST', 'PUT'],
+        if current_user.is_authenticated:
+            # User may have applications they previously created
+            # load the latest one into the session
+            if current_user.applications:
+                for a in current_user.applications:
+                    if not application:
+                        application = a
+                    else:
+                        if a.created_at > application.created_at:
+                            application = a
+                session['application_id'] = application.id
+            else:
+                # Need to create a new application
+                application = Application()
+                application.save()
+                session['application_id'] = application.id
+        else:
+            # Need to create a new application
+            application = Application()
+            application.applicant = Applicant()
+            application.save()
+            session['application_id'] = application.id
+            pickled_application = pickle.dumps(application)
+            session['application'] = pickled_application
+
+        response = f(application, **kwargs)
+        pickled_application = pickle.dumps(application)
+        session['application'] = pickled_application
+        return response
+
+    return decorator
+
+
+def register_routes(app):
+    @app.route('/svc/eat/v1/application/applicant', methods=['GET', 'POST'],
                endpoint='svc_eat_v1_application_applicant')
     @inject_application
     def svc_eat_v1_application_applicant(application):
@@ -74,10 +78,6 @@ def register_routes(app):
                     response=json.dumps({'errors': 'Applicant does not exist.', 'form': applicant_form.data}),
                     status=404, headers=None,
                     content_type='application/json; charset=utf-8')
-        elif request.method == 'POST' and application.applicant:
-            return Response(response=json.dumps({'error': 'Applicant already exists.  Use PUT instead'}),
-                            status=409, headers=None,
-                            content_type='application/json; charset=utf-8')
 
         application.applicant = application.applicant or Applicant()
         if not applicant_form.validate_on_submit():
@@ -87,8 +87,7 @@ def register_routes(app):
                 content_type='application/json; charset=utf-8')
         for field in ['last_name', 'middle_initial', 'first_name', 'address_1',
                       'address_2', 'apt', 'city', 'state', 'postal', 'ssn']:
-            if applicant_form.data[field]:
-                application.applicant[field] = applicant_form.data[field]
+            application.applicant[field] = applicant_form.data[field]
         application.save()
         return Response(response=json.dumps(application.dict),
                         status=201, headers=None,
@@ -185,7 +184,7 @@ def register_routes(app):
                 content_type='application/json; charset=utf-8')
 
         child = Child()
-        for field in ['first_name', 'middle_initial', 'last_name', 'school_zip', 'school_city', 'school_state']:
+        for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city', 'school_state']:
             if child_form.data[field]:
                 child[field] = child_form.data[field]
         application.children.append(child)
@@ -194,15 +193,26 @@ def register_routes(app):
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')
 
-    @app.route('/svc/eat/v1/application/children/<child_id>', methods=['GET', 'DELETE'],
+    @app.route('/svc/eat/v1/application/children/<child_id>', methods=['GET', 'POST', 'DELETE'],
                endpoint='svc_eat_v1_application_children_child_id')
     @inject_application
     def svc_eat_v1_application_children_child_id(application, child_id):
+        child_form = ChildForm()
         try:
             child = application.children.get(_id=ObjectId(child_id))
 
             if request.method == 'GET':
                 return json.dumps(child.dict)
+            elif request.method == 'POST':
+                if not child_form.validate_on_submit():
+                    return Response(
+                        response=json.dumps({'errors': child_form.errors, 'form': child_form.data}),
+                        status=400, headers=None,
+                        content_type='application/json; charset=utf-8')
+                for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city', 'school_state']:
+                    child[field] = child_form.data[field]
+                application.save()
+
             else:
                 application.children.remove(child)
                 application.save()

@@ -17,7 +17,7 @@ class Income(db.EmbeddedDocument):
         return {
             '_id': str(self._id),
             'source': self.source,
-            'amount': str(self.amount),
+            'amount': float(self.amount),
             'frequency': self.frequency,
         }
 
@@ -52,6 +52,10 @@ class Person(db.EmbeddedDocument):
             'ethnicities': [e.dict for e in self.ethnicities]
         }
 
+    @property
+    def ethnicities_dict(self):
+        return dict.fromkeys([e.dict for e in self.ethnicities], True)
+
 
 class Program(db.EmbeddedDocument):
     program_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
@@ -62,7 +66,7 @@ class Program(db.EmbeddedDocument):
 
 
 class Child(Person):
-    school_zip = EncryptedStringField(max_length=15, required=False, key=str(_key), iv=str(_iv))
+    school_postal = EncryptedStringField(max_length=15, required=False, key=str(_key), iv=str(_iv))
     school_city = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     school_state = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     school_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
@@ -75,7 +79,7 @@ class Child(Person):
             'first_name': self.first_name,
             'middle_initial': self.middle_initial,
             'last_name': self.last_name,
-            'school_zip': self.school_zip,
+            'school_postal': self.school_postal,
             'school_city': self.school_city,
             'school_state': self.school_state,
             'school_name': self.school_name,
@@ -83,6 +87,10 @@ class Child(Person):
             'programs': [p.dict for p in self.programs],
             'ethnicities': [e.dict for e in self.ethnicities]
         }
+
+    @property
+    def programs_dict(self):
+        return dict.fromkeys([e.dict for e in self.programs], True)
 
 
 class Signature(db.EmbeddedDocument):
@@ -108,6 +116,7 @@ class Applicant(Person):
     ssn = EncryptedStringField(min_length=4, max_length=4, required=False, key=str(_key), iv=str(_iv))
     address_1 = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     address_2 = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    apt = EncryptedStringField(max_length=32, required=False, key=str(_key), iv=str(_iv))
     postal = EncryptedStringField(max_length=32, required=False, key=str(_key), iv=str(_iv))
     city = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     state = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
@@ -123,6 +132,7 @@ class Applicant(Person):
             'ssn': self.ssn,
             'address_1': self.address_1,
             'address_2': self.address_2,
+            'apt': self.apt,
             'postal': self.postal,
             'city': self.city,
             'state': self.state
