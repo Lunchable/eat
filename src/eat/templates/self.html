@@ -28,10 +28,25 @@
             </section>
         </nav>
 		<div class="row">
+			<section id="applicant">
+    <h2>Applicant</h2>
+    {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
+    <form method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target">
+        <div>{{ applicant_form.first_name.label }}: {{ applicant_form.first_name() }}</div>
+        <div>{{ applicant_form.middle_initial.label }}: {{ applicant_form.middle_initial() }}</div>
+        <div>{{ applicant_form.last_name.label }}: {{ applicant_form.last_name() }}</div>
+        <div>{{ applicant_form.ssn.label }}: {{ applicant_form.ssn() }}</div>
+        <div>{{ applicant_form.address_1.label }}: {{ applicant_form.address_1() }}</div>
+        <div>{{ applicant_form.address_2.label }}: {{ applicant_form.address_2() }}</div>
+        <div>{{ applicant_form.apt.label }}: {{ applicant_form.apt() }}</div>
+        <div>{{ applicant_form.city.label }}: {{ applicant_form.city() }}</div>
+        <div>{{ applicant_form.state.label }}: {{ applicant_form.state() }}</div>
+        <div>{{ applicant_form.postal.label }}: {{ applicant_form.postal() }}</div>
+        <button type="submit">Submit</button>
+    </form>
+</section>
 			<div class="col-xs-6 col-md-6" id="main">
 				<h1 class= "text-center">Let's start with you</h1>
-				<!-- <form method="POST"> -->
-					{# {{ form_macros.as_tabular_form(signin_form) }} #}
 				  <div class="form-group">
 				       <label for="firstNameSelf">
 				       	First Name <span class="req">*</span>

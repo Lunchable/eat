@@ -1,32 +1,208 @@
 
-html{
-	font-family: Arial, Courier, Sans-Serif;
-	font-size: 100%;
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
 }
 
-.footer, .header{
-	height: 1.25em;
+
+body {
+	font-family: "Helvetica Neue", Arial, Sans-Serif;
+	color: #000000;
+	display: block;
+	margin: 0;
+	font-size: 87.5%;
 }
 
-.header{
-	position: absolute;
-	top: 3%;
-}
-.footer{
-	position: absolute;
-	bottom: 3%;
+p{
+	font-size: 1.786em;
 }
 
-#main {
-	float: none;
-	margin: auto;
-	padding: 2.75em;
-	height: 40em;
+.works {
+	height: 4em;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-top: 1px solid gray;
+	margin-top: 4em;
+}
+/* Buttons */
+
+.btn-large {
+	width: 29.564em;
+    height: 2.529em;
+	border-radius: 3.143em;
+	font-size: 2.143rem;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0.429em 0.857em;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+.btn-white {
 	background-color: #ffffff;
-	border-radius: 1em;
-	border: 1px solid black;
-	overflow: scroll;
+	border: solid 0.071em #9b9b9b;
+	color: #000000;
 }
+
+.btn-white:hover {
+	background-color: #dcdcdc;
+	border: solid 0.071em #9b9b9b;
+	color: #252525;
+	text-decoration: none;
+}
+
+.btn-green {
+	background-color: #7ddc1f;
+	color: #fff;
+}
+
+.btn-green:hover {
+	background-color: #67bd00;
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn-gray{
+	background-color: #515151;
+	position: relative;
+	color: #ffffff;
+}
+
+.btn-gray:hover{
+	background-color: #3c3c3c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#index_buttons a {
+	margin-right: 2em;
+}
+
+
+/* Headers, Footers */
+
+.navbar-header{
+    padding-right: 1.071em;
+    padding-left: 1.071em;
+    margin-left: 1.071em;
+    float: left;
+}
+
+.header-nav {
+	color: #000000;
+	font-size: 1.429em;
+}
+
+.navbar-right {
+	margin-right: 2em;
+    margin-bottom: 0;
+    list-style: none;
+    padding-top: 0.5em;
+    vertical-align: middle;
+    float: right!important;
+    position: relative;
+    display: block;
+}
+
+.navbar-brand {
+	float: left;
+	height: 50px;
+	font-size: 2.625em;
+	line-height: 20px;
+	color: #000000;
+	vertical-align: middle;
+}
+
+#nav {
+	background-color: #1376E2;
+    min-height: 3.571em;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+     box-sizing: border-box; 
+    clear: both;
+}
+
+.footer{
+	font-size: 1.429em;
+	-webkit-transform: skew(-20deg);
+	-moz-transform: skew(-20deg);
+	-o-transform: skew(-20deg);
+	background-color: #515151;
+}
+.footer li a{
+	background-color: rgba(0, 0, 0, 0);
+	-webkit-transform: skew(20deg);
+	-moz-transform: skew(20deg);
+	-o-transform: skew(20deg);
+}
+
+.footer li {
+	border-left: 0.25em solid #ffffff;
+}
+
+/* Main text */
+.hero, .main {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 67.857em;
+}
+
+.hero {
+	background-image: url('stock-photo-african-girl-at-school-holding-green-apple-fruit-283324019.jpg');
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    color: #ffffff;
+}
+
+.hero p {
+	font-size: 1.8em;
+}
+
+.main {
+	background: #f1f1f1;
+	padding-top: 1.25em;
+	display: block;
+}
+
 .req{
 	color: #FF0000;
+}
+
+#fasttrack{
+	width: 100%;
+    height: 3em;
+    background-color: transparent;
+    padding: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+}
+.numbers{
+    height: 112px;
+    font-size: 92px;
+    color: #0073e5;
+    border-radius: 112px;
+    border: 1px solid #0073e5;
+    width: 112px;
+    vertical-align: middle;
+    margin: 0  auto;
+    line-height: 112px;
+}
+
+.hero-text{
+	top: 60%;
+	position: relative;
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.text-center{
+	text-align: center;
 }

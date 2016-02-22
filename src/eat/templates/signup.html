@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-{% import "macros/forms.html" as form_macros %}
+	{% import "macros/forms.html" as form_macros %}
+	    <meta charset="UTF-8">
+	    <meta initial scale="1">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	    <title>EAT</title>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +15,7 @@
     <form role="form" action="{{ url_for('signup') }}" method="POST">
         {{ form_macros.as_tabular_form(signup_form) }}
         <p>
-            <button type="submit" class="signin-submit primary_btn pull-right">Sign up</button>
+            <input type="submit" class="signin-submit primary_btn pull-right" onclick="self" value="Sign Up"/>
         </p>
     </form>
 </div>

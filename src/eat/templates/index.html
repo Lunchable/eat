@@ -4,65 +4,122 @@
 	{% import "macros/forms.html" as form_macros %}
     <meta charset="UTF-8">
     <meta initial scale="1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+   	 <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    <title>EAT</title>
+    <title>EATLUNCH</title>
 </head>
 	<body>
-		<nav class="navbar navbar-default">
-            <section class="container-fluid">
+		<div class="nav navbar-fixed-top" id="nav">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">E.A.T.</a>
+                    <a class="navbar-brand" href="/">EAT<strong>LUNCH</strong></a>
                 </div>
-                    <ul class="nav navbar-default">
-                        <li class="nav navbar-right">
-                            <a href="languages">Languages</a>
-                        </li>
-                    <li class="nav navbar-default navbar-right">
-                        <a href="faq">FAQ</a>
+                    <ul class="nav">
+                    <li class="nav navbar-right">
+                        <a href="signin" class="header-nav">Sign In</a>
                     </li>
-                    <li class="nav navbar-default navbar-right">
-                        <a href="signin">Sign In</a>
+                    <li class="nav navbar-right">
+                        <a href="faq" class="header-nav">FAQ</a>
+                    </li>
+                    <li class="navbar-right">
+            	        <a class="header-nav" href="languages">Languages</a>
                     </li>
                 </ul>
-                </div>
-            </section>
-        </nav>
-		<div class="row">
-			<div class="col-xs-6 col-md-6" id="main">
-				<h1 class="text-center">Welcome to EAT Lunch</h1>
-				<p class="text-center">Street art fashion axe</p>
-				<p class="col-xs-6 text-center">
-					<a class="btn btn-large btn-default" href="signin">Sign In</a>
+        </div>
+		<div class="row hero">
+			<h1 class="text-center hero-text">Welcome to EAT<strong>LUNCH</strong></h1>
+			<p class="text-center hero-text">Apply for free or reduced school meals easily and for free online. In four quick steps, you’ll be done! At the end of this application, if you create an account with us, you’ll easily be able to update your information next time instead of having to reapply.</p>
+			<p class="text-center hero-text" id="index_buttons">
+				<a class="btn-large btn-white" href="signin">Sign In</a>
+				<a class="btn-large btn-green" href="signup">Apply Now/Sign Up</a>
+			</p>
+		</div>
+		<div class="main">
+			<div class= "col-xs-12">
+				<p class="text-center">FAST TRACK YOUR APPLICATION!</p>
+				<p class="text-center">
+					<span class="">&darr;</span>
 				</p>
-				<p class="col-xs-6 text-center">
-					<a class="btn btn-large btn-default" href="self">Apply Now/Sign Up</a>
+		  		<p class="text-center">Click below to easy apply if:
+		  		</p>
+	  		</div>
+			<div class="col-xs-4 col-xs-offset-1 text-center">
+		  		<p>YOU <em>ONLY</em> HAVE FOSTER CHILDREN
+		  		</p>
+		  		<a class="btn-gray btn-large" href="foster">I have foster children</a>
+	  		</div>
+	  		<div class="col-xs-2 text-center">
+  				<p><strong>OR</strong></p>
+  			</div>
+  			<div class="col-xs-4 text-center">
+	  			<p>
+		  		IF YOU ARE A SNAP/TANF/FDPIR RECIPIENT
+	  			</p>
+				<a class="btn-gray btn-large" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
+  			</div>
+  			<div class="row">
+	  			<div class="col-xs-10 col-xs-offset-1 works">
+	  				<p class="text-center">
+	  					HOW IT WORKS
+	  				</p>
+	  			</div>
+  			</div>
+			<div class="col-xs-3">
+				<p class="numbers text-center">
+					1
 				</p>
-				<button type="button"  class="btn dropdown-toggle" data-toggle="dropdown">FAST TRACK YOUR APPLICATION!<span class="caret"></span></button>
-				<div class="dropdown-menu">
-			  		<p>Click here if you are <em>exclusively</em> a parent to a foster child  <strong>OR</strong> if you are a SNAP/TANF/FDPIR recipient
-		  			</p>
-					<a class="btn btn-large btn-primary" href="foster">I have foster children</a>
-					<a class="btn btn-large btn-primary" href="snap_tanf_dfpir">I am a SNAP/TANF/FDPIR recipient</a>
-				</div>
+				<h3>Enter Your Information</h3>
+				<p>
+					Enter your name, address and any income you might have.
+				</p>
+			</div>
+			<div class="col-xs-3">
+				<p class="numbers text-center">
+					2
+				</p>
+				<h3>Enter Your Child's Information</h3>
+				<p>
+					Enter their name, school and any income they might have.
+				</p>
+			</div>
+			<div class="col-xs-3">
+				<p class="numbers text-center">
+					3
+				</p>
+				<h3>Enter Your Household Information</h3>
+				<p>
+					Tell us who else lives in your household (you can skip this step if you’re fast tracking your application).
+				</p>
+			</div>
+			<div class="col-xs-3">
+				<p class="numbers text-center">
+					4
+				</p>
+				<h3>Confirm Details and Submit Your Information</h3>
+				<p>
+					You’re done and your application is on it’s way!
+				</p>
 			</div>
 		</div>
-		<footer class="navbar-fixed-bottom">
-				<div class="nav nav-justified">
-				<li role="presentation">
-					<a class="btn-large text-center" href="#">About</a>
-				</li>
-				<li role="presentation">
-					<a class="btn-large text-center" href="#">Terms</a>
-				</li>
-				<li role="presentation">
-					<a class="btn-large text-center" href="#">Contact</a>
-				</li>
-			
+		<div class="row">
+		<footer class="footer navbar-static-bottom">
+			<div class="nav nav-justified">
+			<li role="presentation">
+				<a class="footer text-center" href="#">About</a>
+			</li>
+			<li role="presentation">
+				<a class="footer text-center" href="#">Terms</a>
+			</li>
+			<li role="presentation">
+				<a class="footer text-center" href="#">Contact</a>
+			</li>
+		
 		</footer>
+		</div>
 		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
 		</script>
 		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>	
+		<script type="text/javascript">
+		</script>
 	</body>
 </html>
