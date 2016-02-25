@@ -16,17 +16,11 @@ from ..forms.ethnicity import EthnicityForm
 def inject_application(f):
     def decorator(**kwargs):
         application = None
-        pickled_application = session.get('application')
-        if pickled_application:
-            application = pickle.loads(pickled_application)
-        else:
-            application_id = session.get('application_id')
-            if application_id:
-                application = Application.objects(id=application_id).first()
+        application_id = session.get('application_id')
+        if application_id:
+            application = Application.objects(id=application_id).first()
         if application:
             response = f(application, **kwargs)
-            pickled_application = pickle.dumps(application)
-            session['application'] = pickled_application
             return response
 
         application = None
@@ -53,12 +47,8 @@ def inject_application(f):
             application.applicant = Applicant()
             application.save()
             session['application_id'] = application.id
-            pickled_application = pickle.dumps(application)
-            session['application'] = pickled_application
 
         response = f(application, **kwargs)
-        pickled_application = pickle.dumps(application)
-        session['application'] = pickled_application
         return response
 
     return decorator
