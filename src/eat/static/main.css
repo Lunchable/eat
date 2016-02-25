@@ -4,8 +4,22 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
+
 }
 
+section{
+	height: 70vh;
+	background: #f1f1f1;
+	display: block;
+	background-color: #f1f1f1;
+	margin: 0 2.071em;
+	position: relative;
+	padding: 1.25em 2em 2em 2em;
+	border: 1px solid black;
+	float: none;
+	border-radius: 0.571em;
+	overflow: scroll;
+}
 
 body {
 	font-family: "Helvetica Neue", Arial, Sans-Serif;
@@ -15,8 +29,20 @@ body {
 	font-size: 87.5%;
 }
 
-p{
-	font-size: 1.786em;
+p, form, label, input, h3 {
+	font-size: 1.5rem;
+}
+
+form {
+	position: relative;
+}
+
+.inline{
+	display: inline;
+}
+
+input{
+	width: 16em;
 }
 
 .works {
@@ -26,6 +52,13 @@ p{
 	border-top: 1px solid gray;
 	margin-top: 4em;
 }
+
+.breadcrumb{
+	margin:0 1.071em;
+	background-color: transparent;
+	font-size: 1.286em;
+}
+
 /* Buttons */
 
 .btn-large {
@@ -39,6 +72,23 @@ p{
     vertical-align: middle;
     touch-action: manipulation;
     cursor: pointer;
+    border: transparent;
+}
+
+.btn-md {
+	width: 18.436rem;
+	height: 4.286rem;
+	border-radius: 3.143rem;
+	font-size: 1.786rem;
+	border: transparent;
+	padding: 0.429em 0.857em;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    position: relative;
+}
+.btn-md-right {
+	float: right;
 }
 
 .btn-white {
@@ -81,14 +131,30 @@ p{
 	margin-right: 2em;
 }
 
+#continue, #back {
+	bottom: 3em;
+	position: fixed;
+	z-index: 10000;
+}
+
+#continue{
+	right: 2em;
+}
+
+#back {
+	right: 15em;
+}
+
 
 /* Headers, Footers */
 
 .navbar-header{
-    padding-right: 1.071em;
-    padding-left: 1.071em;
     margin-left: 1.071em;
     float: left;
+}
+.nav>li>a:hover, a:hover {
+	background-color: transparent;
+	color: #FFFFFF;
 }
 
 .header-nav {
@@ -105,6 +171,7 @@ p{
     float: right!important;
     position: relative;
     display: block;
+    font-weight: 700; 
 }
 
 .navbar-brand {
@@ -114,6 +181,8 @@ p{
 	line-height: 20px;
 	color: #000000;
 	vertical-align: middle;
+	padding: 15px 15px;
+	font-family: HelveticaNeue-Thin;
 }
 
 #nav {
@@ -128,24 +197,35 @@ p{
 
 .footer{
 	font-size: 1.429em;
+	
+	background-color: #515151;
+	display: block;
+}
+
+#footer-mid{
+	border-left: 0.25em solid #ffffff;
+	border-right: 0.25em solid #ffffff;
 	-webkit-transform: skew(-20deg);
 	-moz-transform: skew(-20deg);
 	-o-transform: skew(-20deg);
-	background-color: #515151;
 }
-.footer li a{
-	background-color: rgba(0, 0, 0, 0);
+
+#footer-mid a {
 	-webkit-transform: skew(20deg);
 	-moz-transform: skew(20deg);
 	-o-transform: skew(20deg);
 }
 
-.footer li {
-	border-left: 0.25em solid #ffffff;
+.footer>li>a{
+	background-color: transparent;
+	color: #fff;
+}
+.footer>li>a:hover {
+	color: #1376E2;
 }
 
 /* Main text */
-.hero, .main {
+.hero, .mainCopy {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -164,12 +244,6 @@ p{
 	font-size: 1.8em;
 }
 
-.main {
-	background: #f1f1f1;
-	padding-top: 1.25em;
-	display: block;
-}
-
 .req{
 	color: #FF0000;
 }
@@ -186,13 +260,17 @@ p{
 .numbers{
     height: 112px;
     font-size: 92px;
-    color: #0073e5;
     border-radius: 112px;
-    border: 1px solid #0073e5;
     width: 112px;
     vertical-align: middle;
     margin: 0  auto;
     line-height: 112px;
+    font-family: HelveticaNeue-Thin;
+}
+
+.numbers-blue{
+	color: #0073e5;
+	border: 1px solid #0073e5;
 }
 
 .hero-text{
@@ -205,4 +283,50 @@ p{
 
 .text-center{
 	text-align: center;
+}
+
+/* Application */
+
+/*.main{ 
+	height: 80vh;
+	background: #f1f1f1;
+	display: block;
+	background-color: #f1f1f1;
+	margin: 0 2.071em;
+	position: relative;
+	padding: 1.25em 2em 2em 2em;
+	border: 1px solid black;
+	float: none;
+	border-radius: 0.571em;
+	overflow: scroll;
+}*/
+
+#middle_initial{
+	width: 2em;
+}
+
+#address_1{
+	width: 44em;
+}
+
+.form-inline {
+	padding-bottom: 0.5em;
+}
+
+
+/* Glyphs */
+
+.approved {
+	color: #7ddc1f;
+}
+.denied {
+	color: #ea0000;
+}
+
+.checkbox {
+	width:inherit;
+}
+
+.fa{
+	padding: 0 1em;
 }

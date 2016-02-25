@@ -33,7 +33,7 @@
 				<a class="btn-large btn-green" href="signup">Apply Now/Sign Up</a>
 			</p>
 		</div>
-		<div class="main">
+		<div class="lowerHero">
 			<div class= "col-xs-12">
 				<p class="text-center">FAST TRACK YOUR APPLICATION!</p>
 				<p class="text-center">
@@ -100,26 +100,25 @@
 				</p>
 			</div>
 		</div>
-		<div class="row">
-		<footer class="footer navbar-static-bottom">
-			<div class="nav nav-justified">
-			<li role="presentation">
-				<a class="footer text-center" href="#">About</a>
-			</li>
-			<li role="presentation">
-				<a class="footer text-center" href="#">Terms</a>
-			</li>
-			<li role="presentation">
-				<a class="footer text-center" href="#">Contact</a>
-			</li>
-		
-		</footer>
-		</div>
+		<footer class="footer navbar-static-bottom nav-justified nav">
+	        <li role="presentation">
+	            <a class="text-center" href="#">About</a>
+	        </li>
+	        <li role="presentation" id="footer-mid">
+	            <a class="text-center" href="#">Terms</a>
+	        </li>
+	        <li role="presentation">
+	            <a class="text-center" href="#">Contact</a>
+	        </li>
+    	</footer>
 		<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
 		</script>
 		<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>	
 		<script type="text/javascript">
+			// $(document).ready(function(){
+			// 	$('.main, .hero').hide();
+			// })
 		</script>
 	</body>
 </html>
