@@ -56,6 +56,7 @@
 <hr>
 <section id="children">
     <h2>Children</h2>
+<ol id="children_list" class="children_list">
     {% for child in application.children %}
         <div>
             <h3>Child #{{ loop.index }}</h3>
@@ -68,31 +69,6 @@
             <div>{{ child_form.school_postal.label }}: {{ child_form.school_postal() }}</div>
             <div>{{ child_form.school_name.label }}: {{ child_form.school_name() }}</div>
             <div><a href="/svc/eat/v1/application/children/{{ child._id }}" target="_child_delete">Delete this child</a>
-            </div>
-            {% for income in child.incomes %}
-                {% set income_form = IncomeForm(csrf_enabled=False, **(income.dict)) %}
-                <div>
-                    <h4>Income #{{ loop.index }}:</h4>
-                    <form method="POST"
-                          action="/svc/eat/v1/application/children/{{ child._id }}/incomes/{{ income._id }}">
-                        <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                        <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                        <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
-                        <div><a href="/svc/eat/v1/application/children/{{ child._id }}/incomes/{{ income._id }}"
-                                target="_child_income_delete">Delete this income</a></div>
-                    </form>
-                </div>
-
-            {% endfor %}
-            {% set income_form = IncomeForm(csrf_enabled=False) %}
-            <div>
-                <h4>Add Income for this child</h4>
-                <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/incomes">
-                    <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                    <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                    <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
-                    <button type="submit">Submit</button>
-                </form>
             </div>
 
             {% set programs_form = ProgramsForm(csrf_enabled=False, **( child.programs_dict) ) %}
@@ -124,9 +100,33 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            <ol id="appliant_incomes_list" class="incomes_list">
+            {% for income in child.incomes %}
+                <div id="{{ income._id }}" class="income_item row">
+                    <span class="col-1">Source: </span><span class="col-2">{{ income.source|capitalize }}</span>
+                    <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                    <span class="col-1">Frequency: </span><span class="col-2">{{ income.frequency|capitalize }}</span>
+                    <span class="col-3"><a href="/svc/eat/v1/application/children/{{ child._id }}/incomes/{{ income._id }}"
+                                           class="income_delete glyphicon glyphicon-remove-sign"></a></span>
+                    <br>
+                </div>
+
+            {% endfor %}
+            </ol>
+            {% set income_form = IncomeForm(csrf_enabled=False) %}
+            <div>
+                <h4>Add Income for this child</h4>
+                <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/incomes" class="incomes_form">
+                    <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
+                    <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
+                    <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
 
         </div>
     {% endfor %}
+</ol>
     <div>
         <h3>Add Child</h3>
         {% set child_form = ChildForm(csrf_enabled=False) %}

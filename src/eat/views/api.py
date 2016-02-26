@@ -245,7 +245,7 @@ def register_routes(app):
                 child.incomes.append(income)
                 application.save()
 
-            return Response(response=json.dumps(application.dict),
+            return Response(response=json.dumps(income.dict),
                             status=201, headers=None,
                             content_type='application/json; charset=utf-8')
         except DoesNotExist:
