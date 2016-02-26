@@ -10,7 +10,7 @@
 <section id="applicant">
     <h2>Applicant</h2>
     {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
-    <form method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target">
+    <form id="applicant_form" method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target">
         <div>{{ applicant_form.first_name.label }}: {{ applicant_form.first_name() }}</div>
         <div>{{ applicant_form.middle_initial.label }}: {{ applicant_form.middle_initial() }}</div>
         <div>{{ applicant_form.last_name.label }}: {{ applicant_form.last_name() }}</div>
@@ -21,7 +21,7 @@
         <div>{{ applicant_form.city.label }}: {{ applicant_form.city() }}</div>
         <div>{{ applicant_form.state.label }}: {{ applicant_form.state() }}</div>
         <div>{{ applicant_form.postal.label }}: {{ applicant_form.postal() }}</div>
-        <button type="submit">Submit</button>
+        <button type="submit" hidden>Submit</button>
     </form>
 </section>
 <section id="applicant_incomes">
@@ -209,6 +209,7 @@
 
     </form>
 </section>
-
+<script type="application/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript" src="/static/js/application.js"></script>
 </body>
 </html>
