@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EATLunch Application Form Demo</title>
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <h1>EATLunch Application</h1>
@@ -27,21 +28,21 @@
 <section id="applicant_incomes">
     <h2>Applicant Income</h2>
     {% if application.applicant %}
+        <ol id="appliant_incomes_list" class="incomes_list">
         {% for income in application.applicant.incomes %}
-            <div>
-                <h3>Income #{{ loop.index }}:</h3>
-                <div>Source: {{ income.source }}</div>
-                <div>Amount: ${{ income.amount }}</div>
-                <div>Frequency: {{ income.frequency }}</div>
-                <div><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}"
-                        target="_applicant_income_delete">Delete
-                    this income</a></div>
+            <div id="{{ income._id }}" class="income_item row">
+                <span class="col-1">Source: </span><span class="col-2">{{ income.source|capitalize }}</span>
+                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                <span class="col-1">Frequency: </span><span class="col-2">{{ income.frequency|capitalize }}</span>
+                <span class="col-3"><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}" target="_applicant_income_delete">Delete this income</a></span>
+                <br>
             </div>
         {% endfor %}
+        </ol>
         <div>
             <h3>Add a new income source</h3>
             {% set income_form=IncomeForm(csrf_enabled=False) %}
-            <form method="POST" action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
+            <form method="POST" id="applicant_incomes_form" class="incomes_form" action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
                 <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
                 <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
                 <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
