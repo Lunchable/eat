@@ -29,20 +29,22 @@
     <h2>Applicant Income</h2>
     {% if application.applicant %}
         <ol id="appliant_incomes_list" class="incomes_list">
-        {% for income in application.applicant.incomes %}
-            <div id="{{ income._id }}" class="income_item row">
-                <span class="col-1">Source: </span><span class="col-2">{{ income.source|capitalize }}</span>
-                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
-                <span class="col-1">Frequency: </span><span class="col-2">{{ income.frequency|capitalize }}</span>
-                <span class="col-3"><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}" target="_applicant_income_delete">Delete this income</a></span>
-                <br>
-            </div>
-        {% endfor %}
+            {% for income in application.applicant.incomes %}
+                <div id="{{ income._id }}" class="income_item row">
+                    <span class="col-1">Source: </span><span class="col-2">{{ income.source|capitalize }}</span>
+                    <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                    <span class="col-1">Frequency: </span><span class="col-2">{{ income.frequency|capitalize }}</span>
+                    <span class="col-3"><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}"
+                                           class="income_delete glyphicon glyphicon-remove-sign"></a></span>
+                    <br>
+                </div>
+            {% endfor %}
         </ol>
         <div>
             <h3>Add a new income source</h3>
             {% set income_form=IncomeForm(csrf_enabled=False) %}
-            <form method="POST" id="applicant_incomes_form" class="incomes_form" action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
+            <form method="POST" id="applicant_incomes_form" class="incomes_form"
+                  action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
                 <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
                 <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
                 <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>

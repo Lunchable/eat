@@ -1,3 +1,18 @@
+var labelMap = {
+    wages: 'Wages',
+    tips: 'Tips',
+    daily: 'Daily',
+    weekly: 'Weekly',
+    biweekly: 'Every Two Weeks',
+    semimonthly: 'Twice a Month',
+    monthly: 'Monthly',
+    annually: 'Annually'
+}
+
+function labelLookup(value){
+    return labelMap[value] || value;
+}
+
 $('#applicant_form').submit(
     function (e) {
         e.preventDefault();
@@ -7,9 +22,6 @@ $('#applicant_form').submit(
         }, {});
         var url = this.action;
         var method = this.method;
-        var f = function(s){
-            console.log(s);
-        }
         $(this).find('input').removeClass('form_error');
         $('span.form_error_message').remove();
         $.ajax({
@@ -43,9 +55,6 @@ $('.incomes_form').submit(
         }, {});
         var url = this.action;
         var method = this.method;
-        var f = function(s){
-            console.log(s);
-        }
         $(this).find('input,select').removeClass('form_error');
         $('span.form_error_message').remove();
         $.ajax({
@@ -56,14 +65,14 @@ $('.incomes_form').submit(
                 console.log("Created income", income);
                 var incomes_list = $(this.form).closest('section').find('.incomes_list');
 
-                var new_income =    $('<div id="' + income._id +'" class="income_item row"></div>')
-                                    .append($('<span class="col-1">').text('Source: '))
-                                    .append($('<span class="col-2">').text(income.source))
-                                    .append($('<span class="col-1">').text('Amount: '))
-                                    .append($('<span class="col-2">').text('$' + income.amount))
-                                    .append($('<span class="col-1">').text('Frequency: '))
-                                    .append($('<span class="col-2">').text(income.frequency))
-                                    .append($('<span class="col-3">').html('<a href="/svc/eat/v1/application/applicant/incomes/' + income._id + '" target="_applicant_income_delete">Delete this income</a>'))
+                var new_income =    $('<div>').attr('id', income._id).addClass('income_item row')
+                                    .append($('<span>').addClass('col-1').text('Source: '))
+                                    .append($('<span>').addClass('col-2').text(labelLookup(income.source)))
+                                    .append($('<span>').addClass('col-1').text('Amount: '))
+                                    .append($('<span>').addClass('col-2').text('$' + income.amount))
+                                    .append($('<span>').addClass('col-1').text('Frequency: '))
+                                    .append($('<span>').addClass('col-2').text(labelLookup(income.frequency)))
+                                    .append($('<span>').addClass('col-3').html('<a href="/svc/eat/v1/application/applicant/incomes/' + income._id + '" class="income_delete glyphicon glyphicon-remove-sign"></a>'))
                                     .append($('<br>'));
                 $(incomes_list).append(new_income);
 
@@ -79,6 +88,34 @@ $('.incomes_form').submit(
             },
             dataType: 'json',
             form: this
+        });
+    }
+);
+
+function disappear(element) {
+    $(element).fadeOut(300, function() { 
+        $(this).remove(); 
+       });
+
+}
+
+$('a.income_delete').click(
+    function (e) {
+        e.preventDefault();
+        var url = this.href;
+        var method = 'DELETE';
+        $.ajax({
+            type: method,
+            url: url,
+            success: function(income){
+                console.log("Deleted income", income);
+                disappear(this.row);
+            },
+            error: function(err){
+                console.log(err);
+            },
+            dataType: 'json',
+            row: $(this).closest('.row')
         });
     }
 );
