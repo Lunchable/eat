@@ -138,9 +138,8 @@ def register_routes(app):
                 application.applicant.incomes.remove(income)
                 application.save()
 
-            return Response(response=json.dumps(application.dict),
-                            status=201, headers=None,
-                            content_type='application/json; charset=utf-8')
+            return Response(response=None,
+                            status=204, headers=None)
         except DoesNotExist:
             return Response(
                 response=json.dumps({'errors': 'Income does not exist.'}),
