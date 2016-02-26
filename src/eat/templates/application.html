@@ -27,6 +27,7 @@
 </section>
 <section id="applicant_incomes">
     <h2>Applicant Income</h2>
+    <div class="income_container">
     {% if application.applicant %}
         <ol id="appliant_incomes_list" class="incomes_list">
             {% for income in application.applicant.incomes %}
@@ -52,13 +53,14 @@
             </form>
         </div>
     {% endif %}
+    </div>
 </section>
 <hr>
 <section id="children">
     <h2>Children</h2>
 <ol id="children_list" class="children_list">
     {% for child in application.children %}
-        <div>
+        <div class="income_container">
             <h3>Child #{{ loop.index }}</h3>
             {% set child_form = ChildForm(csrf_enabled=False, **(child.dict)) %}
             <div>{{ child_form.first_name.label }}: {{ child_form.first_name() }}</div>
