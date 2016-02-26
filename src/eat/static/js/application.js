@@ -63,7 +63,8 @@ $('.incomes_form').submit(
             data: data,
             success: function(income){
                 console.log("Created income", income);
-                var incomes_list = $(this.form).closest('section').find('.incomes_list');
+                $(this.form).find('input').val('');
+                var incomes_list = $(this.form).closest('.income_container').find('.incomes_list');
 
                 var new_income =    $('<div>').attr('id', income._id).addClass('income_item row')
                                     .append($('<span>').addClass('col-1').text('Source: '))
