@@ -12,7 +12,8 @@ This project adheres to the [Open Code of Conduct][code-of-conduct]. By particip
 # Running the app locally
 1. create and activate your virtualenv
 2. pip install -r requirements
-3. cd src && python manage.py runserver
+3. bower install
+4. cd src && python manage.py runserver
 
 # API interface
 
