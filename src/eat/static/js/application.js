@@ -128,6 +128,27 @@ $('a.income_delete').click(
     }
 );
 
+$('a.child_delete').click(
+    function (e) {
+        e.preventDefault();
+        var url = this.href;
+        var method = 'DELETE';
+        $.ajax({
+            type: method,
+            url: url,
+            success: function(child){
+                console.log("Deleted child", child);
+                disappear(this.li);
+            },
+            error: function(err){
+                console.log(err);
+            },
+            dataType: 'json',
+            li: $(this).closest('li')
+        });
+    }
+);
+
 function children_form_handler(e) {
     e.preventDefault();
     var data = $(this).serializeArray().reduce(function (obj, item) {
@@ -148,9 +169,15 @@ function children_form_handler(e) {
                 $(this.form).find('input').val('');
                 var children_list = $(this.form).closest('section').find('.children_list');
                 var new_child =     $('<li>').attr('id', child._id).addClass('income_container')
+                //<h3><span><a href="/svc/eat/v1/application/children/{{ child._id }}" class="child_delete glyphicon glyphicon-remove-sign"></a></span></h3>
+                                    .append($('<h3>')
+                                        .append( $('<span>')
+                                            .append($('<a>').attr('href', '/svc/eat/v1/application/children/' + child._id).addClass('child_delete glyphicon glyphicon-remove-sign'))
+                                        )
+                                    )
                                     .append($('<form>').attr('child_id', child._id).attr('action', action="/svc/eat/v1/application/children/" + child._id).addClass('children_form')
                                         .append($('<div>').html('<label for="first_name">' + labelLookup('first_name') + '</label>: <input id="first_name" name="first_name" type="text" value="' + child.first_name+ '">'))
-                                        .append($('<div>').html('<label for="middle_initial">' + labelLookup('middle_initial') + '</label>: <input id="middle_initial " name="middle_initial " type="text" value="' + child.middle_initial + '">'))
+                                        .append($('<div>').html('<label for="middle_initial">' + labelLookup('middle_initial') + '</label>: <input id="middle_initial " name="middle_initial " type="text" value="' + (child.middle_initial || '') + '">'))
                                         .append($('<div>').html('<label for="last_name">' + labelLookup('last_name') + '</label>: <input id="last_name " name="last_name " type="text" value="' + child.last_name + '">'))
                                         .append($('<div>').html('<label for="school_city">' + labelLookup('school_city') + '</label>: <input id="school_city " name="school_city " type="text" value="' + child.school_city + '">'))
                                         .append($('<div>').html('<label for="school_state">' + labelLookup('school_state') + '</label>: <input id="school_state " name="school_state " type="text" value="' + child.school_state + '">'))
