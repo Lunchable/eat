@@ -173,12 +173,13 @@ def register_routes(app):
                 content_type='application/json; charset=utf-8')
 
         child = Child()
-        for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city', 'school_state']:
+        for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city', 'school_state',
+                      'school_name']:
             if child_form.data[field]:
                 child[field] = child_form.data[field]
         application.children.append(child)
         application.save()
-        return Response(response=json.dumps(application.dict),
+        return Response(response=json.dumps(child.dict),
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')
 
@@ -186,7 +187,7 @@ def register_routes(app):
                endpoint='svc_eat_v1_application_children_child_id')
     @inject_application
     def svc_eat_v1_application_children_child_id(application, child_id):
-        child_form = ChildForm()
+        child_form = ChildForm(csrf_enabled=False)
         try:
             child = application.children.get(_id=ObjectId(child_id))
 
@@ -198,7 +199,8 @@ def register_routes(app):
                         response=json.dumps({'errors': child_form.errors, 'form': child_form.data}),
                         status=400, headers=None,
                         content_type='application/json; charset=utf-8')
-                for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city', 'school_state']:
+                for field in ['first_name', 'middle_initial', 'last_name', 'school_postal', 'school_city',
+                              'school_state', 'school_name']:
                     child[field] = child_form.data[field]
                 application.save()
 
