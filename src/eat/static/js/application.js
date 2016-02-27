@@ -70,6 +70,10 @@ $('.incomes_form').submit(
             data: data,
             success: function(income){
                 console.log("Created income", income);
+                var delete_href = '/svc/eat/v1/application/applicant/incomes/' + income._id;
+                if($(this.form).attr('child_id')) {
+                    delete_href = '/svc/eat/v1/application/children/' + $(this.form).attr('child_id') + '/incomes/' + income._id;
+                }
                 $(this.form).find('input').val('');
                 var incomes_list = $(this.form).closest('.income_container').find('.incomes_list');
 
@@ -80,9 +84,10 @@ $('.incomes_form').submit(
                                     .append($('<span>').addClass('col-2').text('$' + income.amount))
                                     .append($('<span>').addClass('col-1').text('Frequency: '))
                                     .append($('<span>').addClass('col-2').text(labelLookup(income.frequency)))
-                                    .append($('<span>').addClass('col-3').html('<a href="/svc/eat/v1/application/applicant/incomes/' + income._id + '" class="income_delete glyphicon glyphicon-remove-sign"></a>'))
+                                    .append($('<span>').addClass('col-3').html('<a href="' + delete_href + '" class="income_delete glyphicon glyphicon-remove-sign"></a>'))
                                     .append($('<br>'));
                 $(incomes_list).append(new_income);
+                $('a.income_delete').click(income_delete_handler);
 
             },
             error: function(err){
@@ -107,26 +112,26 @@ function disappear(element) {
 
 }
 
-$('a.income_delete').click(
-    function (e) {
-        e.preventDefault();
-        var url = this.href;
-        var method = 'DELETE';
-        $.ajax({
-            type: method,
-            url: url,
-            success: function(income){
-                console.log("Deleted income", income);
-                disappear(this.row);
-            },
-            error: function(err){
-                console.log(err);
-            },
-            dataType: 'json',
-            row: $(this).closest('.row')
-        });
-    }
-);
+function income_delete_handler(e) {
+    e.preventDefault();
+    var url = this.href;
+    var method = 'DELETE';
+    $.ajax({
+        type: method,
+        url: url,
+        success: function(income){
+            console.log("Deleted income", income);
+            disappear(this.row);
+        },
+        error: function(err){
+            console.log(err);
+        },
+        dataType: 'json',
+        row: $(this).closest('.row')
+    });
+}
+
+$('a.income_delete').click(income_delete_handler);
 
 function child_delete_handler(e) {
     e.preventDefault();
