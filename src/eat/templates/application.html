@@ -124,7 +124,7 @@
                 {% set income_form = IncomeForm(csrf_enabled=False) %}
                 <div>
                     <h4>Add Income for this child</h4>
-                    <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
+                    <form method="POST" child_id="{{ child._id }}" action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
                           class="incomes_form">
                         <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
                         <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
