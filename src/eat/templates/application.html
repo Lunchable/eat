@@ -60,18 +60,19 @@
     <h2>Children</h2>
 <ol id="children_list" class="children_list">
     {% for child in application.children %}
-        <div class="income_container">
-            <h3>Child #{{ loop.index }}</h3>
+        <li id="{{ child._id }}" class="income_container">
+{#            <h3>Child #{{ loop.index }}</h3>#}
             {% set child_form = ChildForm(csrf_enabled=False, **(child.dict)) %}
-            <div>{{ child_form.first_name.label }}: {{ child_form.first_name() }}</div>
-            <div>{{ child_form.middle_initial.label }}: {{ child_form.middle_initial() }}</div>
-            <div>{{ child_form.last_name.label }}: {{ child_form.last_name() }}</div>
-            <div>{{ child_form.school_city.label }}: {{ child_form.school_city() }}</div>
-            <div>{{ child_form.school_state.label }}: {{ child_form.school_state() }}</div>
-            <div>{{ child_form.school_postal.label }}: {{ child_form.school_postal() }}</div>
-            <div>{{ child_form.school_name.label }}: {{ child_form.school_name() }}</div>
-            <div><a href="/svc/eat/v1/application/children/{{ child._id }}" target="_child_delete">Delete this child</a>
-            </div>
+            <form method="POST" child_id="{{ child._id }}" action="/svc/eat/v1/application/children/{{ child._id }}" class="children_form">
+                <div>{{ child_form.first_name.label }}: {{ child_form.first_name() }}</div>
+                <div>{{ child_form.middle_initial.label }}: {{ child_form.middle_initial() }}</div>
+                <div>{{ child_form.last_name.label }}: {{ child_form.last_name() }}</div>
+                <div>{{ child_form.school_city.label }}: {{ child_form.school_city() }}</div>
+                <div>{{ child_form.school_state.label }}: {{ child_form.school_state() }}</div>
+                <div>{{ child_form.school_postal.label }}: {{ child_form.school_postal() }}</div>
+                <div>{{ child_form.school_name.label }}: {{ child_form.school_name() }}</div>
+                <button type="submit">Update</button>
+            </form>
 
             {% set programs_form = ProgramsForm(csrf_enabled=False, **( child.programs_dict) ) %}
             <div>
@@ -126,13 +127,13 @@
                 </form>
             </div>
 
-        </div>
+        </li>
     {% endfor %}
 </ol>
     <div>
         <h3>Add Child</h3>
         {% set child_form = ChildForm(csrf_enabled=False) %}
-        <form method="POST" action="/svc/eat/v1/application/children">
+        <form method="POST" action="/svc/eat/v1/application/children" class="children_form">
             <div>{{ child_form.first_name.label }}: {{ child_form.first_name() }}</div>
             <div>{{ child_form.middle_initial.label }}: {{ child_form.middle_initial() }}</div>
             <div>{{ child_form.last_name.label }}: {{ child_form.last_name() }}</div>
