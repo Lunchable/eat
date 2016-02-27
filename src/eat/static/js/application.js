@@ -128,26 +128,26 @@ $('a.income_delete').click(
     }
 );
 
-$('a.child_delete').click(
-    function (e) {
-        e.preventDefault();
-        var url = this.href;
-        var method = 'DELETE';
-        $.ajax({
-            type: method,
-            url: url,
-            success: function(child){
-                console.log("Deleted child", child);
-                disappear(this.li);
-            },
-            error: function(err){
-                console.log(err);
-            },
-            dataType: 'json',
-            li: $(this).closest('li')
-        });
-    }
-);
+function child_delete_handler(e) {
+    e.preventDefault();
+    var url = this.href;
+    var method = 'DELETE';
+    $.ajax({
+        type: method,
+        url: url,
+        success: function(child){
+            console.log("Deleted child", child);
+            disappear(this.li);
+        },
+        error: function(err){
+            console.log(err);
+        },
+        dataType: 'json',
+        li: $(this).closest('li')
+    });
+}
+
+$('a.child_delete').click(child_delete_handler);
 
 function children_form_handler(e) {
     e.preventDefault();
@@ -189,8 +189,8 @@ function children_form_handler(e) {
                 $(children_list).append(new_child);
                 //be sure to bind this handler function now to newly created forms
                 $('.children_form').submit(children_form_handler);
+                $('a.child_delete').click(child_delete_handler);
             }
-
         },
         error: function(err){
             if(err.status==400){
