@@ -390,24 +390,34 @@ def register_routes(app):
                 person[field] = person_form.data[field]
         application.persons.append(person)
         application.save()
-        return Response(response=json.dumps(application.dict),
+        return Response(response=json.dumps(person.dict),
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')
 
-    @app.route('/svc/eat/v1/application/persons/<person_id>', methods=['GET', 'DELETE'],
+    @app.route('/svc/eat/v1/application/persons/<person_id>', methods=['GET', 'POST', 'DELETE'],
                endpoint='svc_eat_v1_application_persons_person_id')
     @inject_application
     def svc_eat_v1_application_persons_person_id(application, person_id):
+        person_form = PersonForm(csrf_enabled=False)
         try:
             person = application.persons.get(_id=ObjectId(person_id))
 
             if request.method == 'GET':
                 return json.dumps(person.dict)
+            elif request.method == 'POST':
+                if not person_form.validate_on_submit():
+                    return Response(
+                        response=json.dumps({'errors': person_form.errors, 'form': person_form.data}),
+                        status=400, headers=None,
+                        content_type='application/json; charset=utf-8')
+                for field in ['first_name', 'middle_initial', 'last_name']:
+                    person[field] = person_form.data[field]
+                application.save()
             else:
                 application.persons.remove(person)
                 application.save()
 
-            return Response(response=json.dumps(application.dict),
+            return Response(response=json.dumps(person.dict),
                             status=201, headers=None,
                             content_type='application/json; charset=utf-8')
         except DoesNotExist:
@@ -446,7 +456,7 @@ def register_routes(app):
                 person.incomes.append(income)
                 application.save()
 
-            return Response(response=json.dumps(application.dict),
+            return Response(response=json.dumps(income.dict),
                             status=201, headers=None,
                             content_type='application/json; charset=utf-8')
         except DoesNotExist:
