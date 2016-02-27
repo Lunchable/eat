@@ -16,7 +16,7 @@ var labelMap = {
     school_postal: 'School Zip Code'
 }
 
-function labelLookup(value){
+function labelLookup(value) {
     return labelMap[value] || value;
 }
 
@@ -35,12 +35,12 @@ $('#applicant_form').submit(
             type: method,
             url: url,
             data: data,
-            success: function(s){
+            success: function (s) {
                 console.log(s);
             },
-            error: function(err){
-                if(err.status==400){
-                    for(var i in err.responseJSON.errors) {
+            error: function (err) {
+                if (err.status == 400) {
+                    for (var i in err.responseJSON.errors) {
                         var inputField = $(this.form).find('input[name=' + i + ']');
                         inputField.addClass('form_error');
                         inputField.after('<span class="form_error_message">' + err.responseJSON.errors[i][0] + "</span>");
@@ -68,31 +68,34 @@ $('.incomes_form').submit(
             type: method,
             url: url,
             data: data,
-            success: function(income){
+            success: function (income) {
                 console.log("Created income", income);
                 var delete_href = '/svc/eat/v1/application/applicant/incomes/' + income._id;
-                if($(this.form).attr('child_id')) {
+                if ($(this.form).attr('child_id')) {
                     delete_href = '/svc/eat/v1/application/children/' + $(this.form).attr('child_id') + '/incomes/' + income._id;
+                }
+                else if ($(this.form).attr('person_id')) {
+                    delete_href = '/svc/eat/v1/application/persons/' + $(this.form).attr('person_id') + '/incomes/' + income._id;
                 }
                 $(this.form).find('input').val('');
                 var incomes_list = $(this.form).closest('.income_container').find('.incomes_list');
 
-                var new_income =    $('<div>').attr('id', income._id).addClass('income_item row')
-                                    .append($('<span>').addClass('col-1').text('Source: '))
-                                    .append($('<span>').addClass('col-2').text(labelLookup(income.source)))
-                                    .append($('<span>').addClass('col-1').text('Amount: '))
-                                    .append($('<span>').addClass('col-2').text('$' + income.amount))
-                                    .append($('<span>').addClass('col-1').text('Frequency: '))
-                                    .append($('<span>').addClass('col-2').text(labelLookup(income.frequency)))
-                                    .append($('<span>').addClass('col-3').html('<a href="' + delete_href + '" class="income_delete glyphicon glyphicon-remove-sign"></a>'))
-                                    .append($('<br>'));
+                var new_income = $('<div>').attr('id', income._id).addClass('income_item row')
+                    .append($('<span>').addClass('col-1').text('Source: '))
+                    .append($('<span>').addClass('col-2').text(labelLookup(income.source)))
+                    .append($('<span>').addClass('col-1').text('Amount: '))
+                    .append($('<span>').addClass('col-2').text('$' + income.amount))
+                    .append($('<span>').addClass('col-1').text('Frequency: '))
+                    .append($('<span>').addClass('col-2').text(labelLookup(income.frequency)))
+                    .append($('<span>').addClass('col-3').html('<a href="' + delete_href + '" class="income_delete glyphicon glyphicon-remove-sign"></a>'))
+                    .append($('<br>'));
                 $(incomes_list).append(new_income);
                 $('a.income_delete').click(income_delete_handler);
 
             },
-            error: function(err){
-                if(err.status==400){
-                    for(var i in err.responseJSON.errors) {
+            error: function (err) {
+                if (err.status == 400) {
+                    for (var i in err.responseJSON.errors) {
                         var inputField = $(this.form).find('input[name=' + i + ']');
                         inputField.addClass('form_error');
                         inputField.after('<span class="form_error_message">' + err.responseJSON.errors[i][0] + "</span>");
@@ -106,9 +109,9 @@ $('.incomes_form').submit(
 );
 
 function disappear(element) {
-    $(element).fadeOut(300, function() { 
-        $(this).remove(); 
-       });
+    $(element).fadeOut(300, function () {
+        $(this).remove();
+    });
 
 }
 
@@ -119,11 +122,11 @@ function income_delete_handler(e) {
     $.ajax({
         type: method,
         url: url,
-        success: function(income){
+        success: function (income) {
             console.log("Deleted income", income);
             disappear(this.row);
         },
-        error: function(err){
+        error: function (err) {
             console.log(err);
         },
         dataType: 'json',
@@ -140,11 +143,11 @@ function child_delete_handler(e) {
     $.ajax({
         type: method,
         url: url,
-        success: function(child){
+        success: function (child) {
             console.log("Deleted child", child);
             disappear(this.li);
         },
-        error: function(err){
+        error: function (err) {
             console.log(err);
         },
         dataType: 'json',
@@ -168,28 +171,28 @@ function children_form_handler(e) {
         type: method,
         url: url,
         data: data,
-        success: function(child){
+        success: function (child) {
             console.log("Created child", child);
-            if(! ($(this.form).attr('child_id'))){ // we're adding a new child
+            if (!($(this.form).attr('child_id'))) { // we're adding a new child
                 $(this.form).find('input').val('');
                 var children_list = $(this.form).closest('section').find('.children_list');
-                var new_child =     $('<li>').attr('id', child._id).addClass('income_container')
-                //<h3><span><a href="/svc/eat/v1/application/children/{{ child._id }}" class="child_delete glyphicon glyphicon-remove-sign"></a></span></h3>
-                                    .append($('<h3>')
-                                        .append( $('<span>')
-                                            .append($('<a>').attr('href', '/svc/eat/v1/application/children/' + child._id).addClass('child_delete glyphicon glyphicon-remove-sign'))
-                                        )
-                                    )
-                                    .append($('<form>').attr('child_id', child._id).attr('action', action="/svc/eat/v1/application/children/" + child._id).addClass('children_form')
-                                        .append($('<div>').html('<label for="first_name">' + labelLookup('first_name') + '</label>: <input id="first_name" name="first_name" type="text" value="' + child.first_name+ '">'))
-                                        .append($('<div>').html('<label for="middle_initial">' + labelLookup('middle_initial') + '</label>: <input id="middle_initial" name="middle_initial" type="text" value="' + (child.middle_initial || '') + '">'))
-                                        .append($('<div>').html('<label for="last_name">' + labelLookup('last_name') + '</label>: <input id="last_name" name="last_name" type="text" value="' + child.last_name + '">'))
-                                        .append($('<div>').html('<label for="school_city">' + labelLookup('school_city') + '</label>: <input id="school_city" name="school_city" type="text" value="' + child.school_city + '">'))
-                                        .append($('<div>').html('<label for="school_state">' + labelLookup('school_state') + '</label>: <input id="school_state" name="school_state" type="text" value="' + child.school_state + '">'))
-                                        .append($('<div>').html('<label for="school_postal">' + labelLookup('school_postal') + '</label>: <input id="school_postal" name="school_postal" type="text" value="' + child.school_postal + '">'))
-                                        .append($('<div>').html('<label for="school_name">' + labelLookup('school_name') + '</label>: <input id="school_name" name="school_name" type="text" value="' + child.school_name + '">'))
-                                        .append($('<button>').attr('type', 'submit').text('Update'))
-                                    );
+                var new_child = $('<li>').attr('id', child._id).addClass('income_container')
+                    //<h3><span><a href="/svc/eat/v1/application/children/{{ child._id }}" class="child_delete glyphicon glyphicon-remove-sign"></a></span></h3>
+                    .append($('<h3>')
+                        .append($('<span>')
+                            .append($('<a>').attr('href', '/svc/eat/v1/application/children/' + child._id).addClass('child_delete glyphicon glyphicon-remove-sign'))
+                        )
+                    )
+                    .append($('<form>').attr('child_id', child._id).attr('action', action = "/svc/eat/v1/application/children/" + child._id).addClass('children_form')
+                        .append($('<div>').html('<label for="first_name">' + labelLookup('first_name') + '</label>: <input id="first_name" name="first_name" type="text" value="' + child.first_name + '">'))
+                        .append($('<div>').html('<label for="middle_initial">' + labelLookup('middle_initial') + '</label>: <input id="middle_initial" name="middle_initial" type="text" value="' + (child.middle_initial || '') + '">'))
+                        .append($('<div>').html('<label for="last_name">' + labelLookup('last_name') + '</label>: <input id="last_name" name="last_name" type="text" value="' + child.last_name + '">'))
+                        .append($('<div>').html('<label for="school_city">' + labelLookup('school_city') + '</label>: <input id="school_city" name="school_city" type="text" value="' + child.school_city + '">'))
+                        .append($('<div>').html('<label for="school_state">' + labelLookup('school_state') + '</label>: <input id="school_state" name="school_state" type="text" value="' + child.school_state + '">'))
+                        .append($('<div>').html('<label for="school_postal">' + labelLookup('school_postal') + '</label>: <input id="school_postal" name="school_postal" type="text" value="' + child.school_postal + '">'))
+                        .append($('<div>').html('<label for="school_name">' + labelLookup('school_name') + '</label>: <input id="school_name" name="school_name" type="text" value="' + child.school_name + '">'))
+                        .append($('<button>').attr('type', 'submit').text('Update'))
+                    );
 
                 $(children_list).append(new_child);
                 //be sure to bind this handler function now to newly created forms
@@ -197,9 +200,9 @@ function children_form_handler(e) {
                 $('a.child_delete').click(child_delete_handler);
             }
         },
-        error: function(err){
-            if(err.status==400){
-                for(var i in err.responseJSON.errors) {
+        error: function (err) {
+            if (err.status == 400) {
+                for (var i in err.responseJSON.errors) {
                     var inputField = $(this.form).find('input[name=' + i + ']');
                     inputField.addClass('form_error');
                     inputField.after('<span class="form_error_message">' + err.responseJSON.errors[i][0] + "</span>");
@@ -212,3 +215,80 @@ function children_form_handler(e) {
 }
 
 $('.children_form').submit(children_form_handler);
+
+function person_delete_handler(e) {
+    e.preventDefault();
+    var url = this.href;
+    var method = 'DELETE';
+    $.ajax({
+        type: method,
+        url: url,
+        success: function (person) {
+            console.log("Deleted person", person);
+            disappear(this.li);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+        dataType: 'json',
+        li: $(this).closest('li')
+    });
+}
+
+$('a.person_delete').click(person_delete_handler);
+
+
+
+function person_form_handler(e) {
+    e.preventDefault();
+    var data = $(this).serializeArray().reduce(function (obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    var url = this.action;
+    var method = this.method;
+    $(this).find('input,select').removeClass('form_error');
+    $('span.form_error_message').remove();
+    $.ajax({
+        type: method,
+        url: url,
+        data: data,
+        success: function (person) {
+            console.log("Created person", person);
+            if (!($(this.form).attr('person_id'))) { // we're adding a new person
+                $(this.form).find('input').val('');
+                var person_list = $(this.form).closest('section').find('.person_list');
+                var new_person = $('<li>').attr('id', person._id).addClass('income_container')
+                    .append($('<h3>')
+                        .append($('<span>')
+                            .append($('<a>').attr('href', '/svc/eat/v1/application/persons/' + person._id).addClass('person_delete glyphicon glyphicon-remove-sign'))
+                        )
+                    )
+                    .append($('<form>').attr('person_id', person._id).attr('action', action = "/svc/eat/v1/application/persons/" + person._id).addClass('person_form')
+                        .append($('<div>').html('<label for="first_name">' + labelLookup('first_name') + '</label>: <input id="first_name" name="first_name" type="text" value="' + person.first_name + '">'))
+                        .append($('<div>').html('<label for="middle_initial">' + labelLookup('middle_initial') + '</label>: <input id="middle_initial" name="middle_initial" type="text" value="' + (person.middle_initial || '') + '">'))
+                        .append($('<div>').html('<label for="last_name">' + labelLookup('last_name') + '</label>: <input id="last_name" name="last_name" type="text" value="' + person.last_name + '">'))
+                        .append($('<button>').attr('type', 'submit').text('Update'))
+                    );
+
+                $(person_list).append(new_person);
+                //be sure to bind this handler function now to newly created forms
+                $('.person_form').submit(person_form_handler);
+                $('a.person_delete').click(person_delete_handler);
+            }
+        },
+        error: function (err) {
+            if (err.status == 400) {
+                for (var i in err.responseJSON.errors) {
+                    var inputField = $(this.form).find('input[name=' + i + ']');
+                    inputField.addClass('form_error');
+                    inputField.after('<span class="form_error_message">' + err.responseJSON.errors[i][0] + "</span>");
+                }
+            }
+        },
+        dataType: 'json',
+        form: this
+    });
+}
+
+$('.person_form').submit(person_form_handler);

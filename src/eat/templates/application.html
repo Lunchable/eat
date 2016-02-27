@@ -124,7 +124,8 @@
                 {% set income_form = IncomeForm(csrf_enabled=False) %}
                 <div>
                     <h4>Add Income for this child</h4>
-                    <form method="POST" child_id="{{ child._id }}" action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
+                    <form method="POST" child_id="{{ child._id }}"
+                          action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
                           class="incomes_form">
                         <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
                         <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
@@ -150,68 +151,74 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-
-    </form>
 </section>
 <hr>
 <section id="persons">
     <h2>Other Household Members</h2>
-    {% for person in application.persons %}
-        <div>
-            <h3>Household Member #{{ loop.index }}</h3>
-            {% set person_form = PersonForm(csrf_enabled=False, **(person.dict)) %}
-            <div>{{ person_form.first_name.label }}: {{ person_form.first_name() }}</div>
-            <div>{{ person_form.middle_initial.label }}: {{ person_form.middle_initial() }}</div>
-            <div>{{ person_form.last_name.label }}: {{ person_form.last_name() }}</div>
-            <div><a href="/svc/eat/v1/application/persons/{{ person._id }}" target="_person_delete">Delete this
-                person</a>
-            </div>
-            {% for income in person.incomes %}
-                {% set income_form = IncomeForm(csrf_enabled=False, **(income.dict)) %}
-                <div>
-                    <h4>Income #{{ loop.index }}:</h4>
-                    <form method="POST"
-                          action="/svc/eat/v1/application/persons/{{ person._id }}/incomes/{{ income._id }}">
-                        <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                        <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                        <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
-                        <div><a href="/svc/eat/v1/application/persons/{{ person._id }}/incomes/{{ income._id }}"
-                                target="_person_income_delete">Delete this income</a></div>
+    <ol id="person_list" class="person_list">
+        {% for person in application.persons %}
+            <li id="{{ person._id }}" class="income_container">
+                <h3><a href="/svc/eat/v1/application/persons/{{ person._id }}"
+                       class="person_delete"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                </h3>
+                    {% set person_form = PersonForm(csrf_enabled=False, **(person.dict)) %}
+                    <form method="POST" person_id="{{ person._id }}" action="/svc/eat/v1/application/persons/{{ person._id }}" class="person_form">
+                        <div>{{ person_form.first_name.label }}: {{ person_form.first_name() }}</div>
+                        <div>{{ person_form.middle_initial.label }}: {{ person_form.middle_initial() }}</div>
+                        <div>{{ person_form.last_name.label }}: {{ person_form.last_name() }}</div>
+                        <button type="submit">Update</button>
                     </form>
-                </div>
-            {% endfor %}
-            {% set income_form = IncomeForm(csrf_enabled=False) %}
-            <div>
-                <h4>Add Income for this person</h4>
-                <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/incomes">
-                    <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                    <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                    <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
 
-            {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( person.ethnicities_dict ) ) %}
-            <div>
-                <h4>Optionally indicate this person's race/ethnicity</h4>
-                <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/ethnicities">
-                    <div>{{ ethnicities_form.hispanic_or_latino.label }}: {{ ethnicities_form.hispanic_or_latino() }}</div>
-                    <div>{{ ethnicities_form.native_american.label }}: {{ ethnicities_form.native_american() }}</div>
-                    <div>{{ ethnicities_form.asian.label }}: {{ ethnicities_form.asian() }}</div>
-                    <div>{{ ethnicities_form.black_or_african_american.label }}: {{ ethnicities_form.black_or_african_american() }}</div>
-                    <div>{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div>
-                    <div>{{ ethnicities_form.white.label }}: {{ ethnicities_form.white() }}</div>
-                    <div>{{ ethnicities_form.decline.label }}: {{ ethnicities_form.decline() }}</div>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+                    <ol class="incomes_list">
+                        {% for income in person.incomes %}
+                            <div id="{{ income._id }}" class="income_item row">
+                                <span class="col-1">Source: </span><span class="col-2">{{ income.source|capitalize }}</span>
+                                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                                <span class="col-1">Frequency: </span><span
+                                    class="col-2">{{ income.frequency|capitalize }}</span>
+                        <span class="col-3"><a
+                                href="/svc/eat/v1/application/persons/{{ person._id }}/incomes/{{ income._id }}"
+                                class="income_delete"><span class="glyphicon glyphicon-remove-sign"></span></a></span>
+                                <br>
+                            </div>
 
-        </div>
-    {% endfor %}
+                        {% endfor %}
+                    </ol>
+                    {% set income_form = IncomeForm(csrf_enabled=False) %}
+                    <div>
+                        <h4>Add Income for this child</h4>
+                        <form method="POST" person_id="{{ person._id }}"
+                              action="/svc/eat/v1/application/persons/{{ person._id }}/incomes"
+                              class="incomes_form">
+                            <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
+                            <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
+                            <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+
+                    {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( person.ethnicities_dict ) ) %}
+                    <div>
+                        <h4>Optionally indicate this person's race/ethnicity</h4>
+                        <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/ethnicities">
+                            <div>{{ ethnicities_form.hispanic_or_latino.label }}: {{ ethnicities_form.hispanic_or_latino() }}</div>
+                            <div>{{ ethnicities_form.native_american.label }}: {{ ethnicities_form.native_american() }}</div>
+                            <div>{{ ethnicities_form.asian.label }}: {{ ethnicities_form.asian() }}</div>
+                            <div>{{ ethnicities_form.black_or_african_american.label }}: {{ ethnicities_form.black_or_african_american() }}</div>
+                            <div>{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div>
+                            <div>{{ ethnicities_form.white.label }}: {{ ethnicities_form.white() }}</div>
+                            <div>{{ ethnicities_form.decline.label }}: {{ ethnicities_form.decline() }}</div>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+
+            </li>
+        {% endfor %}
+    </ol>
     <div>
         <h3>Add a Household Member</h3>
         {% set person_form = PersonForm(csrf_enabled=False) %}
-        <form method="POST" action="/svc/eat/v1/application/children">
+        <form method="POST" action="/svc/eat/v1/application/persons" class="person_form">
             <div>{{ person_form.first_name.label }}: {{ person_form.first_name() }}</div>
             <div>{{ person_form.middle_initial.label }}: {{ person_form.middle_initial() }}</div>
             <div>{{ person_form.last_name.label }}: {{ person_form.last_name() }}</div>
@@ -219,7 +226,6 @@
         </form>
     </div>
 
-    </form>
 </section>
 <script type="application/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="application/javascript" src="/static/js/application.js"></script>
