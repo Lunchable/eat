@@ -15,6 +15,12 @@ h2 {
 	font-size: 1.7183rem;
 }
 
+h4 {
+	font-family: HelveticaNeue-Bold;
+	font-size: 1.25rem;
+	display: inline;
+}
+
 section{
 	height: 70vh;
 	display: block;
@@ -45,6 +51,57 @@ p, form, label, input, h3 {
 form {
 	position: relative;
 	margin-left: 1em;
+}
+
+/* checkboxes */
+.checkbox {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  background: transparent;
+  border: 1px solid #515151;
+  border-radius: 2px;
+  display: inline-flex;
+  margin-right: 2em;
+  wordwrap: ;
+}
+.checkbox label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+}
+.checkbox label:after {
+  content: '';
+  width: 12px;
+  height: 7px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid black;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.checkbox label:hover::after {
+  opacity: 0.3;
+}  
+.checkbox input[type=checkbox] {
+  visibility: hidden;
+}
+.checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* radio buttons */
+
+input[type=radio]{
+	margin:8px;
 }
 
 .inline{
@@ -441,10 +498,6 @@ fieldset {
     border: 0;
     margin: 0;
     padding: 0;
-}
-
-.checkbox {
-	width:inherit;
 }
 
 .fa{
