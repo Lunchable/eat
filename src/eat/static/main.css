@@ -5,24 +5,33 @@ html, body, section{
 
 
 }
+h1,h2,h3,h4{
+	font-family: HelveticaNeue-Bold;
+}
+
 h1{
 	font-size:2.5rem;
-	font-family: HelveticaNeue-Bold;
 }
 
 h2 {
-	font-family: HelveticaNeue-Bold;
 	font-size: 1.7183rem;
 }
 
+h3{
+
+}
+
 h4 {
-	font-family: HelveticaNeue-Bold;
 	font-size: 1.25rem;
 	display: inline;
 }
 
+.reg-text{
+	font-family: HelveticaNeue;
+}
+
 section{
-	height: 70vh;
+	height: 80vh;
 	display: block;
 	background-color: #ffffff;
 	margin: 0 2.071em;
@@ -38,7 +47,6 @@ section{
 body {
 	font-family: HelveticaNeue, Arial, Sans-Serif;
 	color: #000000;
-	background-color: #f1f1f1;
 	display: block;
 	margin: 0;
 	font-size: 87.5%;
@@ -62,8 +70,6 @@ form {
   border: 1px solid #515151;
   border-radius: 2px;
   display: inline-flex;
-  margin-right: 2em;
-  wordwrap: ;
 }
 .checkbox label {
     width: 20px;
@@ -97,7 +103,12 @@ form {
 .checkbox input[type=checkbox]:checked + label:after {
   opacity: 1;
 }
-
+.check-text{
+    font-size: 1.25rem;
+    display: inline;
+    position: relative;
+    top: -10px;
+}
 /* radio buttons */
 
 input[type=radio]{
@@ -118,8 +129,16 @@ input[type=radio]{
 .font-medium {
   font-family: HelveticaNeue-Light;
   font-size: 2.5em;
-  line-height: 1.3;
+  line-height: 1.3em;
   letter-spacing: 2.2px;
+  display: block;
+}
+
+.middle {
+	float: none;
+	margin-top: 25vh;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .breadcrumb{
@@ -200,6 +219,18 @@ input[type=radio]{
 	text-decoration: none;
 }
 
+.btn-delete, .btn-edit {
+  width: 85px;
+  height: 85px;
+  border-radius: 85px;
+  line-height: 85px;
+  text-align: center;
+  border: transparent;
+}
+.btn-submit {
+	width: 100%;
+}
+
 .btn-green {
 	background-color: #7ddc1f;
 	color: #fff;
@@ -230,8 +261,9 @@ input[type=radio]{
 
 #btn-facebook {
 	top: 80px;
-    background-color: blue;
-    color: #FFF;
+  	width: 747px;
+  	border-radius: 8px;
+  	background-color: #507cc0;
     width: 16em;
     height: inherit;
     line-height: 29.988px;
@@ -241,6 +273,10 @@ input[type=radio]{
 	top: 156px;
     background-color: green;
     width: 16em;
+    height: inherit;
+    border-radius: 8px;
+    background-color: #df4930;
+}
 }
 
 #index_buttons a {
@@ -253,12 +289,12 @@ input[type=radio]{
 	z-index: 10000;
 }
 
-#continue{
-	right: 2em;
+#back{
+	left: 2em;
 }
 
-#back {
-	right: 15em;
+#continue {
+	left: 15em;
 }
 
 .green-link {
@@ -353,7 +389,10 @@ input[type=radio]{
      box-sizing: border-box; 
     clear: both;
 }
-
+.fa-facebook, .fa-google-plus {
+	color: #ffffff;
+	z-index: 1000;
+}
 .footer{
 	font-size: 1.429em;
 	background-color: #515151;
@@ -404,6 +443,8 @@ input[type=radio]{
 
 .req{
 	color: #FF0000;
+	margin: 0 5px;
+	font-weight: bold;
 }
 
 #fasttrack{
@@ -426,6 +467,29 @@ input[type=radio]{
     font-family: HelveticaNeue-Thin;
 }
 
+.numbers-small {
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 54px;
+  text-align: center;
+  margin: 0;
+  font-family: 	HelveticaNeue-Bold;
+  font-size: 2.143em;
+  background-color: #0073e5;
+  color: #ffffff; 
+}
+
+.person-gray {
+	background-color: #f1f1f1;
+    width: calc((90%-15px)/3);
+    margin-right: 15px;
+    padding: 25px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+
 #thumbs{
 	display: block;
 	text-align: center;
@@ -439,7 +503,7 @@ input[type=radio]{
 .center{
 	position: absolute;
 	top: 40%;
-	left: 17%;
+	width: 100%;
 }
 .numbers-gray {
 	color: #ffffff;
@@ -504,6 +568,17 @@ fieldset {
 	padding: 0 1em;
 }
 
+#submit-check{
+	color: #252525;
+    display: block;
+    text-align: center;
+}
+
+#submit-check:before{
+    margin-top: 2.143em;
+    font-size: 92px
+}
+
 .fa:before{
 	font-size: 2rem;
 }
@@ -541,7 +616,7 @@ fieldset {
     margin-bottom: 1em; 
 }
 
-#duplicate {
+#duplicate, #frequency {
   width: 10.714em;
   height: 2.143em;
   border-radius: 5px;
@@ -586,4 +661,53 @@ fieldset {
 .wages-btn :active{
 	background-color: #515151;
 	color: #ffffff;
+}
+
+.app-container{
+	background-color: #f1f1f1;
+}
+
+.learn-more {
+	font-family: HelveticaNeue;
+	font-size: inherit;
+	color: #9b9b9b;
+}
+
+.esignature{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    padding: 0 15rem;
+
+}
+ #esig{
+ 	width: 640px;
+ }
+
+ .disclaimer{
+ 	position: absolute;
+    bottom: -18rem;
+ 	font-family: Helvetica;
+ 	width: 100%;
+ 	padding: 0 4rem;
+	color: #f5f5f5
+ 	text-align: center;
+ }
+
+.learn-more a:hover{
+	color: #515151;
+	text-decoration: none;
+}
+
+.overlay-highlight {
+	color: #000;
+	text-decoration: underline;
+}
+
+.modal-header {
+	border: transparent;
+}
+
+.overlay-highlight:hover {
+	color: #9b9b9b;
 }

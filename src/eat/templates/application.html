@@ -30,7 +30,27 @@
         <li>Child's Information</li>
         <li>Household Information</li>
         <li>Confirmation</li>
-    </ol> 
+    </ol>
+    <section class="main" id="step-1">  
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">1</p>
+                <p class="font-medium text-center">ENTER YOUR INFORMATION</p>
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
+        <div>
+        </div>
+    </section>
+
+     <!-- STEP 1 APPLICANT -->
     <section class="main" id="applicant">
         <div></div>
         <h1>Let's Start with You</h1>
@@ -50,9 +70,9 @@
                     {{ applicant_form.last_name() }}  <i class="fa fa-check-circle approved"></i>
                 </div>
             </div>
-           <!--  <div>
-                {#  {{ applicant_form.ssn.label }}: {{ applicant_form.ssn() }} #}
-            </div> -->
+             <div>
+                  {{ applicant_form.ssn.label }}: {{ applicant_form.ssn() }} 
+            </div>
             <div class="form-inline row">
                 <div class="col-xs-8">
                     {{ applicant_form.address_1.label }}  <span class="req">*</span> {{ applicant_form.address_1() }}  <i class="fa fa-check-circle approved"></i>
@@ -83,26 +103,26 @@
             <div>
                 <p>Does any of the below apply to your household?<span class="req">*</span></p>
             </div>
-            <div class="col-xs-4">
-                <h4>SNAP</h4>
+            <div class="col-xs-3">
                 <div class="checkbox">
                     <input type="checkbox" id="snap" class="inline">
                     <label for="snap"></label>
                 </div>
+                <h4 class="check-text">SNAP</h4>
             </div>
-            <div class="col-xs-4">
-                <h4>TANF</h4>
+            <div class="col-xs-3">
                 <div class="checkbox">
                     <input type="checkbox" id="tanf" class="inline">
                     <label for="tanf"></label>
                 </div>
+                <h4 class="check-text">TANF</h4>
             </div>
-            <div class="col-xs-4">
-                <h4>FDPIR</h4>
+            <div class="col-xs-3">
                 <div class="checkbox">
                     <input type="checkbox" id="fdpir" class="inline">
                     <label for="fdpir"></label>
                 </div>
+                <h4 class="check-text">FDPIR</h4>
             </div>
             <div class="col-xs-12" id="fasttrack-no">
                 <h4>SNAP/TANF/FDPIR ID #</h4>
@@ -118,22 +138,28 @@
                 <div class="checkbox">
                     <input type="checkbox" id="agreed" class="checkbox inline" required><label for="agreed"></label>
                 </div>
-                <p class="inline">I have read and agree to the terms<span class="req">*</span></p>
+                <h4 class=" check-text inline">I have read and agree to the terms<span class="req">*</span></h4>
             </div>
             </div>
             <div class="modal fade" id="usdaAgreement" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-body">
-                            <p>In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, the USDA, its Agencies, offices, and employees, and institutions participating in or administering USDA programs are prohibited from discriminating based on race, color, national origin, religion, sex, gender identity (including gender expression), sexual orientation, disability, age, marital status, family/parental status, income derived from a public assistance program, political beliefs, or reprisal or retaliation for prior civil rights activity, in any program or activity conducted or funded by USDA (not all bases apply to all programs). Remedies and complaint filing deadlines vary by program or incident.</p>
-                            <p>Persons with disabilities who require alternative means of communication for program information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally, program information may be made available in languages other than English.</p>
-                            <p>To file a program discrimination complaint, complete the USDA Program Discrimination Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint and at any USDA office or write a letter addressed to USDA and provide in the letter all of the information requested in the form. To request a copy of the complaint form, call (866) 632-9992. Submit your completed form or letter to USDA by: (1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410; (2) fax: (202) 690-7442; or (3) email: <a href= "mailto:program.intake@usda.gov."> program.intake@usda.gov.</a></p>
-                            <p>USDA is an equal opportunity provider, employer, and lender.</p>    
-                        </div>
-                        <div class="modal-footer">
+                        <div class="modal-header">
                             <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, the USDA, its Agencies, offices, and employees, and institutions participating in or administering USDA programs are prohibited from discriminating based on race, color, national origin, religion, sex, gender identity (including gender expression), sexual orientation, disability, age, marital status, family/parental status, income derived from a public assistance program, political beliefs, or reprisal or retaliation for prior civil rights activity, in any program or activity conducted or funded by USDA (not all bases apply to all programs). Remedies and complaint filing deadlines vary by program or incident.</p>
+                            <p>Persons with disabilities who require alternative means of communication for program information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally, program information may be made available in languages other than English.</p>
+                            <p>To file a program discrimination complaint, complete the USDA Program Discrimination Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint and at any USDA office or write a letter addressed to USDA and provide in the letter all of the information requested in the form. To request a copy of the complaint form, call (866) 632-9992. Submit your completed form or letter to USDA by: </p>
+                            <p>(1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410;</p>
+                            <p>(2) fax: (202) 690-7442; or </p>
+                            <p>(3) email: <a href= "mailto:program.intake@usda.gov."> program.intake@usda.gov.</a></p>
+                            <p>USDA is an equal opportunity provider, employer, and lender.</p>
+                            <p><strong>Use of Information Statement</strong></p>
+                            <p>"The Richard B. Russell National School Lunch Act requires the information on this application. You do not have to give the information, but if you do not submit all needed information, we cannot approve your child for free or reduced price meals. You must include the last four digits of the social security number of the adult household member who signs the application. The social security number is not required when you apply on behalf of a foster child or you list a Supplemental Nutrition Assistance Program (SNAP), Temporary Assistance for Needy Families (TANF) Program or Food Distribution Program on Indian Reservations (FDPIR) case number or other FDPIR identifier for your child or when you indicate that the adult household member signing the application does not have a social security number. We will use your information to determine if your child is eligible for free or reduced price meals, and for administration and enforcement of the lunch and breakfast programs.</p>
+                            <p>We may share your eligibility information with education, health, and nutrition programs to help them evaluate, fund, or determine benefits for their programs, auditors for program reviews, and law enforcement officials to help them look into violations of program rules.”</p>
                         </div>
                     </div>
                 </div>
@@ -142,6 +168,8 @@
             <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button>
         </form>
     </section>
+
+    <!-- APPLICANT INCOMES -->
     <section class="main" id="applicant_incomes">
         <h1>Let's Start with You</h1>
         <h2>Applicant Income</h2>
@@ -190,7 +218,7 @@
             <div class="col-xs-12" id="app-income">
                 <div class="input-group">
                     <div class="input-group-btn">Income #{{ loop.index }}</div>
-                    <div class="">Source {{ income.source }}</div>
+                    <div>Source {{ income.source }}</div>
                     <div>Amount <span class="req">*</span> ${{ income.amount }}</div>
                     <div>Frequency {{ income.frequency }}</div>
                     <div><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}"
@@ -203,12 +231,13 @@
                 {% set income_form=IncomeForm(csrf_enabled=False) %}
                 <form method="POST" action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
                     <div class="row">
-                        <div class="col-xs-12" id="income-form">{{ income_form.source.label }}  
-                            {{ income_form.source() }}
+                        <div class="col-xs-12" id="income-form">{{ income_form.source.label }} {{ income_form.source() }}
                             <button type="button" class="btn-white" id="duplicate">+ DUPLICATE</button>
                         </div>
-                        <div class="inline">{{ income_form.amount.label }} <span class="req">*</span> {{ income_form.amount() }}</div>
-                        <div class="inline">{{ income_form.frequency.label }}<span class="req">*</span> {{ income_form.frequency() }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">{{ income_form.amount.label }} <span class="req">*</span> {{ income_form.amount() }}</div>
+                        <div class="col-xs-4">{{ income_form.frequency.label }}<span class="req">*</span> {{ income_form.frequency() }}</div>
                     </div> 
                     <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
                     <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button> 
@@ -237,6 +266,26 @@
                 </div>
             </div>
         {% endif %}
+    </section>
+
+    <!-- STEP 2 CHILDREN -->
+    <section class="main" id="step-2">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">
+                    2
+                </p> 
+                <p class="font-medium text-center">ENTER YOUR CHILD'S INFORMATION</p> 
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
     </section>
     <section class="main" id="children">
         <h2>Children</h2>
@@ -332,27 +381,50 @@
                 {% set income_form = IncomeForm(csrf_enabled=False) %}
             <div class="row">
                 <div class="col-xs-12">
-                    <h4>Add Income for this child</h4>
+                    <h2>Add Income for this child</h2>
                 </div>
             </div>
             <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/incomes">
                 <div class="input-group">{{ income_form.source.label }}<span class="req">*</span> {{ income_form.source() }}</div>
-                <div class="inline">{{ income_form.amount.label }} ${{ income_form.amount() }}  <span class="req">*</span></div>
+                <div class="inline">{{ income_form.amount.label }} $ {{ income_form.amount() }}  <span class="req">*</span></div>
                 <div class="inline">{{ income_form.frequency.label }} {{ income_form.frequency() }}  <span class="req">*</span></div>
             </form>
             {% set programs_form = ProgramsForm(csrf_enabled=False, **( child.programs_dict) ) %}
             <div>
-                <h4>Please indicate which programs this child participates in</h4>
+                <h2>Does any of the below apply to this child? <span class="req">*</span></h2>
                 <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/programs">
+                    <div>
                     <div class="row">
-                        <div class="col-xs-1">{{ programs_form.SNAP.label }}<div class="checkbox"> {{ programs_form.SNAP() }}</div>
+                        <div class="col-xs-3">
+                            <div class="checkbox"> {{ programs_form.SNAP() }}</div>
+                            <div class="check-text">{{ programs_form.SNAP.label }}</div>
                         </div>
-                        <div class="col-xs-1">{{ programs_form.TANF.label }} <div class="checkbox">{{ programs_form.TANF() }}</div></div>
-                        <div class="col-xs-1">{{ programs_form.FDPIR.label }} <div class="checkbox"> {{ programs_form.FDPIR() }}</div></div>
-                        <div class="col-xs-1">{{ programs_form.FOSTER.label }} <div class="checkbox">{{ programs_form.FOSTER() }}</div></div>
-                        <div class="col-xs-1">{{ programs_form.MIGRANT.label }}<div class="checkbox"> {{ programs_form.MIGRANT() }}</div></div>
-                        <div class="col-xs-1">{{ programs_form.HOMELESS.label }}<div class="checkbox"> {{ programs_form.HOMELESS() }}</div></div>
-                        <div class="col-xs-1">{{ programs_form.RUNAWAY.label }}<div class="checkbox"> {{ programs_form.RUNAWAY() }}</div></div>
+                        <div class="col-xs-3">
+                            <div class="checkbox">{{ programs_form.TANF() }}</div>
+                            <div class="check-text">{{ programs_form.TANF.label }}</div> 
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox"> {{ programs_form.FDPIR() }}</div>
+                            <div class="check-text">{{ programs_form.FDPIR.label }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox">{{ programs_form.FOSTER() }}</div>
+                            <div class="check-text">{{ programs_form.FOSTER.label }}</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox"> {{ programs_form.MIGRANT() }}</div>
+                            <div class="check-text">{{ programs_form.MIGRANT.label }}</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox">{{ programs_form.HOMELESS() }}</div>
+                            <div class="check-text">{{ programs_form.HOMELESS.label }}</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="checkbox"> {{ programs_form.RUNAWAY() }}</div>
+                            <div class="check-text">{{ programs_form.RUNAWAY.label }}</div>
+                        </div>
                     </div>
                     <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
                     <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button> 
@@ -362,20 +434,42 @@
                 {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( child.ethnicities_dict ) ) %}
                 <div class="row">
                     <div class="col-xs-12">
-                        <h4>Optionally indicate this child's race/ethnicity</h4>
+                        <h2>Optionally indicate this child's race/ethnicity</h2>
+                        <p>We are required to ask for information about your children’s race and ethnicity. this information is important and helps to make sure we are fully serving our community. responding to this section is optional and<span class="req">does not affect</span>your children’s eligibility for free or reduced price meals. <span>(Optional)</span></p>
                     </div>
                     <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/ethnicities">
                         <div class="row">
-                        <div class="col-xs-3">{{ ethnicities_form.hispanic_or_latino.label }}<div class="checkbox"> {{ ethnicities_form.hispanic_or_latino() }}</div></div>
-                        <div class="col-xs-3">{{ ethnicities_form.native_american.label }}<div class="checkbox"> {{ ethnicities_form.native_american() }}</div></div>
-                        <div class="col-xs-3">{{ ethnicities_form.asian.label }}<div class="checkbox"> {{ ethnicities_form.asian() }}</div></div>
-                        
-                        <div class="col-xs-3">{{ ethnicities_form.black_or_african_american.label }}<div class="checkbox"> {{ ethnicities_form.black_or_african_american() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.hispanic_or_latino.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.hispanic_or_latino() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.native_american.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.native_american() }}</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.asian.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.asian() }}</div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-xs-4">{{ ethnicities_form.pacific_islander.label }} {{ ethnicities_form.pacific_islander() }}</div></div>
-                        <div class="col-xs-4">{{ ethnicities_form.white.label }}<div class="checkbox"> {{ ethnicities_form.white() }}</div></div>
-                        <div class="col-xs-4">{{ ethnicities_form.decline.label }}<div class="checkbox"> {{ ethnicities_form.decline() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.black_or_african_american.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.black_or_african_american() }}</div>
+                            </div>                       
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.pacific_islander.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.pacific_islander() }}</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.white.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.white() }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.decline.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.decline() }}</div>
+                            </div>
                         </div>
                         <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
                         <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button> 
@@ -383,7 +477,9 @@
                 </div>
         {% endfor %}
         <div class="row">
+            <div></div>
             <h3>Add Child</h3>
+        </div>
             {% set child_form = ChildForm(csrf_enabled=False) %}
             <form method="POST" action="/svc/eat/v1/application/children">
                 <div class="row form-inline">
@@ -400,20 +496,38 @@
                     <div class="col-xs-4">{{ child_form.school_state.label }} {{ child_form.school_state() }} <i class="fa fa-check-circle approved"></i></div>
                 </div>
                 <div class="row form-inline">
-                    <div class="col-xs-6">{{ child_form.school_postal.label }} {{ child_form.school_postal() }}</div>
-                    <div class="col-xs-6">{{ child_form.school_name.label }} {{ child_form.school_name() }}</div>
+                    <div class="col-xs-6">{{ child_form.school_postal.label }} {{ child_form.school_postal() }} <i class="fa fa-check-circle approved"></i></div>
+                    <div class="col-xs-6">{{ child_form.school_name.label }} {{ child_form.school_name() }} <i class="fa fa-check-circle approved"></i></div>
                 </div>  
                 <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
             <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button>
             <div class="row">
                 <div class="col-xs-12">
-                    <p>Does any of the below apply to the child? <span class="req">*</span>
-                    </p>
-                    <p>(LEARN MORE)</p>
+                    <h2>Does any of the below apply to the child? <span class="req">*</span> <a href="#"><span class="learn-more">(LEARN MORE)</span></a></h2>
+                    
                 </div>
             </div> 
             </form>
         </div>
+    </section>
+    <section class="main" id="step-3">  
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">
+                    3
+                </p>  
+                <p class="font-medium text-center">ENTER YOUR HOUSEHOLD INFORMATION</p>
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
+
     </section>
     <section class="main" id="persons">
         <div><h2>Other Household Members</h2></div>
@@ -487,60 +601,61 @@
             </form>
         </div>
     </section>
-    <section class="main" id="step-1">  
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">1</p>
-                <p class="font-medium text-center">ENTER YOUR INFORMATION</p>
+    <section class="main" id="persons-confirmation">  
+        <div class="container">
+            <div class="middle">
+                <h2 class="text-center font-medium">YOU HAVE ENTERED A TOTAL OF <strong>number</strong> OF APPLICANTS, INCLUDING YOURSELF.<br> IS THAT CORRECT?</h2>
             </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4 text-center">
+                <input type ="radio" id="persons-confirm1"><label for="persons-confirm1">YES</label>
+                <input type ="radio" id="persons-confirm2"><label for="persons-confirm2">NO</label>
             </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
-        </div>
-        <div>
         </div>
     </section>
-    <section class="main" id="step-2">
+    <section class="main" id="populated">
         <div class="row">
             <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">
-                    2
-                </p> 
-                <p class="font-medium text-center">ENTER YOUR CHILD'S INFORMATION</p> 
+                <h2>Household Information</h2>
+                <p>These are the household members you've entered so far, do you have any other people, related and not related, living with you?<span class="req">*</span></p>
             </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
         </div>
-    </section>
-    <section class="main" id="step-3">  
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">
-                    3
-                </p>  
-                <p class="font-medium text-center">ENTER YOUR HOUSEHOLD INFORMATION</p>
+        <div class="container">
+            <div class="row">
+                <div class="person-gray">
+                    <div class="numbers numbers-small">1</div>
+                    <!-- sample fill out -->
+                    <h3>Applicant's Name<span class="reg-text"> (you)</span</h3>
+                    <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                    <br>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <button type="button" class="btn-delete btn-green">DELETE</button>
+                    <button type="button" class="btn-edit btn-gray">EDIT</button>
+                </div>
+                <div class="person-gray">
+                    <div class="numbers numbers-small">1</div>
+                    <!-- sample fill out -->
+                    <h3>Applicant's Name<span class="reg-text"> (you)</span</h3>
+                    <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                    <br>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <button type="button" class="btn-delete btn-green">DELETE</button>
+                    <button type="button" class="btn-edit btn-gray">EDIT</button>
+                </div>
             </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
         </div>
-
     </section>
     <section class="main" id="step-4">
         <div class="row">
@@ -560,11 +675,77 @@
             <div><a class="arrow-right" href=""></a></div> 
         </div>
     </section>
+    <section class="main" id="signup">
+        <ol class="breadcrumb">
+        <li>Home</a></li>
+        <li class="active">Sign Up</li>
+        </ol>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5">
+                    <form class="form-signin" role="form" method="POST">
+                        <h2>Please Sign In</h2>
+                    {# {{ form_macros.as_tabular_form(signin_form) }} #}
+                </div>
+                <div class="col-xs-2">
+                    <h2 class="text-center">OR</h2>
+                </div>
+                <div class="col-xs-5">
+                    <a href="#" class="btn btn-social btn-large" id="btn-facebook"><i class="fa fa-facebook" id="fb"></i>Log in with Facebook</a>
+                    <a href="#" class="btn btn-social btn-large" id="btn-google"><i class="fa fa-google-plus"></i> Log in with Google+</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5 table">
+                    <div class="checkbox">
+                        <input type="checkbox" id="remember"><label for="remember"></label>                            
+                    </div>
+                    <h4 class="check-text">REMEMBER ME</h4>
+                    <p><a class="green-link" href="#">Forgot your password?</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5">
+                    <button class="btn btn-large btn-green btn-submit" type="submit" onclick="/application">Sign In</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </section>
     <section class="main" id="skip-step">  
         <div class="center">
             <i class="fa fa-thumbs-up text-center" id="thumbs"></i>
             <p class="font-medium text-center"><strong>GOOD NEWS!</strong></p>
             <p class="font-medium text-center">BECAUSE OF SPECIAL CIRCUMSTANCES, YOU GET TO SKIP A STEP!</p>
+        </div>
+    </section>
+    <section class="main" id="signature">
+        <div class="row center">
+            <h2 class="font-medium text-center">PLEASE ENTER YOUR ELECTRONIC SIGNATURE AND TODAY'S DATE <br><span class="learn-more"><em>(type your name into the field below, it will count as a signature)</em><span class="req">*</span></span></h2>
+            <div class="esignature">
+                <h4>Date</h4>
+                <label for="date"></label>
+                <input type="textbox" class="text-center" placeholder="MM/DD/YYYY" id="date">
+            </div>
+            <div class="esignature">
+                <h4>Electronic Signature</h4>
+                <label for="esig"></label>
+                <input type="textbox" class="text-center" placeholder="Write your full name here" id="esig">
+            </div>
+            <p class="disclaimer">The person signing is furnishing true information and to advise that person that the application is being made in connection with the receipt of Federal funds; School officials may verify the information on the application; and deliberate misrepresentation of the information may subject the applicant to prosecution under State and Federal statutes.</p>
+        </div>
+        <div><a class="arrow-left" href=""></a></div>
+        <div><a class="arrow-right" href=""></a></div> 
+    </section>
+    <section class="main" id="submitted">  
+        <div class="center">
+            <i class="fa fa-check-circle text-center" id="submit-check"></i>
+            <p class="font-medium text-center">YOUR INFORMATION WAS SUCCESSFULLY SUBMITTED</p>
+            <a class="green-link font-medium text-center">GO TO HOMEPAGE</a>
         </div>
     </section>
     <section class="main" id="error">  
@@ -574,16 +755,8 @@
             <p class="col-xs-12 font-medium text-center"><strong>Uh oh!</strong> 404 error! You've reached a non-working page.</p>
             <p class="col-xs-12 font-medium text-center">Please <a href="#" class="green-link">GO BACK</a> or <a href="/" class="green-link">GO TO HOMEPAGE</a></p>
         </div>
-    </section>
-    <section class="main" id="populated">
-        <div class="row">
-            <div class="col-xs-3">
-                <!-- sample fill out -->
-                <h
-            </div>
-        </div>
-    </section>
-    <footer class="footer navbar-fixed-bottom nav-justified nav">
+    </section>    
+    <footer class="footer navbar-static-bottom nav-justified nav">
         <li role="presentation">
             <a class="text-center" href="#">About</a>
         </li>
@@ -597,6 +770,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
         </script>
+
         <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script> 
         <script type="text/javascript">
         $(document).ready(function(){
