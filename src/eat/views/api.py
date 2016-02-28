@@ -5,11 +5,10 @@ from flask_login import current_user
 from mongoengine.errors import DoesNotExist
 import pickle
 
-from eat.models.application import Application, Applicant, Income, Child, Program, Ethnicity, Person
+from eat.models.application import Application, Applicant, Income, Child, Ethnicity, Person
 from ..forms.applicant import ApplicantForm
 from ..forms.income import IncomeForm
-from ..forms.person import ChildForm, PersonForm
-from ..forms.programs import ProgramsForm
+from ..forms.person import ChildForm, PersonForm, ChildStatusForm
 from ..forms.ethnicity import EthnicityForm
 
 
@@ -76,7 +75,7 @@ def register_routes(app):
                 status=400, headers=None,
                 content_type='application/json; charset=utf-8')
         for field in ['last_name', 'middle_initial', 'first_name', 'address_1',
-                      'address_2', 'apt', 'city', 'state', 'postal', 'ssn']:
+                      'address_2', 'apt', 'city', 'state', 'postal', 'ssn', 'snap_case', 'tanf_case', 'fdipr_case']:
             application.applicant[field] = applicant_form.data[field]
         application.save()
         return Response(response=json.dumps(application.dict),
@@ -295,7 +294,7 @@ def register_routes(app):
                endpoint='svc_eat_v1_application_children_child_id_programs')
     @inject_application
     def svc_eat_v1_application_children_child_id_programs(application, child_id):
-        programs_form = ProgramsForm(csrf_enabled=False)
+        programs_form = ChildStatusForm(csrf_enabled=False)
         try:
             child = application.children.get(_id=ObjectId(child_id))
 
@@ -308,8 +307,8 @@ def register_routes(app):
                         status=400, headers=None,
                         content_type='application/json; charset=utf-8')
 
-                programs = [Program(program_name=p) for (p, k) in programs_form.data.items() if k]
-                child.programs = programs
+                # programs = [Program(program_name=p) for (p, k) in programs_form.data.items() if k]
+                # child.programs = programs
                 application.save()
 
             return Response(response=json.dumps(application.dict),

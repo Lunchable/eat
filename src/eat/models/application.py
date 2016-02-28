@@ -57,20 +57,11 @@ class Person(db.EmbeddedDocument):
         return dict.fromkeys([e.dict for e in self.ethnicities], True)
 
 
-class Program(db.EmbeddedDocument):
-    program_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
-
-    @property
-    def dict(self):
-        return self.program_name
-
-
 class Child(Person):
     school_postal = EncryptedStringField(max_length=15, required=False, key=str(_key), iv=str(_iv))
     school_city = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     school_state = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     school_name = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
-    programs = db.EmbeddedDocumentListField(Program)
 
     @property
     def dict(self):
@@ -84,7 +75,6 @@ class Child(Person):
             'school_state': self.school_state,
             'school_name': self.school_name,
             'incomes': [i.dict for i in self.incomes],
-            'programs': [p.dict for p in self.programs],
             'ethnicities': [e.dict for e in self.ethnicities]
         }
 
@@ -120,6 +110,10 @@ class Applicant(Person):
     postal = EncryptedStringField(max_length=32, required=False, key=str(_key), iv=str(_iv))
     city = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
     state = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    snap_case = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    tanf_case = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+    fdipr_case = EncryptedStringField(max_length=255, required=False, key=str(_key), iv=str(_iv))
+
 
     @property
     def dict(self):
@@ -135,7 +129,10 @@ class Applicant(Person):
             'apt': self.apt,
             'postal': self.postal,
             'city': self.city,
-            'state': self.state
+            'state': self.state,
+            'snap_case': self.snap_case,
+            'tanf_case': self.tanf_case,
+            'fdipr_case': self.fdipr_case,
         }
 
 

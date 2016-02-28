@@ -1,0 +1,55 @@
+input {
+    display: block;
+    /*padding: 0;*/
+    margin: 0;
+    /*border: 0; */
+    /*width: 100%;*/
+}
+
+.glyphicon-remove-sign {
+    color: darkred;
+}
+
+.glyphicon-remove-sign:hover {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.glyphicon-plus-sign {
+    color: darkgreen;
+}
+
+.glyphicon-plus-sign:hover {
+    color: green;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-sq-lg {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.btn-sq {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 10px;
+}
+
+.btn-sq-sm {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 10px;
+}
+
+.btn-sq-xs {
+    width: 25px !important;
+    height: 25px !important;
+    padding: 2px;
+}
+
+.btn-income {
+    color: #000;
+    border: 1px solid #000;
+}

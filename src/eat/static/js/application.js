@@ -130,7 +130,7 @@ function income_delete_handler(e) {
             console.log(err);
         },
         dataType: 'json',
-        row: $(this).closest('.row')
+        row: $(this).closest('li')
     });
 }
 
