@@ -1,17 +1,23 @@
-
-*{
+html, body, section{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
 
 }
+h1{
+	font-size:2.5rem;
+	font-family: HelveticaNeue-Bold;
+}
+
+h3 {
+	/*padding-left: 1em;*/
+}
 
 section{
 	height: 70vh;
-	background: #f1f1f1;
 	display: block;
-	background-color: #f1f1f1;
+	background-color: #ffffff;
 	margin: 0 2.071em;
 	position: relative;
 	padding: 1.25em 2em 2em 2em;
@@ -19,11 +25,13 @@ section{
 	float: none;
 	border-radius: 0.571em;
 	overflow: scroll;
+	box-shadow: #f1f1f1 1px 1px 3px;
 }
 
 body {
-	font-family: "Helvetica Neue", Arial, Sans-Serif;
+	font-family: HelveticaNeue, Arial, Sans-Serif;
 	color: #000000;
+	background-color: #f1f1f1;
 	display: block;
 	margin: 0;
 	font-size: 87.5%;
@@ -35,14 +43,15 @@ p, form, label, input, h3 {
 
 form {
 	position: relative;
-}
-
-.inline{
-	display: inline;
+	margin-left: 1em;
 }
 
 input{
 	width: 16em;
+}
+
+.inline{
+	display: inline;
 }
 
 .works {
@@ -70,9 +79,12 @@ input{
 	margin-left: auto;
 	padding: 0.429em 0.857em;
     vertical-align: middle;
-    touch-action: manipulation;
     cursor: pointer;
     border: transparent;
+}
+
+.btn-disabled-green {
+	background-color: rgba(125, 220, 31, 0.5);
 }
 
 .btn-md {
@@ -83,7 +95,6 @@ input{
 	border: transparent;
 	padding: 0.429em 0.857em;
     vertical-align: middle;
-    touch-action: manipulation;
     cursor: pointer;
     position: relative;
 }
@@ -125,6 +136,26 @@ input{
 	background-color: #3c3c3c;
 	color: #ffffff;
 	text-decoration: none;
+}
+
+.btn-social {
+	position: absolute;	
+	color: #FFF;
+}
+
+#btn-facebook {
+	top: 80px;
+    background-color: blue;
+    color: #FFF;
+    width: 16em;
+    height: inherit;
+    line-height: 29.988px;
+}
+
+#btn-google {
+	top: 156px;
+    background-color: green;
+    width: 16em;
 }
 
 #index_buttons a {
@@ -224,7 +255,7 @@ input{
 	color: #1376E2;
 }
 
-/* Main text */
+/* Index text */
 .hero, .mainCopy {
 	width: 100%;
 	margin-left: auto;
@@ -268,6 +299,13 @@ input{
     font-family: HelveticaNeue-Thin;
 }
 
+.numbers-gray {
+	color: #ffffff;
+	background-color: #252525;
+	position: relative;
+	top: 155px;
+}
+
 .numbers-blue{
 	color: #0073e5;
 	border: 1px solid #0073e5;
@@ -287,26 +325,12 @@ input{
 
 /* Application */
 
-/*.main{ 
-	height: 80vh;
-	background: #f1f1f1;
-	display: block;
-	background-color: #f1f1f1;
-	margin: 0 2.071em;
-	position: relative;
-	padding: 1.25em 2em 2em 2em;
-	border: 1px solid black;
-	float: none;
-	border-radius: 0.571em;
-	overflow: scroll;
-}*/
-
 #middle_initial{
 	width: 2em;
 }
 
 #address_1{
-	width: 44em;
+	width: 42em;
 }
 
 .form-inline {
@@ -323,10 +347,73 @@ input{
 	color: #ea0000;
 }
 
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
 .checkbox {
 	width:inherit;
 }
 
 .fa{
 	padding: 0 1em;
+}
+
+#down-caret {
+	margin-bottom: 4em;
+}
+
+#down-caret:after {
+    width: 40px;
+    height: 40px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    content: "";
+    top: 35px;
+    position: absolute;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 48.5%;
+}
+
+
+/* Income buttons */
+
+.wages{
+  position: relative;
+  display: inline-flex;
+  justify-content: space-between;
+  width:95%;
+  float: none;
+  margin: 0; 
+}
+.wages-btn{    
+  position: relative;
+  display: table;
+  width: 10%;
+  border: 1px solid #979797;
+  text-align:center;
+  height: 100px;
+  border-radius: 0.714em;
+  margin-bottom: 1em;
+
+}
+.wages-btn p {
+	vertical-align: middle;
+	font-family: HelveticaNeue-Bold;
+	display: table-cell;
+	word-wrap: break-word;
+	font-size: 1.2rem;
+}
+
+.wages-btn:hover {
+	cursor: pointer;
+}
+
+.wages-btn :active{
+	background-color: #515151;
+	color: #ffffff;
 }
