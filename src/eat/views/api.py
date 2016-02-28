@@ -78,7 +78,7 @@ def register_routes(app):
                       'address_2', 'apt', 'city', 'state', 'postal', 'ssn', 'snap_case', 'tanf_case', 'fdipr_case']:
             application.applicant[field] = applicant_form.data[field]
         application.save()
-        return Response(response=json.dumps(application.dict),
+        return Response(response=json.dumps(application.applicant.dict),
                         status=201, headers=None,
                         content_type='application/json; charset=utf-8')
 
