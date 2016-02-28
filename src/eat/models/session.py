@@ -14,9 +14,12 @@ class MongoSession(CallbackDict, SessionMixin):
 
 
 class MongoSessionInterface(SessionInterface):
-    def __init__(self, host='localhost', port=27017,
-                 db='', collection='session'):
-        client = MongoClient(host, port)
+    def __init__(self, host='localhost', port=27017, db='', username=None, password=None, collection='session'):
+        if username and password:
+            uri = 'mongodb://{}:{}@{}:{}/{}'.format(username, password, host, port, db)
+        else:
+            uri = 'mongodb://{}:{}/{}'.format(host, port, db)
+        client = MongoClient(uri)
         self.store = client[db][collection]
 
     def open_session(self, app, request):
