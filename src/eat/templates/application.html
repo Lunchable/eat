@@ -58,7 +58,7 @@
         <p><em>(Applicant must be 21 years of age OR an emancipated minor) <span class="req">*</span> indicates required information</em></p>
         {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
         <form method="GET" action="/svc/eat/v1/application/applicant" target="_applicant_target">
-            <div class="form-inline row">
+            <div class="row">
                 <div class="col-xs-4">
                     {{ applicant_form.first_name.label }}  <span class="req">*</span> {{ applicant_form.first_name() }}  <i class="fa fa-check-circle approved"></i>
                 </div>
@@ -70,10 +70,7 @@
                     {{ applicant_form.last_name() }}  <i class="fa fa-check-circle approved"></i>
                 </div>
             </div>
-             <div>
-                  {{ applicant_form.ssn.label }}: {{ applicant_form.ssn() }} 
-            </div>
-            <div class="form-inline row">
+            <div class="row">
                 <div class="col-xs-8">
                     {{ applicant_form.address_1.label }}  <span class="req">*</span> {{ applicant_form.address_1() }}  <i class="fa fa-check-circle approved"></i>
                 </div>
@@ -90,18 +87,24 @@
                 {{ applicant_form.state.label }}  <span class="req">*</span> {{ applicant_form.state() }}  <i class="fa fa-check-circle approved"></i>
                 {{ applicant_form.postal.label }}  <span class="req">*</span>{{ applicant_form.postal() }}  <i class="fa fa-check-circle approved"></i>
             </div>
-            <div>Are you an adult?  <span class="req">*</span></div>
             <div class="row">
                 <div class="col-xs-4">
-                    <input type="radio" name="adult" id="adult1" value="over_21">
-                    <label for="adult1">I AM OVER 21 YEARS OF AGE</label>
+                  {{ applicant_form.ssn.label }}: <span class="req">*</span>  {{ applicant_form.ssn() }} <i class="fa fa-check-circle approved"></i>
                 </div>
-                <div class="cols-xs-4">
-                    <input type="radio" name="adult" id="adult2" value="emancipated_minor">
-                    <label for="adult2">I AM AN EMANICPATED MINOR</label>
+            </div>
+            <div>Are you an adult?  <span class="req">*</span></div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="radio" class="styled" name="adult" id="adult1" value="over_21">I AM OVER 21 YEARS OF AGE
                 </div>
-            <div>
+                <div class="cols-xs-6">
+                    <input type="radio" name="adult" id="adult2" value="emancipated_minor">I AM AN EMANICPATED MINOR<label for="adult2"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
                 <p>Does any of the below apply to your household?<span class="req">*</span></p>
+                </div>
             </div>
             <div class="col-xs-3">
                 <div class="checkbox">
@@ -501,12 +504,6 @@
                 </div>  
                 <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
             <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2>Does any of the below apply to the child? <span class="req">*</span> <a href="#"><span class="learn-more">(LEARN MORE)</span></a></h2>
-                    
-                </div>
-            </div> 
             </form>
         </div>
     </section>
@@ -571,19 +568,40 @@
                     <h4>Optionally indicate this person's race/ethnicity</h4>
                     <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/ethnicities">
                         <div class="row">
-                        <div class="col-xs-3">{{ ethnicities_form.hispanic_or_latino.label }}<div class="checkbox"> {{ ethnicities_form.hispanic_or_latino() }}</div></div>
-                        <div class="col-xs-3">{{ ethnicities_form.native_american.label }}<div class="checkbox"> {{ ethnicities_form.native_american() }}</div></div>
-                        <div class="col-xs-3">{{ ethnicities_form.asian.label }}<div class="checkbox"> {{ ethnicities_form.asian() }}</div></div>
-                        
-                        <div class="col-xs-3">{{ ethnicities_form.black_or_african_american.label }}<div class="checkbox"> {{ ethnicities_form.black_or_african_american() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.hispanic_or_latino.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.hispanic_or_latino() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.native_american.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.native_american() }}</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.asian.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.asian() }}</div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-xs-4">{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div></div>
-                        <div class="col-xs-4">{{ ethnicities_form.white.label }}<div class="checkbox"> {{ ethnicities_form.white() }}</div></div>
-                        <div class="col-xs-4">{{ ethnicities_form.decline.label }}<div class="checkbox"> {{ ethnicities_form.decline() }}</div></div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.black_or_african_american.label }}</div>
+                                <div class="checkbox"> {{ ethnicities_form.black_or_african_american() }}</div>
+                            </div>                       
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.pacific_islander.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.pacific_islander() }}</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.white.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.white() }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="check-text">{{ ethnicities_form.decline.label }}</div>
+                                <div class="checkbox">{{ ethnicities_form.decline() }}</div>
+                            </div>
                         </div>
                         <button class="btn-md btn-md-right btn-green" type="submit">CONTINUE</button>
-            <button class="btn-md btn-md-right btn-white" type="button">BACK</button>
+                        <button class="btn-md btn-md-right btn-white" type="button">BACK</button>
                     </form>
                 </div>
 
@@ -594,10 +612,10 @@
             {% set person_form = PersonForm(csrf_enabled=False) %}
             <form method="POST" action="/svc/eat/v1/application/children">
                 <div class="col-xs-4">{{ person_form.first_name.label }}:<span class="req">*</span> {{ person_form.first_name() }}  </div>
-                <div class="col-xs-3">{{ person_form.middle_initial.label }}:<span class="req">*</span> {{ person_form.middle_initial() }}  <span class="req">*</span></div>
+                <div class="col-xs-3">{{ person_form.middle_initial.label }}:<span class="req">*</span> {{ person_form.middle_initial() }}</div>
                 <div class="col-xs-5">{{ person_form.last_name.label }}:<span class="req">*</span> {{ person_form.last_name() }}  </div>
                 <button class="btn-md btn-md-right btn-green" id="continue" type="submit">CONTINUE</button>
-            <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button>
+                <button class="btn-md btn-md-right btn-white" id="back" type="button">BACK</button>
             </form>
         </div>
     </section>
@@ -608,10 +626,19 @@
             </div>
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4 text-center">
-                <input type ="radio" id="persons-confirm1"><label for="persons-confirm1">YES</label>
-                <input type ="radio" id="persons-confirm2"><label for="persons-confirm2">NO</label>
+                <input type ="radio" name="persons-confirm" id="confirm1"><label for="confirm1">YES</label>
+                <input type ="radio" name="persons-confirm" id="persons-confirm2"><label for="confirm2">NO</label>
             </div>
-        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-4">
+                        <button class="btn-md btn-white" type="button">BACK</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn-md btn-green btn-block" type="submit">CONTINUE</button>
+                    </div>
+                </div>
+            </div>
     </section>
     <section class="main" id="populated">
         <div class="row">
@@ -770,7 +797,6 @@
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}">
         </script>
-
         <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script> 
         <script type="text/javascript">
         $(document).ready(function(){

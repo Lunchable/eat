@@ -115,6 +115,23 @@ input[type=radio]{
 	margin:8px;
 }
 
+#radio:checked::before,
+input[type="checkbox"] {
+    position:absolute;
+    clip: rect(0,0,0,0);
+    clip: rect(0 0 0 0);
+}
+
+#radio:checked,
+input[type="checkbox"] + label::before {
+    content: url('radio-checked.png');
+}
+
+input[type="checkbox"]:checked + label::before {
+    content: url('radio-checked.png');
+}
+
+
 .inline{
 	display: inline;
 }
@@ -201,6 +218,7 @@ input[type=radio]{
     vertical-align: middle;
     cursor: pointer;
     position: relative;
+    display: block;
 }
 .btn-md-right {
 	float: right;
