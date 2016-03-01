@@ -3,99 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <title>EATLunch Application Form Demo</title>
-    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/styles/styles.css" rel="stylesheet">
+    <link href="static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/styles/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/styles/main.css">
 </head>
 <body>
-<h1>EATLunch Application</h1>
+    <!-- Header -->
+    <div class="nav navbar-static-top" id="nav">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">EAT<strong>LUNCH</strong></a>
+        </div>
+            <ul class="nav">
+            <li class="nav navbar-right">
+                <a href="signin" class="header-nav">Sign In</a>
+            </li>
+            <li class="nav navbar-right">
+                <a href="faq" class="header-nav">FAQ</a>
+            </li>
+            <li class="navbar-right">
+                <a class="header-nav" href="languages">Languages</a>
+            </li>
+        </ul>
+    </div>
+     <!-- Breadcrumbs. These will need to be changed on the active section -->
+    <ol class="breadcrumb">
+        <li class="active">My Information</a></li>
+        <li>Child's Information</li>
+        <li>Household Information</li>
+        <li>Confirmation</li>
+    </ol>
+<!-- <h1>EATLunch Application</h1> -->
 <a href="/svc/eat/v1/application" target="_application_target">View Raw Application</a>
 <section id="applicant">
-    <h2>Applicant</h2>
-    {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
+    <section id="applicant">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Let's Start with You</h2>
+        </div>
+    </div>
+        {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
     <form id="applicant_form" method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target">
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.first_name.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.first_name() }}</span>
-            </span>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-4 text-right">{{ applicant_form.first_name.label }}</span>
+                    <span class="col-lg-8 text-left">{{ applicant_form.first_name() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-5 text-right">{{ applicant_form.middle_initial.label }}</span>
+                    <span class="col-lg-7 text-left">{{ applicant_form.middle_initial() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-4 text-right">{{ applicant_form.last_name.label }}</span>
+                    <span class="col-lg-8 text-left">{{ applicant_form.last_name() }}</span>
+                </span>
+            </div>
         </div>
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.middle_initial.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.middle_initial() }}</span>
-            </span>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-4 text-right">{{ applicant_form.ssn.label }}</span>
+                    <span class="col-lg-8 text-left">{{ applicant_form.ssn() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-3">
+                    <span class="col-lg-6 text-right">{{ applicant_form.address_1.label }}</span>
+                    <span class="col-lg-6 text-left">{{ applicant_form.address_1() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-5">
+                    <span class="col-lg-5 text-right">{{ applicant_form.address_2.label }}</span>
+                    <span class="col-lg-7 text-left">{{ applicant_form.address_2() }}</span>
+                </span>
+            </div>
         </div>
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.last_name.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.last_name() }}</span>
-            </span>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-4 text-right">{{ applicant_form.apt.label }}</span>
+                    <span class="col-lg-8 text-left">{{ applicant_form.apt() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-3 text-right">{{ applicant_form.city.label }}</span>
+                    <span class="col-lg-9 text-left">{{ applicant_form.city() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-3 text-right">{{ applicant_form.state.label }}</span>
+                    <span class="col-lg-9 text-left">{{ applicant_form.state() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-4 text-right">{{ applicant_form.postal.label }}</span>
+                    <span class="col-lg-8 text-left">{{ applicant_form.postal() }}</span>
+                </span>
+            </div>
+        </div>
+         <!-- Adult/Emancipated radio button -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Are you an adult?  <span class="req">*</span></p>
+            </div>
         </div>
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.ssn.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.ssn() }}</span>
-            </span>
+            <div class="col-lg-4">
+                <div>
+                    <span class="col-lg-6">
+                        <label for="adult1">I AM OVER 21 YEARS OF AGE</label>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-6">
+                        <input type="radio" name="adult" id="adult1" value="over_21">
+                    </span>
+                </div>
+            </div>
+            <div class="cols-lg-8">
+                <div>
+                    <span class="col-lg-6">
+                        <input type="radio" name="adult" id="adult2" value="emancipated_minor">
+                    </span>
+                    <span class="col-lg-6">
+                        <label for="adult2">
+                            I AM AN EMANICIPATED MINOR
+                        </label>
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.address_1.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.address_1() }}</span>
-            </span>
+            <div class="col-lg-4">
+                <div class="checkbox">
+                    <span class="col-lg-2">
+                        <input type="checkbox" id="snap" class="inline">
+                    </span>
+                    <span class="col-lg-10">
+                        <label for="snap">SNAP</label>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkbox">
+                    <span class="col-lg-2">
+                        <input type="checkbox" id="tanf" class="inline">
+                    </span>
+                    <span class="col-lg-10">
+                    <label for="tanf">TANF</label>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkbox">
+                    <span class="col-lg-2">
+                        <input type="checkbox" id="fdpir" class="inline">
+                    </span>
+                    <span class="col-lg-10">
+                        <label for="fdpir">FDPIR</label>
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.address_2.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.address_2() }}</span>
-            </span>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-6 text-right">{{ applicant_form.snap_case.label }}</span>
+                    <span class="col-lg-6 text-left">{{ applicant_form.snap_case() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-6 text-right">{{ applicant_form.tanf_case.label }}</span>
+                    <span class="col-lg-6 text-left">{{ applicant_form.tanf_case() }}</span>
+                </span>
+            </div>
+            <div>
+                <span class="col-lg-4">
+                    <span class="col-lg-6 text-right">{{ applicant_form.fdipr_case.label }}</span>
+                    <span class="col-lg-6 text-left">{{ applicant_form.fdipr_case() }}</span>
+                </span>
+            </div>
         </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.apt.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.apt() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.city.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.city() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.state.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.state() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.postal.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.postal() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.snap_case.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.snap_case() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.tanf_case.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.tanf_case() }}</span>
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-lg-8">
-                <span class="col-lg-2 text-right">{{ applicant_form.fdipr_case.label }}</span>
-                <span class="col-lg-10 text-left">{{ applicant_form.fdipr_case() }}</span>
-            </span>
-        </div>
-        <button type="submit" hidden>Submit</button>
+        <div class="col-lg-12">
+                <p>In order to get started, please read <a class="overlay-highlight" data-toggle="modal" data-target="#usdaAgreement">the agreements here</a> carefully then check the box to agree to the terms. <span class="req">*</span></p>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkbox">
+                    <input type="checkbox" id="agreed" class="checkbox inline" required><label for="agreed"></label>
+                </div>
+                <h4 class=" check-text inline">I have read and agree to the terms<span class="req">*</span></h4>
+            </div>
+            </div>
+            <div class="modal fade" id="usdaAgreement" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, the USDA, its Agencies, offices, and employees, and institutions participating in or administering USDA programs are prohibited from discriminating based on race, color, national origin, religion, sex, gender identity (including gender expression), sexual orientation, disability, age, marital status, family/parental status, income derived from a public assistance program, political beliefs, or reprisal or retaliation for prior civil rights activity, in any program or activity conducted or funded by USDA (not all bases apply to all programs). Remedies and complaint filing deadlines vary by program or incident.</p>
+                            <p>Persons with disabilities who require alternative means of communication for program information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally, program information may be made available in languages other than English.</p>
+                            <p>To file a program discrimination complaint, complete the USDA Program Discrimination Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint and at any USDA office or write a letter addressed to USDA and provide in the letter all of the information requested in the form. To request a copy of the complaint form, call (866) 632-9992. Submit your completed form or letter to USDA by: </p>
+                            <p>(1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410;</p>
+                            <p>(2) fax: (202) 690-7442; or </p>
+                            <p>(3) email: <a href= "mailto:program.intake@usda.gov."> program.intake@usda.gov.</a></p>
+                            <p>USDA is an equal opportunity provider, employer, and lender.</p>
+                            <p><strong>Use of Information Statement</strong></p>
+                            <p>"The Richard B. Russell National School Lunch Act requires the information on this application. You do not have to give the information, but if you do not submit all needed information, we cannot approve your child for free or reduced price meals. You must include the last four digits of the social security number of the adult household member who signs the application. The social security number is not required when you apply on behalf of a foster child or you list a Supplemental Nutrition Assistance Program (SNAP), Temporary Assistance for Needy Families (TANF) Program or Food Distribution Program on Indian Reservations (FDPIR) case number or other FDPIR identifier for your child or when you indicate that the adult household member signing the application does not have a social security number. We will use your information to determine if your child is eligible for free or reduced price meals, and for administration and enforcement of the lunch and breakfast programs.</p>
+                            <p>We may share your eligibility information with education, health, and nutrition programs to help them evaluate, fund, or determine benefits for their programs, auditors for program reviews, and law enforcement officials to help them look into violations of program rules.”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn-md btn-white" >BACK</button>
+        <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
     </form>
 </section>
 <section id="applicant_incomes">
-    <h2>Applicant Income</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Applicant Income</h2>
+        </div>
+    </div>
     <div class="income_container container">
         <div class="row">
             <div class="col-lg-12">
@@ -134,12 +274,12 @@
                         </span>
                     <span class="col-lg-3">
                         <span class="col-lg-4 text-right">{{ income_form.amount.label }}</span>
-                        <span class="col-lg-1 text-right glyphicon glyphicon-usd"></span>
+                        <span class="col-lg-2 text-right glyphicon glyphicon-usd"></span>
                         <span class="col-lg-6 text-left">{{ income_form.amount() }}</span>
                     </span>
-                    <span class="col-lg-3">
-                        <span class="col-lg-4 text-right">{{ income_form.frequency.label }}</span>
-                        <span class="col-lg-8 text-left">{{ income_form.frequency() }}</span>
+                    <span class="col-lg-4">
+                        <span class="col-lg-6 text-right">{{ income_form.frequency.label }}</span>
+                        <span class="col-lg-6 text-left">{{ income_form.frequency() }}</span>
                     </span>
                     <span type="submit" class="col-lg-1">
                         <span class="glyphicon glyphicon-plus-sign"></span>
@@ -167,7 +307,11 @@
 </section>
 <hr>
 <section id="children">
-    <h2>Children</h2>
+    <div class="row">
+        <span class="col-lg-12">
+            <h2>Child's Information</h2>
+        </span>
+    </div>
     <ol id="children_list" class="children_list">
         {% for child in application.children %}
             <li id="{{ child._id }}" class="income_container">
@@ -333,7 +477,7 @@
     </div>
 
 </section>
-<script type="application/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-<script type="application/javascript" src="/static/js/application.js"></script>
+<script type="application/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript" src="static/js/application.js"></script>
 </body>
 </html>
