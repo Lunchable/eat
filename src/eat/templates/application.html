@@ -271,7 +271,7 @@
                     <span class="col-lg-3">
                         <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
                         <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value="" class="input-sm" disabled></span>
-                        </span>
+                    </span>
                     <span class="col-lg-3">
                         <span class="col-lg-4 text-right">{{ income_form.amount.label }}</span>
                         <span class="col-lg-2 text-right glyphicon glyphicon-usd"></span>
@@ -429,13 +429,52 @@
                 <div>
                     <h4>Optionally indicate this child's race/ethnicity</h4>
                     <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/ethnicities">
-                        <div>{{ ethnicities_form.hispanic_or_latino.label }}: {{ ethnicities_form.hispanic_or_latino() }}</div>
-                        <div>{{ ethnicities_form.native_american.label }}: {{ ethnicities_form.native_american() }}</div>
-                        <div>{{ ethnicities_form.asian.label }}: {{ ethnicities_form.asian() }}</div>
-                        <div>{{ ethnicities_form.black_or_african_american.label }}: {{ ethnicities_form.black_or_african_american() }}</div>
-                        <div>{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div>
-                        <div>{{ ethnicities_form.white.label }}: {{ ethnicities_form.white() }}</div>
-                        <div>{{ ethnicities_form.decline.label }}: {{ ethnicities_form.decline() }}</div>
+                        <div class="row">
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.hispanic_or_latino.label }}</span>
+                                    <span class="checkbox">{{ ethnicities_form.hispanic_or_latino() }}</span>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.native_american.label }}</span>
+                                    <span class="checkbox">{{ ethnicities_form.native_american() }}</span>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.asian.label }}</span>
+                                    <span class="checkbox">{{ ethnicities_form.asian() }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.black_or_african_american.label }}</span>
+                                    <span class="checkbox">{{ ethnicities_form.black_or_african_american() }}</span>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.pacific_islander.label }}</span>
+                                    <span class="checkbox"> {{ ethnicities_form.pacific_islander() }}</span>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.white.label }}<span class="checkbox"> {{ ethnicities_form.white() }}</span>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="col-lg-4">
+                                    <span>{{ ethnicities_form.decline.label }}</span>
+                                    <span class="checkbox">{{ ethnicities_form.decline() }}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-md btn-white" >BACK</button>
                         <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
                     </form>
                 </div>
@@ -460,10 +499,24 @@
                     <form method="POST" child_id="{{ child._id }}"
                           action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
                           class="incomes_form">
-                        <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                        <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                        <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
-                        <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
+                                <span class="col-lg-3">
+                                <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
+                                <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value="" class="input-sm" disabled></span>
+                            </span>
+                            <span class="col-lg-3">
+                                <span class="col-lg-4 text-right">{{ income_form.amount.label }}</span>
+                                <span class="col-lg-2 text-right glyphicon glyphicon-usd"></span>
+                                <span class="col-lg-6 text-left">{{ income_form.amount() }}</span>
+                            </span>
+                            <span class="col-lg-4">
+                                <span class="col-lg-6 text-right">{{ income_form.frequency.label }}</span>
+                                <span class="col-lg-6 text-left">{{ income_form.frequency() }}</span>
+                            </span>
+                            <span type="submit" class="col-lg-1">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                            </span>
+                            <button type="button" class="btn-md btn-white" >BACK</button>
+                            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
                     </form>
                 </div>
 
@@ -474,13 +527,54 @@
         <h3>Add Child</h3>
         {% set child_form = ChildForm(csrf_enabled=False) %}
         <form method="POST" action="/svc/eat/v1/application/children" class="children_form">
-            <div>{{ child_form.first_name.label }}: {{ child_form.first_name() }}</div>
-            <div>{{ child_form.middle_initial.label }}: {{ child_form.middle_initial() }}</div>
-            <div>{{ child_form.last_name.label }}: {{ child_form.last_name() }}</div>
-            <div>{{ child_form.school_city.label }}: {{ child_form.school_city() }}</div>
-            <div>{{ child_form.school_state.label }}: {{ child_form.school_state() }}</div>
-            <div>{{ child_form.school_postal.label }}: {{ child_form.school_postal() }}</div>
-            <div>{{ child_form.school_name.label }}: {{ child_form.school_name() }}</div>
+            <div class="row">
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.first_name.label }}</span>
+                        <span class="col-lg-8">{{ child_form.first_name() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.middle_initial.label }}</span>
+                        <span class="col-lg-8">{{ child_form.middle_initial() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.last_name.label }}</span>
+                        <span class="col-lg-8">{{ child_form.last_name() }}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.school_city.label }}</span>
+                        <span class="col-lg-8">{{ child_form.school_city() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.school_state.label }}</span>
+                        <span class="col-lg-8">{{ child_form.school_state() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.school_postal.label }}</span>
+                        <span class="col-lg-8">{{ child_form.school_postal() }}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ child_form.school_name.label }}</span>
+                        <span class="col-lg-4">{{ child_form.school_name() }}</span>
+                    </span>
+                </div>
+            </div>
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -497,10 +591,27 @@
                 {% set person_form = PersonForm(csrf_enabled=False, **(person.dict)) %}
                 <form method="POST" person_id="{{ person._id }}"
                       action="/svc/eat/v1/application/persons/{{ person._id }}" class="person_form">
-                    <div>{{ person_form.first_name.label }}: {{ person_form.first_name() }}</div>
-                    <div>{{ person_form.middle_initial.label }}: {{ person_form.middle_initial() }}</div>
-                    <div>{{ person_form.last_name.label }}: {{ person_form.last_name() }}</div>
-                    <button type="submit">Update</button>
+                    <div class="row">
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.first_name.label }}</span>
+                        <span class="col-lg-8">{{ person_form.first_name() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.middle_initial.label }}</span>
+                        <span class="col-lg-8">{{ person_form.middle_initial() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.last_name.label }}</span>
+                        <span class="col-lg-8">{{ person_form.last_name() }}</span>
+                    </span>
+                </div>
+            </div>>
+                    <button type="submit" class="btn-md btn-green">CONTINUE</button>
                 </form>
 
                 <ol class="incomes_list">
@@ -524,9 +635,22 @@
                     <form method="POST" person_id="{{ person._id }}"
                           action="/svc/eat/v1/application/persons/{{ person._id }}/incomes"
                           class="incomes_form">
-                        <div>{{ income_form.source.label }}: {{ income_form.source() }}</div>
-                        <div>{{ income_form.amount.label }}: ${{ income_form.amount() }}</div>
-                        <div>{{ income_form.frequency.label }}: {{ income_form.frequency() }}</div>
+                            <span class="col-lg-3">
+                                <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
+                                <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value="" class="input-sm" disabled></span>
+                            </span>
+                            <span class="col-lg-3">
+                                <span class="col-lg-4 text-right">{{ income_form.amount.label }}</span>
+                                <span class="col-lg-2 text-right glyphicon glyphicon-usd"></span>
+                                <span class="col-lg-6 text-left">{{ income_form.amount() }}</span>
+                        </span>
+                        <span class="col-lg-4">
+                            <span class="col-lg-6 text-right">{{ income_form.frequency.label }}</span>
+                            <span class="col-lg-6 text-left">{{ income_form.frequency() }}</span>
+                        </span>
+                        <span type="submit" class="col-lg-1">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </span>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
@@ -552,14 +676,236 @@
         <h3>Add a Household Member</h3>
         {% set person_form = PersonForm(csrf_enabled=False) %}
         <form method="POST" action="/svc/eat/v1/application/persons" class="person_form">
-            <div>{{ person_form.first_name.label }}: {{ person_form.first_name() }}</div>
-            <div>{{ person_form.middle_initial.label }}: {{ person_form.middle_initial() }}</div>
-            <div>{{ person_form.last_name.label }}: {{ person_form.last_name() }}</div>
-            <button type="submit">Submit</button>
+            <div class="row">
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.first_name.label }}</span>
+                        <span class="col-lg-8">{{ person_form.first_name() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.middle_initial.label }}</span>
+                        <span class="col-lg-8">{{ person_form.middle_initial() }}</span>
+                    </span>
+                </div>
+                <div>
+                    <span class="col-lg-4">
+                        <span class="col-lg-4">{{ person_form.last_name.label }}</span>
+                        <span class="col-lg-8">{{ person_form.last_name() }}</span>
+                    </span>
+                </div>
+            </div>
+            <button type="button" class="btn-md btn-white" >BACK</button>
+            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
         </form>
     </div>
 
 </section>
+
+<!-- Confirmation page of added persons to household -->
+
+<section class="main" id="populated">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Household Information</h2>
+                <p>These are the household members you've entered so far, do you have any other people, related and not related, living with you?<span class="req">*</span></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="person-gray">
+                    <div class="numbers numbers-small">1</div>
+                    <!-- sample fill out -->
+                    <h3>Applicant's Name<span class="reg-text"> (you)</span</h3>
+                    <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                    <br>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <button type="button" class="btn-delete btn-green">DELETE</button>
+                    <button type="button" class="btn-edit btn-gray">EDIT</button>
+                </div>
+                <div class="person-gray">
+                    <div class="numbers numbers-small">1</div>
+                    <!-- sample fill out -->
+                    <h3>Applicant's Name<span class="reg-text"> (you)</span</h3>
+                    <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                    <br>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <h4>INCOME: $00/FREQUENCY</h4>
+                    <p><em>Source</em></p>
+                    <button type="button" class="btn-delete btn-green">DELETE</button>
+                    <button type="button" class="btn-edit btn-gray">EDIT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second confirmation page for household -->
+     <section id="persons-confirmation">  
+        <div class="container">
+            <div class="middle">
+                <h2 class="text-center font-medium">YOU HAVE ENTERED A TOTAL OF <strong>number</strong> OF APPLICANTS, INCLUDING YOURSELF.<br> IS THAT CORRECT?</h2>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4 text-center">
+                <input type ="radio" name="persons-confirm" id="confirm1"><label for="confirm1">YES</label>
+                <input type ="radio" name="persons-confirm" id="persons-confirm2"><label for="confirm2">NO</label>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-4">
+                        <button class="btn-md btn-white" type="button">BACK</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn-md btn-green btn-block" type="submit">CONTINUE</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+<!-- This is the section page for the TANF, FDPIR, and SNAP recipients -->
+
+<section class="main" id="skip-step">  
+        <div class="center">
+            <i class="fa fa-thumbs-up text-center" id="thumbs"></i>
+            <p class="font-medium text-center"><strong>GOOD NEWS!</strong></p>
+            <p class="font-medium text-center">BECAUSE OF SPECIAL CIRCUMSTANCES, YOU GET TO SKIP A STEP!</p>
+        </div>
+    </section>
+    <section class="main" id="signature">
+        <div class="row center">
+            <h2 class="font-medium text-center">PLEASE ENTER YOUR ELECTRONIC SIGNATURE AND TODAY'S DATE <br><span class="learn-more"><em>(type your name into the field below, it will count as a signature)</em><span class="req">*</span></span></h2>
+            <div class="esignature">
+                <h4>Date</h4>
+                <label for="date"></label>
+                <input type="textbox" class="text-center" placeholder="MM/DD/YYYY" id="date">
+            </div>
+            <div class="esignature">
+                <h4>Electronic Signature</h4>
+                <label for="esig"></label>
+                <input type="textbox" class="text-center" placeholder="Write your full name here" id="esig">
+            </div>
+            <p class="disclaimer">The person signing is furnishing true information and to advise that person that the application is being made in connection with the receipt of Federal funds; School officials may verify the information on the application; and deliberate misrepresentation of the information may subject the applicant to prosecution under State and Federal statutes.</p>
+        </div>
+        <div><a class="arrow-left" href=""></a></div>
+        <div><a class="arrow-right" href=""></a></div> 
+    </section>
+
+
+<!-- Successful Submission screen -->
+
+<section class="main" id="submitted">  
+    <div class="center">
+        <i class="fa fa-check-circle text-center" id="submit-check"></i>
+        <p class="font-medium text-center">YOUR INFORMATION WAS SUCCESSFULLY SUBMITTED</p>
+        <a class="green-link font-medium text-center">GO TO HOMEPAGE</a>
+    </div>
+</section>
+
+<!-- 404 error section -->
+
+<section class="main" id="error">  
+    <div class="row">
+        <div id="err-image">
+        </div>
+        <p class="col-xs-12 font-medium text-center"><strong>Uh oh!</strong> 404 error! You've reached a non-working page.</p>
+        <p class="col-xs-12 font-medium text-center">Please <a href="#" class="green-link">GO BACK</a> or <a href="/" class="green-link">GO TO HOMEPAGE</a></p>
+    </div>
+</section>    
+
+<!-- Execution Steps: These are the inbetween 
+    "loading screens" placed between person, applicant, child, etc. -->
+
+    <!-- Step 1 -->
+    <section class="main" id="step-1">  
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">1</p>
+                <p class="font-medium text-center">ENTER YOUR INFORMATION</p>
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
+        <div>
+        </div>
+    </section>
+
+<!-- Step 2 Load -->
+    <section class="main" id="step-2">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">
+                    2
+                </p> 
+                <p class="font-medium text-center">ENTER YOUR CHILD'S INFORMATION</p> 
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
+    </section>
+
+<!-- Step 3 Load -->
+    <section class="main" id="step-3">  
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">
+                    3
+                </p>  
+                <p class="font-medium text-center">ENTER YOUR HOUSEHOLD INFORMATION</p>
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-gray"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div>
+        </div>
+    </section>
+
+<!-- Step 4 Load -->
+    <section class="main" id="step-4">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="numbers numbers-gray text-center">
+                    4
+                </p>  
+                <p class="font-medium text-center">LAST STEP! CONFIRM AND SUBMIT YOUR INFORMATION.</p>
+            </div>
+            <div class="col-xs-4 offset">
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+                <span class="step-circle step-circle-blue"></span>
+            </div>
+            <div><a class="arrow-left" href=""></a></div>
+            <div><a class="arrow-right" href=""></a></div> 
+        </div>
+    </section>
+
 <script type="application/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="application/javascript" src="static/js/application.js"></script>
 </body>
