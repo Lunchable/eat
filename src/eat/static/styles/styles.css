@@ -53,3 +53,12 @@ input {
     color: #000;
     border: 1px solid #000;
 }
+
+.form_error {
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.form_error_message {
+    color: red;
+}
