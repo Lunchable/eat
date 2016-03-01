@@ -499,42 +499,6 @@ def register_routes(app):
                 status=404, headers=None,
                 content_type='application/json; charset=utf-8')
 
-    @app.route('/svc/eat/v1/application/persons/<person_id>/programs', methods=['GET', 'POST'],
-               endpoint='svc_eat_v1_application_persons_person_id_programs')
-    @inject_application
-    def svc_eat_v1_application_persons_person_id_programs(application, person_id):
-        programs_form = ProgramsForm(csrf_enabled=False)
-        try:
-            person = application.persons.get(_id=ObjectId(person_id))
-
-            if request.method == 'GET':
-                return json.dumps([p.dict for p in person.programs])
-            else:
-                if not programs_form.validate_on_submit():
-                    return Response(
-                        response=json.dumps({'errors': programs_form.errors, 'form': programs_form.programs.data}),
-                        status=400, headers=None,
-                        content_type='application/json; charset=utf-8')
-
-                programs = [Program(program_name=p) for (p, k) in programs_form.data.items() if k]
-                person.programs = programs
-                application.save()
-
-            return Response(response=json.dumps(application.dict),
-                            status=201, headers=None,
-                            content_type='application/json; charset=utf-8')
-        except DoesNotExist:
-            return Response(
-                response=json.dumps({'errors': 'Person does not exist.'}),
-                status=404, headers=None,
-                content_type='application/json; charset=utf-8')
-
-        except Exception:
-            return Response(
-                response=json.dumps({'errors': 'The person could not be queried'}),
-                status=404, headers=None,
-                content_type='application/json; charset=utf-8')
-
     @app.route('/svc/eat/v1/application/persons/<person_id>/ethnicities', methods=['GET', 'POST'],
                endpoint='svc_eat_v1_application_persons_person_id_ethnicities')
     @inject_application
