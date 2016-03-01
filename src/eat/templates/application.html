@@ -27,109 +27,119 @@
 </div>
 <!-- Breadcrumbs. These will need to be changed on the active section -->
 <ol class="breadcrumb">
-    <li class="active">My Information</a></li>
+    <li class="active">My Information</li>
     <li>Child's Information</li>
     <li>Household Information</li>
     <li>Confirmation</li>
 </ol>
-<!-- <h1>EATLunch Application</h1> -->
-<a href="/svc/eat/v1/application" target="_application_target">View Raw Application</a>
+
 <section id="applicant">
-    <section id="applicant">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Let's Start with You</h2>
+        </div>
+    </div>
+    {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
+    <form id="applicant_form" method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target"
+          novalidate>
+        <div class="row">
+        <span class="col-lg-8">
+        <table id="applicant_form_table" class="table">
+            <tbody>
+            <tr>
+                <td>
+                    <span class="text-right">{{ applicant_form.first_name.label }}</span>
+                </td>
+                <td>
+                    <span class="text-left">{{ applicant_form.first_name() }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-5 text-right">{{ applicant_form.middle_initial.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-7 text-left">{{ applicant_form.middle_initial() }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-4 text-right">{{ applicant_form.last_name.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-8 text-left">{{ applicant_form.last_name() }}</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="col-lg-4 text-right">{{ applicant_form.ssn.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-8 text-left">{{ applicant_form.ssn() }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-6 text-right">{{ applicant_form.address_1.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-6 text-left">{{ applicant_form.address_1() }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-5 text-right">{{ applicant_form.address_2.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-7 text-left">{{ applicant_form.address_2() }}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="col-lg-4 text-right">{{ applicant_form.apt.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-8 text-left">{{ applicant_form.apt() }}</span>
+
+                </td>
+                <td>
+                    <span class="col-lg-3 text-right">{{ applicant_form.city.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-9 text-left">{{ applicant_form.city() }}</span>
+
+                </td>
+                <td>
+                    <span class="col-lg-3 text-right">{{ applicant_form.state.label }}</span>
+                </td>
+                <td>
+                    <span class="col-lg-3 text-left">{{ applicant_form.state() }}</span>
+                    <span class="col-lg-3 text-right">{{ applicant_form.postal.label }}</span>
+                    <span class="col-lg-6 text-left input-sm">{{ applicant_form.postal() }}</span>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+            </span>
+
+        <!-- Adult/Emancipated radio button -->
         <div class="row">
             <div class="col-lg-12">
-                <h2>Let's Start with You</h2>
+                <p>Are you an adult? <span class="req">*</span></p>
             </div>
         </div>
-        {% set applicant_form = ApplicantForm(csrf_enabled=False, **(application.applicant.dict)) %}
-        <form id="applicant_form" method="POST" action="/svc/eat/v1/application/applicant" target="_applicant_target">
-            <div class="row">
+        <div class="row">
+            <div class="col-lg-4">
                 <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-4 text-right">{{ applicant_form.first_name.label }}</span>
-                    <span class="col-lg-8 text-left">{{ applicant_form.first_name() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-5 text-right">{{ applicant_form.middle_initial.label }}</span>
-                    <span class="col-lg-7 text-left">{{ applicant_form.middle_initial() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-4 text-right">{{ applicant_form.last_name.label }}</span>
-                    <span class="col-lg-8 text-left">{{ applicant_form.last_name() }}</span>
-                </span>
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-4 text-right">{{ applicant_form.ssn.label }}</span>
-                    <span class="col-lg-8 text-left">{{ applicant_form.ssn() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-3">
-                    <span class="col-lg-6 text-right">{{ applicant_form.address_1.label }}</span>
-                    <span class="col-lg-6 text-left">{{ applicant_form.address_1() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-5">
-                    <span class="col-lg-5 text-right">{{ applicant_form.address_2.label }}</span>
-                    <span class="col-lg-7 text-left">{{ applicant_form.address_2() }}</span>
-                </span>
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-4 text-right">{{ applicant_form.apt.label }}</span>
-                    <span class="col-lg-8 text-left">{{ applicant_form.apt() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-3 text-right">{{ applicant_form.city.label }}</span>
-                    <span class="col-lg-9 text-left">{{ applicant_form.city() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-3 text-right">{{ applicant_form.state.label }}</span>
-                    <span class="col-lg-9 text-left">{{ applicant_form.state() }}</span>
-                </span>
-                </div>
-                <div>
-                <span class="col-lg-4">
-                    <span class="col-lg-4 text-right">{{ applicant_form.postal.label }}</span>
-                    <span class="col-lg-8 text-left">{{ applicant_form.postal() }}</span>
-                </span>
-                </div>
-            </div>
-            <!-- Adult/Emancipated radio button -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Are you an adult? <span class="req">*</span></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div>
                     <span class="col-lg-6">
                         <label for="adult1">I AM OVER 21 YEARS OF AGE</label>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-6">
                         <input type="radio" name="adult" id="adult1" value="over_21">
                     </span>
-                    </div>
                 </div>
-                <div class="cols-lg-8">
-                    <div>
+            </div>
+            <div class="cols-lg-8">
+                <div>
                     <span class="col-lg-6">
                         <input type="radio" name="adult" id="adult2" value="emancipated_minor">
                     </span>
@@ -138,141 +148,141 @@
                             I AM AN EMANICIPATED MINOR
                         </label>
                     </span>
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="checkbox">
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="checkbox">
                     <span class="col-lg-2">
                         <input type="checkbox" id="snap" class="inline">
                     </span>
                     <span class="col-lg-10">
                         <label for="snap">SNAP</label>
                     </span>
-                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="checkbox">
+            </div>
+            <div class="col-lg-4">
+                <div class="checkbox">
                     <span class="col-lg-2">
                         <input type="checkbox" id="tanf" class="inline">
                     </span>
                     <span class="col-lg-10">
                     <label for="tanf">TANF</label>
                     </span>
-                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="checkbox">
+            </div>
+            <div class="col-lg-4">
+                <div class="checkbox">
                     <span class="col-lg-2">
                         <input type="checkbox" id="fdpir" class="inline">
                     </span>
                     <span class="col-lg-10">
                         <label for="fdpir">FDPIR</label>
                     </span>
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div>
+        </div>
+        <div class="row">
+            <div>
                 <span class="col-lg-4">
                     <span class="col-lg-6 text-right">{{ applicant_form.snap_case.label }}</span>
                     <span class="col-lg-6 text-left">{{ applicant_form.snap_case() }}</span>
                 </span>
-                </div>
-                <div>
+            </div>
+            <div>
                 <span class="col-lg-4">
                     <span class="col-lg-6 text-right">{{ applicant_form.tanf_case.label }}</span>
                     <span class="col-lg-6 text-left">{{ applicant_form.tanf_case() }}</span>
                 </span>
-                </div>
-                <div>
+            </div>
+            <div>
                 <span class="col-lg-4">
                     <span class="col-lg-6 text-right">{{ applicant_form.fdipr_case.label }}</span>
                     <span class="col-lg-6 text-left">{{ applicant_form.fdipr_case() }}</span>
                 </span>
-                </div>
             </div>
-            <div class="col-lg-12">
-                <p>In order to get started, please read <a class="overlay-highlight" data-toggle="modal"
-                                                           data-target="#usdaAgreement">the agreements here</a>
-                    carefully then check the box to agree to the terms. <span class="req">*</span></p>
+        </div>
+        <div class="col-lg-12">
+            <p>In order to get started, please read <a class="overlay-highlight" data-toggle="modal"
+                                                       data-target="#usdaAgreement">the agreements here</a>
+                carefully then check the box to agree to the terms. <span class="req">*</span></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="checkbox">
+                <input type="checkbox" id="agreed" class="checkbox inline" required><label for="agreed"></label>
             </div>
-            <div class="col-lg-4">
-                <div class="checkbox">
-                    <input type="checkbox" id="agreed" class="checkbox inline" required><label for="agreed"></label>
-                </div>
-                <h4 class=" check-text inline">I have read and agree to the terms<span class="req">*</span></h4>
-            </div>
-            </div>
-            <div class="modal fade" id="usdaAgreement" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" aria-label="Close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA)
-                                civil rights regulations and policies, the USDA, its Agencies, offices, and employees,
-                                and institutions participating in or administering USDA programs are prohibited from
-                                discriminating based on race, color, national origin, religion, sex, gender identity
-                                (including gender expression), sexual orientation, disability, age, marital status,
-                                family/parental status, income derived from a public assistance program, political
-                                beliefs, or reprisal or retaliation for prior civil rights activity, in any program or
-                                activity conducted or funded by USDA (not all bases apply to all programs). Remedies and
-                                complaint filing deadlines vary by program or incident.</p>
-                            <p>Persons with disabilities who require alternative means of communication for program
-                                information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should
-                                contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY)
-                                or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally,
-                                program information may be made available in languages other than English.</p>
-                            <p>To file a program discrimination complaint, complete the USDA Program Discrimination
-                                Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint
-                                and at any USDA office or write a letter addressed to USDA and provide in the letter all
-                                of the information requested in the form. To request a copy of the complaint form, call
-                                (866) 632-9992. Submit your completed form or letter to USDA by: </p>
-                            <p>(1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil
-                                Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410;</p>
-                            <p>(2) fax: (202) 690-7442; or </p>
-                            <p>(3) email: <a href="mailto:program.intake@usda.gov."> program.intake@usda.gov.</a></p>
-                            <p>USDA is an equal opportunity provider, employer, and lender.</p>
-                            <p><strong>Use of Information Statement</strong></p>
-                            <p>"The Richard B. Russell National School Lunch Act requires the information on this
-                                application. You do not have to give the information, but if you do not submit all
-                                needed information, we cannot approve your child for free or reduced price meals. You
-                                must include the last four digits of the social security number of the adult household
-                                member who signs the application. The social security number is not required when you
-                                apply on behalf of a foster child or you list a Supplemental Nutrition Assistance
-                                Program (SNAP), Temporary Assistance for Needy Families (TANF) Program or Food
-                                Distribution Program on Indian Reservations (FDPIR) case number or other FDPIR
-                                identifier for your child or when you indicate that the adult household member signing
-                                the application does not have a social security number. We will use your information to
-                                determine if your child is eligible for free or reduced price meals, and for
-                                administration and enforcement of the lunch and breakfast programs.</p>
-                            <p>We may share your eligibility information with education, health, and nutrition programs
-                                to help them evaluate, fund, or determine benefits for their programs, auditors for
-                                program reviews, and law enforcement officials to help them look into violations of
-                                program rules.”</p>
-                        </div>
+            <h4 class=" check-text inline">I have read and agree to the terms<span class="req">*</span></h4>
+        </div>
+        </div>
+        <div class="modal fade" id="usdaAgreement" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>In accordance with Federal civil rights law and U.S. Department of Agriculture (USDA)
+                            civil rights regulations and policies, the USDA, its Agencies, offices, and employees,
+                            and institutions participating in or administering USDA programs are prohibited from
+                            discriminating based on race, color, national origin, religion, sex, gender identity
+                            (including gender expression), sexual orientation, disability, age, marital status,
+                            family/parental status, income derived from a public assistance program, political
+                            beliefs, or reprisal or retaliation for prior civil rights activity, in any program or
+                            activity conducted or funded by USDA (not all bases apply to all programs). Remedies and
+                            complaint filing deadlines vary by program or incident.</p>
+                        <p>Persons with disabilities who require alternative means of communication for program
+                            information (e.g., Braille, large print, audiotape, American Sign Language, etc.) should
+                            contact the responsible Agency or USDA's TARGET Center at (202) 720-2600 (voice and TTY)
+                            or contact USDA through the Federal Relay Service at (800) 877-8339. Additionally,
+                            program information may be made available in languages other than English.</p>
+                        <p>To file a program discrimination complaint, complete the USDA Program Discrimination
+                            Complaint Form, AD-3027, found online at How to File a Program Discrimination Complaint
+                            and at any USDA office or write a letter addressed to USDA and provide in the letter all
+                            of the information requested in the form. To request a copy of the complaint form, call
+                            (866) 632-9992. Submit your completed form or letter to USDA by: </p>
+                        <p>(1) mail: U.S. Department of Agriculture, Office of the Assistant Secretary for Civil
+                            Rights, 1400 Independence Avenue, SW, Washington, D.C. 20250-9410;</p>
+                        <p>(2) fax: (202) 690-7442; or </p>
+                        <p>(3) email: <a href="mailto:program.intake@usda.gov."> program.intake@usda.gov.</a></p>
+                        <p>USDA is an equal opportunity provider, employer, and lender.</p>
+                        <p><strong>Use of Information Statement</strong></p>
+                        <p>"The Richard B. Russell National School Lunch Act requires the information on this
+                            application. You do not have to give the information, but if you do not submit all
+                            needed information, we cannot approve your child for free or reduced price meals. You
+                            must include the last four digits of the social security number of the adult household
+                            member who signs the application. The social security number is not required when you
+                            apply on behalf of a foster child or you list a Supplemental Nutrition Assistance
+                            Program (SNAP), Temporary Assistance for Needy Families (TANF) Program or Food
+                            Distribution Program on Indian Reservations (FDPIR) case number or other FDPIR
+                            identifier for your child or when you indicate that the adult household member signing
+                            the application does not have a social security number. We will use your information to
+                            determine if your child is eligible for free or reduced price meals, and for
+                            administration and enforcement of the lunch and breakfast programs.</p>
+                        <p>We may share your eligibility information with education, health, and nutrition programs
+                            to help them evaluate, fund, or determine benefits for their programs, auditors for
+                            program reviews, and law enforcement officials to help them look into violations of
+                            program rules.”</p>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn-md btn-white">BACK</button>
-            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
-        </form>
-    </section>
-    <section id="applicant_incomes">
+        </div>
+        <button type="button" class="btn-md btn-white">BACK</button>
+        <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
+    </form>
+</section>
+<section id="applicant_incomes" hidden>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Applicant Income</h2>
+        </div>
+    </div>
+    <div class="income_container container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>Applicant Income</h2>
-            </div>
-        </div>
-        <div class="income_container container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
+                <p>
                     <span class="btn btn-sq btn-income">
                         <br>Wages/<br>Earnings From<br>Work
                     </span>
@@ -296,12 +306,12 @@
                     <span class="btn btn-sq btn-income">
                         <br>None of the<br>Above
                     </span>
-                </div>
             </div>
-            <div class="row">
-                {% set income_form=IncomeForm(csrf_enabled=False) %}
-                <form method="POST" id="applicant_incomes_form" class="incomes_form"
-                      action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
+        </div>
+        <div class="row">
+            {% set income_form=IncomeForm(csrf_enabled=False) %}
+            <form method="POST" id="applicant_incomes_form" class="incomes_form"
+                  action="/svc/eat/v1/application/applicant/incomes" target="_applicant_income_target">
                     <span class="col-lg-3">
                         <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
                         <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value=""
@@ -319,229 +329,229 @@
                     <span type="submit" class="col-lg-1">
                         <span class="glyphicon glyphicon-plus-sign"></span>
                     </span>
-                </form>
-            </div>
+            </form>
+        </div>
 
-            {% if application.applicant %}
-                <ul id="appliant_incomes_list" class="list-group incomes_list">
-                    {% for income in application.applicant.incomes %}
-                        <li class="list-group-item">
-                            <div id="{{ income._id }}" class="income_item row">
-                                <span class="col-1">Source: </span><span
-                                    class="col-2">{{ income.source|capitalize }}</span>
-                                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
-                                <span class="col-1">Frequency: </span><span
-                                    class="col-2">{{ income.frequency|capitalize }}</span>
+        {% if application.applicant %}
+            <ul id="appliant_incomes_list" class="list-group incomes_list">
+                {% for income in application.applicant.incomes %}
+                    <li class="list-group-item">
+                        <div id="{{ income._id }}" class="income_item row">
+                            <span class="col-1">Source: </span><span
+                                class="col-2">{{ income.source|capitalize }}</span>
+                            <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                            <span class="col-1">Frequency: </span><span
+                                class="col-2">{{ income.frequency|capitalize }}</span>
                                 <span class="col-3"><a href="/svc/eat/v1/application/applicant/incomes/{{ income._id }}"
                                                        class="income_delete glyphicon glyphicon-remove-sign"></a></span>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-    </section>
-    <hr>
-    <section id="children">
-        <div class="row">
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>
+<hr>
+<section id="children" hidden>
+    <div class="row">
         <span class="col-lg-12">
             <h2>Child's Information</h2>
         </span>
-        </div>
-        <ol id="children_list" class="children_list">
-            {% for child in application.children %}
-                <li id="{{ child._id }}" class="income_container">
-                    <h3><span><a href="/svc/eat/v1/application/children/{{ child._id }}"
-                                 class="child_delete glyphicon glyphicon-remove-sign"></a></span></h3>
-                    {% set child_form = ChildForm(csrf_enabled=False, **(child.dict)) %}
-                    <form method="POST" child_id="{{ child._id }}"
-                          action="/svc/eat/v1/application/children/{{ child._id }}"
-                          class="children_form">
-                        <div class="row">
-                            <div>
+    </div>
+    <ol id="children_list" class="children_list">
+        {% for child in application.children %}
+            <li id="{{ child._id }}" class="income_container">
+                <h3><span><a href="/svc/eat/v1/application/children/{{ child._id }}"
+                             class="child_delete glyphicon glyphicon-remove-sign"></a></span></h3>
+                {% set child_form = ChildForm(csrf_enabled=False, **(child.dict)) %}
+                <form method="POST" child_id="{{ child._id }}"
+                      action="/svc/eat/v1/application/children/{{ child._id }}"
+                      class="children_form">
+                    <div class="row">
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.first_name.label }}</span>
                                 <span class="col-lg-8">{{ child_form.first_name() }}</span>
                             </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.middle_initial.label }}</span>
                                 <span class="col-lg-8">{{ child_form.middle_initial() }}</span>
                             </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.last_name.label }}</span>
                                 <span class="col-lg-8">{{ child_form.last_name() }}</span>
                             </span>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2>Is the child a student? <span class="req">*</span></h2>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Is the child a student? <span class="req">*</span></h2>
                         </div>
-                        <div class="row">
-                            <div>
+                    </div>
+                    <div class="row">
+                        <div>
                             <span class="col-lg-2">
                                 <span class="col-lg-6"><input type="radio" name="student" id="student1"
                                                               value="yes"></span>
                                 <span class="col-lg-6"><label for="student1">YES</label></span>
                             </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <span class="col-lg-2">
                                 <span class="col-lg-6"><input type="radio" name="student" id="student2"
                                                               value="yes"></span>
                                 <span class="col-lg-6"><label for="student2">NO</label></span>
                             </span>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div>
+                    </div>
+                    <div class="row">
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.school_city.label }}</span>
                                 <span class="col-lg-8">{{ child_form.school_city() }}</span>
                             </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.school_state.label }}</span>
                                 <span class="col-lg-8">{{ child_form.school_state() }}</span>
                             </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.school_postal.label }}</span>
                                 <span class="col-lg-8">{{ child_form.school_postal() }}</span>
                             </span>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div>
+                    </div>
+                    <div class="row">
+                        <div>
                             <span class="col-lg-4">
                                 <span class="col-lg-4">{{ child_form.school_name.label }}</span>
                                 <span class="col-lg-4">{{ child_form.school_name() }}</span>
                             </span>
-                            </div>
                         </div>
-                        <div class="row">
-                            <button class="btn-md btn-white  col-lg-6" type="button">BACK</button>
-                            <button type="submit" class="col-lg-offset-2 btn-md btn-green">SUBMIT</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="row">
+                        <button class="btn-md btn-white  col-lg-6" type="button">BACK</button>
+                        <button type="submit" class="col-lg-offset-2 btn-md btn-green">SUBMIT</button>
+                    </div>
+                </form>
 
-                    {% set programs_form = ChildStatusForm(csrf_enabled=False, **( child.programs_dict) ) %}
-                    <div>
-                        <h4>Please indicate which programs this child participates in</h4>
-                        <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/programs">
-                            <div class="row">
-                                <div>
+                {% set programs_form = ChildStatusForm(csrf_enabled=False, **( child.programs_dict) ) %}
+                <div>
+                    <h4>Please indicate which programs this child participates in</h4>
+                    <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/programs">
+                        <div class="row">
+                            <div>
                                 <span class="col-xs-3">
                                     <span>{{ programs_form.foster.label }}</span>
                                     <span class="checkbox">{{ programs_form.foster() }}</span>
                                 </span>
-                                    <div>
+                                <div>
                                 <span class="col-xs-3">
                                     <span>{{ programs_form.migrant.label }}</span>
                                     <span class="checkbox">{{ programs_form.migrant() }}</span>
                                 </span>
-                                    </div>
-                                    <div>
+                                </div>
+                                <div>
                                 <span class="col-xs-3">
                                     <span>{{ programs_form.homeless.label }}</span>
                                     <span class="checkbox">{{ programs_form.homeless() }}</span>
                                 </span>
-                                    </div>
-                                    <div>
+                                </div>
+                                <div>
                                 <span class="col-xs-3">
                                     <span>{{ programs_form.runaway.label }}</span>
                                     <span class="checkbox">{{ programs_form.runaway() }}</span>
                                 </span>
-                                    </div>
                                 </div>
-                                <button type="submit">Submit</button>
-                        </form>
-                    </div>
+                            </div>
+                            <button type="submit">Submit</button>
+                    </form>
+                </div>
 
-                    {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( child.ethnicities_dict ) ) %}
-                    <div>
-                        <h4>Optionally indicate this child's race/ethnicity</h4>
-                        <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/ethnicities">
-                            <div class="row">
-                                <div>
+                {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( child.ethnicities_dict ) ) %}
+                <div>
+                    <h4>Optionally indicate this child's race/ethnicity</h4>
+                    <form method="POST" action="/svc/eat/v1/application/children/{{ child._id }}/ethnicities">
+                        <div class="row">
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.hispanic_or_latino.label }}</span>
                                     <span class="checkbox">{{ ethnicities_form.hispanic_or_latino() }}</span>
                                 </span>
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.native_american.label }}</span>
                                     <span class="checkbox">{{ ethnicities_form.native_american() }}</span>
                                 </span>
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.asian.label }}</span>
                                     <span class="checkbox">{{ ethnicities_form.asian() }}</span>
                                     </span>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div>
+                        </div>
+                        <div class="row">
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.black_or_african_american.label }}</span>
                                     <span class="checkbox">{{ ethnicities_form.black_or_african_american() }}</span>
                                 </span>
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.pacific_islander.label }}</span>
                                     <span class="checkbox"> {{ ethnicities_form.pacific_islander() }}</span>
                                 </span>
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.white.label }}</span>
                                     <span class="checkbox"> {{ ethnicities_form.white() }}</span>
                                 </span>
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <span class="col-lg-4">
                                     <span>{{ ethnicities_form.decline.label }}</span>
                                     <span class="checkbox">{{ ethnicities_form.decline() }}
                                     </span>
                                 </span>
-                                </div>
                             </div>
-                            <button type="button" class="btn-md btn-white">BACK</button>
-                            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
-                        </form>
-                    </div>
-                    <ol id="appliant_incomes_list" class="incomes_list">
-                        {% for income in child.incomes %}
-                            <div id="{{ income._id }}" class="income_item row">
-                                <span class="col-1">Source: </span><span
-                                    class="col-2">{{ income.source|capitalize }}</span>
-                                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
-                                <span class="col-1">Frequency: </span><span
-                                    class="col-2">{{ income.frequency|capitalize }}</span>
+                        </div>
+                        <button type="button" class="btn-md btn-white">BACK</button>
+                        <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
+                    </form>
+                </div>
+                <ol id="appliant_incomes_list" class="incomes_list">
+                    {% for income in child.incomes %}
+                        <div id="{{ income._id }}" class="income_item row">
+                            <span class="col-1">Source: </span><span
+                                class="col-2">{{ income.source|capitalize }}</span>
+                            <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                            <span class="col-1">Frequency: </span><span
+                                class="col-2">{{ income.frequency|capitalize }}</span>
                     <span class="col-3"><a
                             href="/svc/eat/v1/application/children/{{ child._id }}/incomes/{{ income._id }}"
                             class="income_delete glyphicon glyphicon-remove-sign"></a></span>
-                                <br>
-                            </div>
+                            <br>
+                        </div>
 
-                        {% endfor %}
-                    </ol>
-                    {% set income_form = IncomeForm(csrf_enabled=False) %}
-                    <div>
-                        <h4>Add Income for this child</h4>
-                        <form method="POST" child_id="{{ child._id }}"
-                              action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
-                              class="incomes_form">
+                    {% endfor %}
+                </ol>
+                {% set income_form = IncomeForm(csrf_enabled=False) %}
+                <div>
+                    <h4>Add Income for this child</h4>
+                    <form method="POST" child_id="{{ child._id }}"
+                          action="/svc/eat/v1/application/children/{{ child._id }}/incomes"
+                          class="incomes_form">
                                 <span class="col-lg-3">
                                 <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
                                 <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value=""
@@ -559,128 +569,128 @@
                             <span type="submit" class="col-lg-1">
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                             </span>
-                            <button type="button" class="btn-md btn-white">BACK</button>
-                            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
-                        </form>
-                    </div>
+                        <button type="button" class="btn-md btn-white">BACK</button>
+                        <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
+                    </form>
+                </div>
 
-                </li>
-            {% endfor %}
-        </ol>
-        <div>
-            <h3>Add Child</h3>
-            {% set child_form = ChildForm(csrf_enabled=False) %}
-            <form method="POST" action="/svc/eat/v1/application/children" class="children_form">
-                <div class="row">
-                    <div>
+            </li>
+        {% endfor %}
+    </ol>
+    <div>
+        <h3>Add Child</h3>
+        {% set child_form = ChildForm(csrf_enabled=False) %}
+        <form method="POST" action="/svc/eat/v1/application/children" class="children_form">
+            <div class="row">
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.first_name.label }}</span>
                         <span class="col-lg-8">{{ child_form.first_name() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.middle_initial.label }}</span>
                         <span class="col-lg-8">{{ child_form.middle_initial() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.last_name.label }}</span>
                         <span class="col-lg-8">{{ child_form.last_name() }}</span>
                     </span>
-                    </div>
                 </div>
-                <div class="row">
-                    <div>
+            </div>
+            <div class="row">
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.school_city.label }}</span>
                         <span class="col-lg-8">{{ child_form.school_city() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.school_state.label }}</span>
                         <span class="col-lg-8">{{ child_form.school_state() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.school_postal.label }}</span>
                         <span class="col-lg-8">{{ child_form.school_postal() }}</span>
                     </span>
-                    </div>
                 </div>
-                <div class="row">
-                    <div>
+            </div>
+            <div class="row">
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ child_form.school_name.label }}</span>
                         <span class="col-lg-4">{{ child_form.school_name() }}</span>
                     </span>
-                    </div>
                 </div>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </section>
-    <hr>
-    <section id="persons">
-        <h2>Other Household Members</h2>
-        <ol id="person_list" class="person_list">
-            {% for person in application.persons %}
-                <li id="{{ person._id }}" class="income_container">
-                    <h3><a href="/svc/eat/v1/application/persons/{{ person._id }}"
-                           class="person_delete"><span class="glyphicon glyphicon-remove-sign"></span> </a>
-                    </h3>
-                    {% set person_form = PersonForm(csrf_enabled=False, **(person.dict)) %}
-                    <form method="POST" person_id="{{ person._id }}"
-                          action="/svc/eat/v1/application/persons/{{ person._id }}" class="person_form">
-                        <div class="row">
-                            <div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+<hr>
+<section id="persons" hidden>
+    <h2>Other Household Members</h2>
+    <ol id="person_list" class="person_list">
+        {% for person in application.persons %}
+            <li id="{{ person._id }}" class="income_container">
+                <h3><a href="/svc/eat/v1/application/persons/{{ person._id }}"
+                       class="person_delete"><span class="glyphicon glyphicon-remove-sign"></span> </a>
+                </h3>
+                {% set person_form = PersonForm(csrf_enabled=False, **(person.dict)) %}
+                <form method="POST" person_id="{{ person._id }}"
+                      action="/svc/eat/v1/application/persons/{{ person._id }}" class="person_form">
+                    <div class="row">
+                        <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.first_name.label }}</span>
                         <span class="col-lg-8">{{ person_form.first_name() }}</span>
                     </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.middle_initial.label }}</span>
                         <span class="col-lg-8">{{ person_form.middle_initial() }}</span>
                     </span>
-                            </div>
-                            <div>
+                        </div>
+                        <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.last_name.label }}</span>
                         <span class="col-lg-8">{{ person_form.last_name() }}</span>
                     </span>
-                            </div>
                         </div>
-                        >
-                        <button type="submit" class="btn-md btn-green">CONTINUE</button>
-                    </form>
+                    </div>
+                    >
+                    <button type="submit" class="btn-md btn-green">CONTINUE</button>
+                </form>
 
-                    <ol class="incomes_list">
-                        {% for income in person.incomes %}
-                            <div id="{{ income._id }}" class="income_item row">
-                                <span class="col-1">Source: </span><span
-                                    class="col-2">{{ income.source|capitalize }}</span>
-                                <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
-                                <span class="col-1">Frequency: </span><span
-                                    class="col-2">{{ income.frequency|capitalize }}</span>
+                <ol class="incomes_list">
+                    {% for income in person.incomes %}
+                        <div id="{{ income._id }}" class="income_item row">
+                            <span class="col-1">Source: </span><span
+                                class="col-2">{{ income.source|capitalize }}</span>
+                            <span class="col-1">Amount: </span><span class="col-2">${{ income.amount }}</span>
+                            <span class="col-1">Frequency: </span><span
+                                class="col-2">{{ income.frequency|capitalize }}</span>
                         <span class="col-3"><a
                                 href="/svc/eat/v1/application/persons/{{ person._id }}/incomes/{{ income._id }}"
                                 class="income_delete"><span class="glyphicon glyphicon-remove-sign"></span></a></span>
-                                <br>
-                            </div>
+                            <br>
+                        </div>
 
-                        {% endfor %}
-                    </ol>
-                    {% set income_form = IncomeForm(csrf_enabled=False) %}
-                    <div>
-                        <h4>Add Income for this child</h4>
-                        <form method="POST" person_id="{{ person._id }}"
-                              action="/svc/eat/v1/application/persons/{{ person._id }}/incomes"
-                              class="incomes_form">
+                    {% endfor %}
+                </ol>
+                {% set income_form = IncomeForm(csrf_enabled=False) %}
+                <div>
+                    <h4>Add Income for this child</h4>
+                    <form method="POST" person_id="{{ person._id }}"
+                          action="/svc/eat/v1/application/persons/{{ person._id }}/incomes"
+                          class="incomes_form">
                             <span class="col-lg-3">
                                 <span class="col-lg-4 text-right">{{ income_form.source.label }}</span>
                                 <span class="col-lg-8 text-left"><input id="source" name="source" type="text" value=""
@@ -698,273 +708,273 @@
                         <span type="submit" class="col-lg-1">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                         </span>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
 
-                    {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( person.ethnicities_dict ) ) %}
-                    <div>
-                        <h4>Optionally indicate this person's race/ethnicity</h4>
-                        <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/ethnicities">
-                            <div>{{ ethnicities_form.hispanic_or_latino.label }}: {{ ethnicities_form.hispanic_or_latino() }}</div>
-                            <div>{{ ethnicities_form.native_american.label }}: {{ ethnicities_form.native_american() }}</div>
-                            <div>{{ ethnicities_form.asian.label }}: {{ ethnicities_form.asian() }}</div>
-                            <div>{{ ethnicities_form.black_or_african_american.label }}: {{ ethnicities_form.black_or_african_american() }}</div>
-                            <div>{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div>
-                            <div>{{ ethnicities_form.white.label }}: {{ ethnicities_form.white() }}</div>
-                            <div>{{ ethnicities_form.decline.label }}: {{ ethnicities_form.decline() }}</div>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
-                </li>
-            {% endfor %}
-        </ol>
-        <div>
-            <h3>Add a Household Member</h3>
-            {% set person_form = PersonForm(csrf_enabled=False) %}
-            <form method="POST" action="/svc/eat/v1/application/persons" class="person_form">
-                <div class="row">
-                    <div>
+                {% set ethnicities_form = EthnicityForm(csrf_enabled=False, **( person.ethnicities_dict ) ) %}
+                <div>
+                    <h4>Optionally indicate this person's race/ethnicity</h4>
+                    <form method="POST" action="/svc/eat/v1/application/persons/{{ person._id }}/ethnicities">
+                        <div>{{ ethnicities_form.hispanic_or_latino.label }}: {{ ethnicities_form.hispanic_or_latino() }}</div>
+                        <div>{{ ethnicities_form.native_american.label }}: {{ ethnicities_form.native_american() }}</div>
+                        <div>{{ ethnicities_form.asian.label }}: {{ ethnicities_form.asian() }}</div>
+                        <div>{{ ethnicities_form.black_or_african_american.label }}: {{ ethnicities_form.black_or_african_american() }}</div>
+                        <div>{{ ethnicities_form.pacific_islander.label }}: {{ ethnicities_form.pacific_islander() }}</div>
+                        <div>{{ ethnicities_form.white.label }}: {{ ethnicities_form.white() }}</div>
+                        <div>{{ ethnicities_form.decline.label }}: {{ ethnicities_form.decline() }}</div>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ol>
+    <div>
+        <h3>Add a Household Member</h3>
+        {% set person_form = PersonForm(csrf_enabled=False) %}
+        <form method="POST" action="/svc/eat/v1/application/persons" class="person_form">
+            <div class="row">
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.first_name.label }}</span>
                         <span class="col-lg-8">{{ person_form.first_name() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.middle_initial.label }}</span>
                         <span class="col-lg-8">{{ person_form.middle_initial() }}</span>
                     </span>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <span class="col-lg-4">
                         <span class="col-lg-4">{{ person_form.last_name.label }}</span>
                         <span class="col-lg-8">{{ person_form.last_name() }}</span>
                     </span>
-                    </div>
                 </div>
-                <button type="button" class="btn-md btn-white">BACK</button>
-                <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
-            </form>
+            </div>
+            <button type="button" class="btn-md btn-white">BACK</button>
+            <button type="submit" class="btn-md btn-md-right btn-green" hidden>CONTINUE</button>
+        </form>
+    </div>
+
+</section>
+
+<!-- Confirmation page of added persons to household -->
+
+<section class="main" id="populated" hidden>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Household Information</h2>
+            <p>These are the household members you've entered so far, do you have any other people, related and not
+                related, living with you?<span class="req">*</span></p>
         </div>
-
-    </section>
-
-    <!-- Confirmation page of added persons to household -->
-
-    <section class="main" id="populated">
+    </div>
+    <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <h2>Household Information</h2>
-                <p>These are the household members you've entered so far, do you have any other people, related and not
-                    related, living with you?<span class="req">*</span></p>
+            <div class="person-gray">
+                <div class="numbers numbers-small">1</div>
+                <!-- sample fill out -->
+                <h3>Applicant's Name<span class="reg-text"> (you)</span></h3>
+                <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                <br>
+                <h4>INCOME: $00/FREQUENCY</h4>
+                <p><em>Source</em></p>
+                <h4>INCOME: $00/FREQUENCY</h4>
+                <p><em>Source</em></p>
+                <button type="button" class="btn-delete btn-green">DELETE</button>
+                <button type="button" class="btn-edit btn-gray">EDIT</button>
+            </div>
+            <div class="person-gray">
+                <div class="numbers numbers-small">1</div>
+                <!-- sample fill out -->
+                <h3>Applicant's Name<span class="reg-text"> (you)</span></h3>
+                <p>Address Line 1<br>
+                    Apartment/Suite Line 2<br>
+                    City, STATE 00000<br>
+                    Social Security # XXXX-XX-1234</p>
+                <br>
+                <h4>INCOME: $00/FREQUENCY</h4>
+                <p><em>Source</em></p>
+                <h4>INCOME: $00/FREQUENCY</h4>
+                <p><em>Source</em></p>
+                <button type="button" class="btn-delete btn-green">DELETE</button>
+                <button type="button" class="btn-edit btn-gray">EDIT</button>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="person-gray">
-                    <div class="numbers numbers-small">1</div>
-                    <!-- sample fill out -->
-                    <h3>Applicant's Name<span class="reg-text"> (you)</span></h3>
-                    <p>Address Line 1<br>
-                        Apartment/Suite Line 2<br>
-                        City, STATE 00000<br>
-                        Social Security # XXXX-XX-1234</p>
-                    <br>
-                    <h4>INCOME: $00/FREQUENCY</h4>
-                    <p><em>Source</em></p>
-                    <h4>INCOME: $00/FREQUENCY</h4>
-                    <p><em>Source</em></p>
-                    <button type="button" class="btn-delete btn-green">DELETE</button>
-                    <button type="button" class="btn-edit btn-gray">EDIT</button>
-                </div>
-                <div class="person-gray">
-                    <div class="numbers numbers-small">1</div>
-                    <!-- sample fill out -->
-                    <h3>Applicant's Name<span class="reg-text"> (you)</span></h3>
-                    <p>Address Line 1<br>
-                        Apartment/Suite Line 2<br>
-                        City, STATE 00000<br>
-                        Social Security # XXXX-XX-1234</p>
-                    <br>
-                    <h4>INCOME: $00/FREQUENCY</h4>
-                    <p><em>Source</em></p>
-                    <h4>INCOME: $00/FREQUENCY</h4>
-                    <p><em>Source</em></p>
-                    <button type="button" class="btn-delete btn-green">DELETE</button>
-                    <button type="button" class="btn-edit btn-gray">EDIT</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Second confirmation page for household -->
-    <section id="persons-confirmation">
-        <div class="container">
-            <div class="middle">
-                <h2 class="text-center font-medium">YOU HAVE ENTERED A TOTAL OF <strong>number</strong> OF APPLICANTS,
-                    INCLUDING YOURSELF.<br> IS THAT CORRECT?</h2>
+<!-- Second confirmation page for household -->
+<section id="persons-confirmation" hidden>
+    <div class="container">
+        <div class="middle">
+            <h2 class="text-center font-medium">YOU HAVE ENTERED A TOTAL OF <strong>number</strong> OF APPLICANTS,
+                INCLUDING YOURSELF.<br> IS THAT CORRECT?</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4 text-center">
+                <input type="radio" name="persons-confirm" id="confirm1"><label for="confirm1">YES</label>
+                <input type="radio" name="persons-confirm" id="persons-confirm2"><label for="confirm2">NO</label>
             </div>
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-4 text-center">
-                    <input type="radio" name="persons-confirm" id="confirm1"><label for="confirm1">YES</label>
-                    <input type="radio" name="persons-confirm" id="persons-confirm2"><label for="confirm2">NO</label>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-2 col-xs-offset-4">
-                            <button class="btn-md btn-white" type="button">BACK</button>
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="btn-md btn-green btn-block" type="submit">CONTINUE</button>
-                        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-4">
+                        <button class="btn-md btn-white" type="button">BACK</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn-md btn-green btn-block" type="submit">CONTINUE</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- This is the section page for the TANF, FDPIR, and SNAP recipients -->
+<!-- This is the section page for the TANF, FDPIR, and SNAP recipients -->
 
-    <section class="main" id="skip-step">
-        <div class="center">
-            <i class="fa fa-thumbs-up text-center" id="thumbs"></i>
-            <p class="font-medium text-center"><strong>GOOD NEWS!</strong></p>
-            <p class="font-medium text-center">BECAUSE OF SPECIAL CIRCUMSTANCES, YOU GET TO SKIP A STEP!</p>
+<section class="main" id="skip-step" hidden>
+    <div class="center">
+        <i class="fa fa-thumbs-up text-center" id="thumbs"></i>
+        <p class="font-medium text-center"><strong>GOOD NEWS!</strong></p>
+        <p class="font-medium text-center">BECAUSE OF SPECIAL CIRCUMSTANCES, YOU GET TO SKIP A STEP!</p>
+    </div>
+</section>
+<section class="main" id="signature" hidden>
+    <div class="row center">
+        <h2 class="font-medium text-center">PLEASE ENTER YOUR ELECTRONIC SIGNATURE AND TODAY'S DATE <br><span
+                class="learn-more"><em>(type your name into the field below, it will count as a signature)</em><span
+                class="req">*</span></span></h2>
+        <div class="esignature">
+            <h4>Date</h4>
+            <label for="date"></label>
+            <input type="textbox" class="text-center" placeholder="MM/DD/YYYY" id="date">
         </div>
-    </section>
-    <section class="main" id="signature">
-        <div class="row center">
-            <h2 class="font-medium text-center">PLEASE ENTER YOUR ELECTRONIC SIGNATURE AND TODAY'S DATE <br><span
-                    class="learn-more"><em>(type your name into the field below, it will count as a signature)</em><span
-                    class="req">*</span></span></h2>
-            <div class="esignature">
-                <h4>Date</h4>
-                <label for="date"></label>
-                <input type="textbox" class="text-center" placeholder="MM/DD/YYYY" id="date">
-            </div>
-            <div class="esignature">
-                <h4>Electronic Signature</h4>
-                <label for="esig"></label>
-                <input type="textbox" class="text-center" placeholder="Write your full name here" id="esig">
-            </div>
-            <p class="disclaimer">The person signing is furnishing true information and to advise that person that the
-                application is being made in connection with the receipt of Federal funds; School officials may verify
-                the information on the application; and deliberate misrepresentation of the information may subject the
-                applicant to prosecution under State and Federal statutes.</p>
+        <div class="esignature">
+            <h4>Electronic Signature</h4>
+            <label for="esig"></label>
+            <input type="textbox" class="text-center" placeholder="Write your full name here" id="esig">
+        </div>
+        <p class="disclaimer">The person signing is furnishing true information and to advise that person that the
+            application is being made in connection with the receipt of Federal funds; School officials may verify
+            the information on the application; and deliberate misrepresentation of the information may subject the
+            applicant to prosecution under State and Federal statutes.</p>
+    </div>
+    <div><a class="arrow-left" href=""></a></div>
+    <div><a class="arrow-right" href=""></a></div>
+</section>
+
+
+<!-- Successful Submission screen -->
+
+<section class="main" id="submitted" hidden>
+    <div class="center">
+        <i class="fa fa-check-circle text-center" id="submit-check"></i>
+        <p class="font-medium text-center">YOUR INFORMATION WAS SUCCESSFULLY SUBMITTED</p>
+        <a class="green-link font-medium text-center">GO TO HOMEPAGE</a>
+    </div>
+</section>
+
+<!-- 404 error section -->
+
+<section class="main" id="error" hidden>
+    <div class="row">
+        <div id="err-image">
+        </div>
+        <p class="col-xs-12 font-medium text-center"><strong>Uh oh!</strong> 404 error! You've reached a non-working
+            page.</p>
+        <p class="col-xs-12 font-medium text-center">Please <a href="#" class="green-link">GO BACK</a> or <a
+                href="/" class="green-link">GO TO HOMEPAGE</a></p>
+    </div>
+</section>
+
+<!-- Execution Steps: These are the inbetween
+    "loading screens" placed between person, applicant, child, etc. -->
+
+<!-- Step 1 -->
+<section class="main" id="step-1" hidden>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="numbers numbers-gray text-center">1</p>
+            <p class="font-medium text-center">ENTER YOUR INFORMATION</p>
+        </div>
+        <div class="col-xs-4 offset">
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-gray"></span>
+            <span class="step-circle step-circle-gray"></span>
+            <span class="step-circle step-circle-gray"></span>
         </div>
         <div><a class="arrow-left" href=""></a></div>
         <div><a class="arrow-right" href=""></a></div>
-    </section>
+    </div>
+    <div>
+    </div>
+</section>
 
-
-    <!-- Successful Submission screen -->
-
-    <section class="main" id="submitted">
-        <div class="center">
-            <i class="fa fa-check-circle text-center" id="submit-check"></i>
-            <p class="font-medium text-center">YOUR INFORMATION WAS SUCCESSFULLY SUBMITTED</p>
-            <a class="green-link font-medium text-center">GO TO HOMEPAGE</a>
+<!-- Step 2 Load -->
+<section class="main" id="step-2" hidden>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="numbers numbers-gray text-center">
+                2
+            </p>
+            <p class="font-medium text-center">ENTER YOUR CHILD'S INFORMATION</p>
         </div>
-    </section>
-
-    <!-- 404 error section -->
-
-    <section class="main" id="error">
-        <div class="row">
-            <div id="err-image">
-            </div>
-            <p class="col-xs-12 font-medium text-center"><strong>Uh oh!</strong> 404 error! You've reached a non-working
-                page.</p>
-            <p class="col-xs-12 font-medium text-center">Please <a href="#" class="green-link">GO BACK</a> or <a
-                    href="/" class="green-link">GO TO HOMEPAGE</a></p>
+        <div class="col-xs-4 offset">
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-gray"></span>
+            <span class="step-circle step-circle-gray"></span>
         </div>
-    </section>
+        <div><a class="arrow-left" href=""></a></div>
+        <div><a class="arrow-right" href=""></a></div>
+    </div>
+</section>
 
-    <!-- Execution Steps: These are the inbetween
-        "loading screens" placed between person, applicant, child, etc. -->
-
-    <!-- Step 1 -->
-    <section class="main" id="step-1">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">1</p>
-                <p class="font-medium text-center">ENTER YOUR INFORMATION</p>
-            </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
+<!-- Step 3 Load -->
+<section class="main" id="step-3" hidden>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="numbers numbers-gray text-center">
+                3
+            </p>
+            <p class="font-medium text-center">ENTER YOUR HOUSEHOLD INFORMATION</p>
         </div>
-        <div>
+        <div class="col-xs-4 offset">
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-gray"></span>
         </div>
-    </section>
+        <div><a class="arrow-left" href=""></a></div>
+        <div><a class="arrow-right" href=""></a></div>
+    </div>
+</section>
 
-    <!-- Step 2 Load -->
-    <section class="main" id="step-2">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">
-                    2
-                </p>
-                <p class="font-medium text-center">ENTER YOUR CHILD'S INFORMATION</p>
-            </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-                <span class="step-circle step-circle-gray"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
+<!-- Step 4 Load -->
+<section class="main" id="step-4" hidden>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="numbers numbers-gray text-center">
+                4
+            </p>
+            <p class="font-medium text-center">LAST STEP! CONFIRM AND SUBMIT YOUR INFORMATION.</p>
         </div>
-    </section>
-
-    <!-- Step 3 Load -->
-    <section class="main" id="step-3">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">
-                    3
-                </p>
-                <p class="font-medium text-center">ENTER YOUR HOUSEHOLD INFORMATION</p>
-            </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-gray"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
+        <div class="col-xs-4 offset">
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
+            <span class="step-circle step-circle-blue"></span>
         </div>
-    </section>
+        <div><a class="arrow-left" href=""></a></div>
+        <div><a class="arrow-right" href=""></a></div>
+    </div>
+</section>
 
-    <!-- Step 4 Load -->
-    <section class="main" id="step-4">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="numbers numbers-gray text-center">
-                    4
-                </p>
-                <p class="font-medium text-center">LAST STEP! CONFIRM AND SUBMIT YOUR INFORMATION.</p>
-            </div>
-            <div class="col-xs-4 offset">
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-                <span class="step-circle step-circle-blue"></span>
-            </div>
-            <div><a class="arrow-left" href=""></a></div>
-            <div><a class="arrow-right" href=""></a></div>
-        </div>
-    </section>
-
-    <script type="application/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="application/javascript" src="static/js/application.js"></script>
+<script type="application/javascript" src="static/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript" src="static/js/application.js"></script>
 </body>
 </html>
